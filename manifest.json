@@ -1,0 +1,17 @@
+{
+  "name": "Maha Lila",
+  "short_name": "Maha Lila",
+  "description": "Il gioco della coscienza — tabellone, dado, loka e quiz",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f0e8d8",
+  "theme_color": "#6e4e2e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='32' fill='%236e4e2e'/><text x='96' y='115' font-family='sans-serif' font-weight='bold' font-size='72' fill='white' text-anchor='middle'>ML</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
