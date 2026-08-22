@@ -1006,10 +1006,15 @@ function processRoll(r) {
       console.log('[dado] → showModal');
       setTimeout(() => showModal(np), 700);
     } else if(waiting) {
-      const ni = (currentP+1) % players.length;
-      document.getElementById('dr').textContent += ` — turno di ${players[ni].name}`;
-      console.log('[dado] → auto-nextTurn in 1.5s');
-      setTimeout(() => nextTurn(), 1500);
+      if(np === 1) {
+        // player just entered — toast so they know to hand device over
+        showTurnToast();
+      } else {
+        const ni = (currentP+1) % players.length;
+        document.getElementById('dr').textContent += ` — turno di ${players[ni].name}`;
+        if(_autoAdv) clearTimeout(_autoAdv);
+        _autoAdv = setTimeout(() => nextTurn(), 1500);
+      }
     } else {
       if(!waiting && triggerPenitenza(np)) setTimeout(() => showPenitenza(np), 700);
       else if(!waiting && triggerCarta(np)) setTimeout(() => showCartaDraw(np), 700);
