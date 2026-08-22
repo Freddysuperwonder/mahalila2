@@ -360,6 +360,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
         <h3 style="margin:0">Ultimi lanci</h3>
         <span id="dh-count" style="font-size:11px;color:var(--muted);font-weight:600">0 lanci</span>
+        <button id="undo-btn" onclick="undo()" disabled style="font-size:11px;padding:4px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);cursor:pointer;color:var(--muted)">↩ Annulla</button>
         <button onclick="resetDice()" style="font-size:11px;padding:4px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);cursor:pointer;color:var(--muted)">Azzera</button>
       </div>
       <div class="hh" id="dh"></div>
@@ -900,6 +901,7 @@ let currentP = +localStorage.getItem('ml_cp')||0;
 if(currentP >= players.length) currentP = 0;
 let myPos = players[currentP].pos;
 let canRoll = true;
+let _undoState = null;
 
 function calcNewPos(from, roll) {
   let to = from + roll;
@@ -934,10 +936,13 @@ function renderHist() {
 }
 
 function resetDice() {
-  players.forEach(p => { p.pos = 68; p.hist = []; p.path = []; p.penitenze = []; p.carte = []; p.carteDrawn = 0; });
+  players.forEach(p => { p.pos = 68; p.hist = []; p.path = []; p.domanda = ''; p.penitenze = []; p.carte = []; p.carteDrawn = 0; });
   currentP = 0;
+  _undoState = null;
   savePlayers();
   renderHist();
+  renderCarte();
+  updateUndoBtn();
   document.getElementById('dr').textContent = 'Tocca per lanciare!';
   setPos(68);
   if(_autoAdv) { clearTimeout(_autoAdv); _autoAdv = null; }
@@ -1023,6 +1028,7 @@ function physRoll(r) {
   console.log('[dado] physRoll — canRoll:', canRoll, '| r:', r);
   if(!canRoll) return;
   canRoll = false;
+  saveUndo();
   sfx.roll();
   const df = document.getElementById('df');
   df.classList.remove('roll'); void df.offsetWidth; df.classList.add('roll');
@@ -1033,6 +1039,7 @@ function rollDice() {
   console.log('[dado] rollDice — canRoll:', canRoll, '| P:', currentP, players[currentP]?.name, '| pos:', myPos);
   if(!canRoll) return;
   canRoll = false;
+  saveUndo();
   sfx.roll();
   const df = document.getElementById('df');
   df.classList.remove('roll');
@@ -1505,6 +1512,34 @@ function applyPGSetup() {
 
 function closePGSetup() {
   document.getElementById('pg-ov').classList.remove('open');
+}
+
+function saveUndo() {
+  _undoState = {players: JSON.parse(JSON.stringify(players)), currentP};
+  updateUndoBtn();
+}
+
+function undo() {
+  if(!_undoState || skState) return;
+  if(_autoAdv) { clearTimeout(_autoAdv); _autoAdv = null; }
+  players = _undoState.players;
+  currentP = _undoState.currentP;
+  myPos = players[currentP].pos;
+  _undoState = null;
+  savePlayers();
+  renderHist();
+  setPos(myPos);
+  renderCarte();
+  canRoll = true;
+  document.getElementById('dr').textContent = '↩ Turno annullato';
+  const tt = document.getElementById('turn-toast');
+  if(tt) tt.style.display = 'none';
+  updateUndoBtn();
+}
+
+function updateUndoBtn() {
+  const btn = document.getElementById('undo-btn');
+  if(btn) btn.disabled = !_undoState || !!skState;
 }
 
 function setMode(m) {
