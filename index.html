@@ -760,14 +760,70 @@ const _QD_STATIC = [
 const QD = QD_BUILD;
 
 const PEN = [
-  {r:1,c:"1–9",el:"🌍 Terra",opts:[{n:"Il Neonato",d:"Fai l'intero prossimo giro emettendo solo versi da neonato se ti rivolgono la parola."},{n:"Il Peso del Mondo",d:"Fai da sedia umana o da poggiapiedi a un giocatore a scelta per i prossimi due turni."},{n:"La Radice Terrena",d:"Togliti le scarpe e gioca a piedi nudi fino a fine partita."}]},
-  {r:2,c:"10–18",el:"💧 Acqua",opts:[{n:"L'Artista di Corte",d:"Improvvisa una danza o un balletto interpretativo di 30 secondi senza musica."},{n:"Il Camaleonte",d:"Bevi un sorso dal bicchiere del vicino di sinistra mimando estrema estasi o disgusto."},{n:"L'Onda Umana",d:"Per tutto il prossimo giro, ogni volta che qualcuno lancia il dado, alzati e fai l'onda dicendo «Splash!»."}]},
-  {r:3,c:"19–27",el:"🔥 Fuoco",opts:[{n:"Il Gladiatore",d:"Sfida un giocatore a braccio di ferro o gara di sguardi. Chi perde cede uno snack."},{n:"Il Servo del Re",d:"Prendi un cartone o giornale e sventola il vicino di destra per i prossimi 2 minuti."},{n:"L'Incenso Vivente",d:"Resta in piedi in un angolo della stanza immobile come una statua per tutto il prossimo giro."}]},
-  {r:4,c:"28–36",el:"💨 Aria",opts:[{n:"Il Poeta Disperato",d:"Recita in ginocchio una poesia d'amore improvvisata a un oggetto della stanza (es. la sedia)."},{n:"Il Batticuore",d:"Fai 20 jumping jacks urlando «Amo il Maha Lila!» a ogni salto."},{n:"L'Abbraccio Karmico",d:"Dai un abbraccio sincero di 15 secondi al giocatore che vedi più come rivale nel gioco."}]},
-  {r:5,c:"37–45",el:"🌌 Etere",opts:[{n:"L'Eco Cosmico",d:"Ripeti ad alta voce l'ultima parola di ogni frase pronunciata al tavolo fino al tuo prossimo turno."},{n:"Il Mimo dello Spazio",d:"Per i prossimi due turni comunica solo a gesti. Se usi la voce, perdi 3 caselle."},{n:"Il Cantastorie",d:"Commenta l'azione del prossimo giocatore con lo stile di un telecronista esagitato."}]},
-  {r:6,c:"46–54",el:"👁 Terzo Occhio",opts:[{n:"Il Veggente Cieco",d:"Chiudi gli occhi. Indovina l'oggetto che ti metteranno in mano usando solo il tatto (max 20 s)."},{n:"La Telepatia Fallita",d:"Guarda fisso negli occhi un avversario per 30 secondi senza ridere. Chi ride salta un turno."},{n:"L'Ipnosi",d:"Prova a ipnotizzare un avversario per farti regalare 2 caselle. Se rifiuta, retrocedi tu di 2 passi."}]},
-  {r:7,c:"55–63",el:"🧠 Intelletto",opts:[{n:"Il Genio Incompreso",d:"Spiega un concetto difficile usando solo parole che iniziano con la lettera «S»."},{n:"Il Matematico Pazzo",d:"Conta all'indietro da 100 a 70 di tre in tre entro 20 secondi senza sbagliare."},{n:"Il Filosofo Muto",d:"Spiega il vero senso della vita usando solo smorfie facciali per 30 secondi."}]},
-  {r:8,c:"64–72",el:"☀️ Liberazione",opts:[{n:"Il Guru Sacrificale",d:"Gioca l'intero prossimo giro stando seduto o in ginocchio sul pavimento."},{n:"La Prova del Tempio",d:"Il gruppo prova a farti ridere o il solletico per 15 secondi. Rimani serio come un monaco zen."},{n:"L'Ultimo Distacco",d:"Scegli un giocatore dietro di te e regalagli subito 4 delle tue caselle."}]}
+  {r:1,c:"1–9",el:"🌍 Terra",opts:[
+    {n:"Il Neonato",d:"Fai l'intero prossimo giro emettendo solo versi da neonato se ti rivolgono la parola."},
+    {n:"Il Peso del Mondo",d:"Fai da sedia umana o da poggiapiedi a un giocatore a scelta per i prossimi due turni."},
+    {n:"La Radice Terrena",d:"Togliti le scarpe e gioca a piedi nudi fino a fine partita."},
+    {n:"L'Animale Totemico",d:"Scegli un animale e interpretalo per 45 secondi: suoni, movimenti e tutto. Il gruppo indovina quale."},
+    {n:"La Statua di Argilla",d:"Un altro giocatore ti posiziona come vuole (mani, braccia, espressione) e devi restare in quella posa fino al prossimo lancio."},
+    {n:"Il Contadino",d:"Striscia in ginocchio sul pavimento per tutta la durata del prossimo turno degli altri giocatori."}
+  ]},
+  {r:2,c:"10–18",el:"💧 Acqua",opts:[
+    {n:"L'Artista di Corte",d:"Improvvisa una danza o un balletto interpretativo di 30 secondi senza musica."},
+    {n:"Il Camaleonte",d:"Bevi un sorso dal bicchiere del vicino di sinistra mimando estrema estasi o disgusto."},
+    {n:"L'Onda Umana",d:"Per tutto il prossimo giro, ogni volta che qualcuno lancia il dado, alzati e fai l'onda dicendo «Splash!»."},
+    {n:"Il Sommozzatore",d:"Trattieni il respiro per 20 secondi mentre gli altri contano ad alta voce. Se non ce la fai, arretri di 2 caselle."},
+    {n:"La Fontana Filosofica",d:"Per i prossimi due turni rispondi a ogni domanda che ti pongono con un'altra domanda."},
+    {n:"Il Pescatore",d:"Hai «agganciato» il giocatore alla tua sinistra: deve alzarsi e sedersi insieme a te ogni volta che lo fai, per i prossimi 3 minuti."}
+  ]},
+  {r:3,c:"19–27",el:"🔥 Fuoco",opts:[
+    {n:"Il Gladiatore",d:"Sfida un giocatore a braccio di ferro o gara di sguardi. Chi perde cede uno snack."},
+    {n:"Il Servo del Re",d:"Prendi un cartone o giornale e sventola il vicino di destra per i prossimi 2 minuti."},
+    {n:"L'Incenso Vivente",d:"Resta in piedi in un angolo della stanza immobile come una statua per tutto il prossimo giro."},
+    {n:"Il Drago",d:"Emetti il ruggito più terrificante che puoi per almeno 10 secondi. Il gruppo giudica a maggioranza se è abbastanza spaventoso."},
+    {n:"La Fiamma Ammansita",d:"Chiedi scusa, con grande solennità e inchino, a ogni giocatore per qualcosa di completamente immaginario ma credibile."},
+    {n:"Il Carbone Ardente",d:"Fai 10 flessioni (o, se non puoi, canta l'inno nazionale a squarciagola dall'inizio alla fine)."}
+  ]},
+  {r:4,c:"28–36",el:"💨 Aria",opts:[
+    {n:"Il Poeta Disperato",d:"Recita in ginocchio una poesia d'amore improvvisata a un oggetto della stanza (es. la sedia)."},
+    {n:"Il Batticuore",d:"Fai 20 jumping jacks urlando «Amo il Maha Lila!» a ogni salto."},
+    {n:"L'Abbraccio Karmico",d:"Dai un abbraccio sincero di 15 secondi al giocatore che vedi più come rivale nel gioco."},
+    {n:"Il Sommelier del Vento",d:"Annusa l'aria in tre angoli diversi della stanza e descrivi solennemente cosa percepisci in ognuno."},
+    {n:"Il Ventriloquo",d:"Parla per i prossimi 5 minuti senza muovere le labbra. Chi ti fa sbagliare guadagna uno snack."},
+    {n:"La Piuma",d:"Devi essere sollevato da terra (anche solo di qualche centimetro) da almeno due giocatori. Se rifiutano, devi tu sollevarne uno."}
+  ]},
+  {r:5,c:"37–45",el:"🌌 Etere",opts:[
+    {n:"L'Eco Cosmico",d:"Ripeti ad alta voce l'ultima parola di ogni frase pronunciata al tavolo fino al tuo prossimo turno."},
+    {n:"Il Mimo dello Spazio",d:"Per i prossimi due turni comunica solo a gesti. Se usi la voce, perdi 3 caselle."},
+    {n:"Il Cantastorie",d:"Commenta l'azione del prossimo giocatore con lo stile di un telecronista esagitato."},
+    {n:"Il Canale Aperto",d:"Improvvisa una profezia cosmica sul destino di ogni giocatore al tavolo in meno di 30 secondi totali."},
+    {n:"Il Nodo Quantistico",d:"Scambia il tuo prossimo turno con il giocatore alla tua destra: gioca tu per lui e lui per te."},
+    {n:"Il Vuoto Cosciente",d:"Siediti in posizione di meditazione e intona «OM» per 20 secondi senza fermarti. Il gruppo cronometra."}
+  ]},
+  {r:6,c:"46–54",el:"👁 Terzo Occhio",opts:[
+    {n:"Il Veggente Cieco",d:"Chiudi gli occhi. Indovina l'oggetto che ti metteranno in mano usando solo il tatto (max 20 s)."},
+    {n:"La Telepatia Fallita",d:"Guarda fisso negli occhi un avversario per 30 secondi senza ridere. Chi ride salta un turno."},
+    {n:"L'Ipnosi",d:"Prova a ipnotizzare un avversario per farti regalare 2 caselle. Se rifiuta, retrocedi tu di 2 passi."},
+    {n:"L'Aura Colorata",d:"Assegna a ogni giocatore un colore e una parola sola per descriverne l'aura. Chi protesta per primo fa 5 salti."},
+    {n:"Il Sogno Lucido",d:"Racconta un sogno completamente inventato come se fosse appena accaduto. Deve durare almeno 30 secondi e convincere qualcuno."},
+    {n:"L'Oracolo Inverso",d:"Fai una previsione assurda ma vagamente plausibile per ognuno degli altri giocatori. Il gruppo vota la più convincente."}
+  ]},
+  {r:7,c:"55–63",el:"🧠 Intelletto",opts:[
+    {n:"Il Genio Incompreso",d:"Spiega un concetto difficile usando solo parole che iniziano con la lettera «S»."},
+    {n:"Il Matematico Pazzo",d:"Conta all'indietro da 100 a 70 di tre in tre entro 20 secondi senza sbagliare."},
+    {n:"Il Filosofo Muto",d:"Spiega il vero senso della vita usando solo smorfie facciali per 30 secondi."},
+    {n:"Il Traduttore Galattico",d:"Ripeti la frase che il giocatore alla tua sinistra ti dice, traducendola istantaneamente in una lingua aliena inventata."},
+    {n:"Il Professore senza Parole",d:"Insegna un concetto scientifico a scelta (es. la gravità, la fotosintesi) usando solo gesti e disegni nell'aria. Il gruppo deve capire."},
+    {n:"Il Paradosso Vivente",d:"Per i prossimi 3 minuti ogni tua affermazione deve contenere almeno una contraddizione voluta e dichiarata."}
+  ]},
+  {r:8,c:"64–72",el:"☀️ Liberazione",opts:[
+    {n:"Il Guru Sacrificale",d:"Gioca l'intero prossimo giro stando seduto o in ginocchio sul pavimento."},
+    {n:"La Prova del Tempio",d:"Il gruppo prova a farti ridere o il solletico per 15 secondi. Rimani serio come un monaco zen."},
+    {n:"L'Ultimo Distacco",d:"Scegli un giocatore dietro di te e regalagli subito 4 delle tue caselle."},
+    {n:"Il Bodhisattva Servitore",d:"Esegui senza discussioni il primo ordine ragionevole che ti dà qualsiasi giocatore nei prossimi 2 minuti."},
+    {n:"Il Fuoco di Gioia",d:"Esegui la danza della vittoria più scenografica che puoi per 15 secondi. Il gruppo applaude o fischia a seconda della performance."},
+    {n:"Il Dono Finale",d:"Il tuo prossimo lancio del dado va al giocatore più indietro di te: avanza lui di quei passi, non tu."}
+  ]}
 ];
 
 // ══════════════════════════════════════════
@@ -1777,7 +1833,8 @@ function showPenitenza(n) {
   const rimanenti = 3 - (p.penitenze?.length || 0);
   document.getElementById('pen-title').textContent = `🎭 Penitenza! — Piano ${piano} · ${penData.el}`;
   document.getElementById('pen-sub').textContent = `Casella ${n} — ${L[n]?.name || ''}`;
-  document.getElementById('pen-opts').innerHTML = penData.opts.map((o,i) =>
+  document.getElementById('pen-opts').innerHTML = const penPick=[...penData.opts].sort(()=>Math.random()-0.5).slice(0,3);
+  document.getElementById('pen-opts').innerHTML=penPick.map((o,i) =>
     `<div class="pen-opt"><strong>Opzione ${i+1} — “${o.n}”</strong><p>${o.d}</p></div>`).join('');
   document.getElementById('pen-note').textContent =
     `Il gruppo vota a maggioranza. Penitenze rimanenti per ${p.name}: ${rimanenti - 1} dopo questa.`;
