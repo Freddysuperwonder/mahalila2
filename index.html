@@ -1012,6 +1012,7 @@ function processRoll(r) {
       setTimeout(() => nextTurn(), 1500);
     } else {
       if(!waiting && triggerPenitenza(np)) setTimeout(() => showPenitenza(np), 700);
+      else if(!waiting && triggerCarta(np)) setTimeout(() => showCartaDraw(np), 700);
       else { console.log('[dado] → showTurnToast'); showTurnToast(); }
     }
   } else {
@@ -1020,6 +1021,7 @@ function processRoll(r) {
       setTimeout(() => showModal(np), 700);
     } else {
       if(!waiting && triggerPenitenza(np)) setTimeout(() => showPenitenza(np), 700);
+      else if(!waiting && triggerCarta(np)) setTimeout(() => showCartaDraw(np), 700);
       else canRoll = true;
     }
   }
@@ -1117,6 +1119,7 @@ function showModal(n) {
 function closeModal() {
   document.getElementById('mo').classList.remove('open');
   if(players.length <= 1) canRoll = true;
+  else if(!canRoll && !skState) showTurnToast();
 }
 
 // ══════════════════════════════════════════
@@ -1664,6 +1667,7 @@ let _cartaPending = null;
 
 function triggerCarta(n) {
   if(gameMode !== 'party') return false;
+  const lo = L[n];
   if(!lo || lo.type !== 'neutral') return false;
   const p = players[currentP];
   if(!p.carte) p.carte = [];
@@ -1749,6 +1753,7 @@ let _penPiano = null;
 
 function triggerPenitenza(n) {
   if(gameMode !== 'party') return false;
+  const lo = L[n];
   if(!lo || lo.type !== 'neutral') return false;
   const piano = Math.ceil(n / 9);
   const p = players[currentP];
