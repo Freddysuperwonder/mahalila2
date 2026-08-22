@@ -707,7 +707,7 @@ const QD_BUILD=(()=>{
       const pos=(+n*13+card)%3;
       let wi=0;
       const opts=Array.from({length:3},(_,p)=>p===pos?tpl.a[i]:(wi++===0?w1:w2));
-      out.push({n:+n,name:lo.name,type:t,card,q:tpl.q[i].replace(/{n}/g,lo.name.toLowerCase()),opts,a:pos,s:tpl.s[i]});
+      out.push({n:+n,name:lo.name,type:t,card,q:tpl.q[i].replace(/{n}/g,`"${lo.name.toUpperCase()}"`),opts,a:pos,s:tpl.s[i]});
     }
   });
   return out;
