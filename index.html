@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -267,6 +267,17 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .pg-ni .pdot{width:13px;height:13px;border-radius:50%;flex-shrink:0}
 .pg-ni input{flex:1;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:var(--paper);color:var(--ink);outline:none}
 .pg-ni input:focus{border-color:var(--acc)}
+/* ── Mode selector ── */
+.mode-sel{display:flex;gap:8px;margin-bottom:16px}
+.mode-btn{flex:1;padding:12px 8px;border-radius:14px;border:2px solid var(--line);background:var(--paper);cursor:pointer;text-align:center;transition:all .18s;display:flex;flex-direction:column;align-items:center}
+.mode-btn.sel{border-color:var(--acc);background:var(--soft)}
+.mode-btn.sel.party{border-color:#7b4ea4;background:#f5f0ff}
+.mode-icon{font-size:22px;margin-bottom:5px}
+.mode-name{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.mode-desc{font-size:10px;color:var(--muted);line-height:1.4;text-align:center}
+.mode-badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.04em;margin-left:6px;vertical-align:middle}
+.mode-badge.oracolo{background:#e8f8ed;color:#1a6b3c}
+.mode-badge.party{background:#f5f0ff;color:#7b4ea4}
 .pg-btns{display:flex;gap:8px;margin-top:16px}
 .pg-btns button{flex:1;padding:11px;border-radius:10px;border:none;font-size:14px;font-weight:700;cursor:pointer}
 .pg-btns .pri{background:var(--acc);color:#fff}
@@ -275,6 +286,54 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 #curr-player-tag.multi{display:flex}
 #curr-player-tag .cp-lbl{font-size:10px;font-weight:700;opacity:.65;letter-spacing:.8px;text-transform:uppercase}
 #curr-player-tag .cp-nm{font-size:24px;font-weight:800;letter-spacing:.1px}
+/* ── Domanda setup ── */
+.pg-domanda{margin:0 0 12px 21px}
+.pg-dlbl{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.pg-domanda textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:var(--paper);color:var(--ink);resize:vertical;min-height:68px;font-family:inherit;outline:none;display:block}
+.pg-domanda textarea:focus{border-color:var(--acc)}
+/* ── Report overlay ── */
+#rpt-ov{position:fixed;inset:0;background:var(--paper);z-index:400;overflow-y:auto;padding-bottom:80px;display:none}
+#rpt-ov.open{display:block}
+/* ── Penitenza overlay ── */
+#pen-ov{position:fixed;inset:0;background:var(--paper);z-index:350;overflow-y:auto;padding-bottom:80px;display:none}
+#pen-ov.open{display:block}
+.pen-hdr{background:linear-gradient(150deg,#7b4ea4 0%,#3d1a6e 100%);color:#fff;padding:calc(var(--safe-t)+20px) 18px 22px;text-align:center}
+.pen-icon{font-size:34px;margin-bottom:8px}
+.pen-title{font-size:17px;font-weight:800}
+.pen-sub{font-size:12px;opacity:.8;margin-top:5px;line-height:1.5}
+.pen-body{padding:14px}
+.pen-opts{display:flex;flex-direction:column;gap:10px;margin:12px 0 18px}
+.pen-opt{background:var(--soft);border:1.5px solid var(--line);border-radius:14px;padding:14px}
+.pen-opt strong{font-size:14px;font-weight:800;color:#7b4ea4;display:block;margin-bottom:4px}
+.pen-opt p{font-size:13px;line-height:1.6;color:var(--ink);margin:0}
+.pen-note{font-size:12px;color:var(--muted);text-align:center;margin-bottom:14px;font-style:italic}
+.pen-btn{width:100%;padding:14px;border-radius:12px;border:none;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:8px;display:block;background:#7b4ea4;color:#fff}
+/* ── Carte Imprevisto (mano) ── */
+.carte-box{margin-top:10px;padding:14px 16px;background:var(--paper);border-radius:14px;border:1px solid var(--line);width:100%;max-width:320px}
+.carte-box h3{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
+.carta-item{background:var(--soft);border-radius:12px;padding:12px 14px;margin-bottom:8px;border-left:4px solid #c0392b}
+.carta-item.nera{border-left-color:#2c3e50}
+.carta-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:3px}
+.carta-val{font-size:15px;font-weight:800;margin-bottom:4px}
+.carta-eff{font-size:12px;line-height:1.55;color:var(--ink)}
+.carta-usa{margin-top:8px;padding:6px 14px;border-radius:8px;border:none;background:#c0392b;color:#fff;font-size:12px;font-weight:700;cursor:pointer}
+.carta-item.nera .carta-usa{background:#2c3e50}
+/* ── Carta draw bottom sheet ── */
+#carta-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:360;display:none;align-items:flex-end}
+#carta-ov.open{display:flex}
+#carta-md{background:var(--paper);border-radius:24px 24px 0 0;width:100%;padding:20px 20px calc(20px + var(--safe-b));-webkit-overflow-scrolling:touch}
+.cd-suit{font-size:52px;text-align:center;margin-bottom:6px}
+.cd-val{font-size:28px;font-weight:900;text-align:center;margin-bottom:4px}
+.cd-tipo{text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;opacity:.65}
+.cd-eff{background:var(--soft);border-radius:12px;padding:14px;font-size:14px;line-height:1.65;margin-bottom:18px}
+.rpt-hdr{background:linear-gradient(150deg,var(--acc) 0%,#3e2810 100%);color:#fff;padding:calc(var(--safe-t) + 18px) 20px 22px}
+.rpt-hdr h2{font-size:20px;font-weight:800}
+.rpt-hdr p{font-size:13px;opacity:.75;margin-top:3px}
+.rpt-body{padding:16px}
+.rpt-txt{font-family:'Courier New',monospace;font-size:12px;line-height:1.75;white-space:pre-wrap;background:var(--soft);border-radius:12px;padding:14px;border:1px solid var(--line);color:var(--ink);max-height:52vh;overflow-y:auto;margin-bottom:14px;-webkit-overflow-scrolling:touch}
+.rpt-btn{width:100%;padding:14px;border-radius:12px;border:none;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:8px;display:block}
+.rpt-btn.pri{background:var(--acc);color:#fff}
+.rpt-btn.sec{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
 </style>
 </head>
 <body>
@@ -282,8 +341,8 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 
 <!-- ══════ DADO ══════ -->
 <div class="page active" id="page-dado">
-  <div class="ph"><h1>🎲 Dado</h1><p>Tocca il dado o il pulsante per lanciare</p></div>
-  <div id="pbar"><div id="pchips" style="display:flex;gap:6px;flex:1;overflow:hidden"></div><button class="pg-btn" onclick="openPGSetup()" title="Configura giocatori">👥</button><button class="pg-btn" id="dice-mode-btn" onclick="toggleDiceMode()" title="Dado fisico/virtuale">🎯</button></div>
+  <div class="ph"><h1>🎲 Dado</h1><p>Tocca il dado o il pulsante per lanciare<span class="mode-badge" id="mode-badge-ph"></span></p></div>
+  <div id="pbar"><div id="pchips" style="display:flex;gap:6px;flex:1;overflow:hidden"></div><button class="pg-btn" onclick="openPGSetup()" title="Configura giocatori">👥</button><button class="pg-btn" id="dice-mode-btn" onclick="toggleDiceMode()" title="Dado fisico/virtuale">🎯</button><button class="pg-btn" id="sfx-btn" onclick="toggleSFX()" title="Suoni">🔊</button></div>
   <div class="dc">
     <div id="dw-area" class="dw" onclick="rollDice()"><div id="df"></div></div>
     <div id="phys-pad">
@@ -320,6 +379,10 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
       </div>
       <div id="pos-info" class="pos-info"></div>
       <button class="rb" style="width:100%" onclick="openQuizAtPos()">📚 Quiz — casella <span id="pos-n2">1</span></button>
+    </div>
+    <div class="carte-box" id="carte-box" style="display:none">
+      <h3>🃏 Le tue Carte Imprevisto</h3>
+      <div id="carte-list"></div>
     </div>
   </div>
 </div>
@@ -423,13 +486,65 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 <div id="pg-ov">
   <div class="pgm">
     <h2>👥 Configura Partita</h2>
-    <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Numero di giocatori</div>
+    <div style="font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Modalità di gioco</div>
+    <div class="mode-sel">
+      <button class="mode-btn" id="mode-oracolo" onclick="setMode('oracolo')">
+        <div class="mode-icon">🔮</div>
+        <span class="mode-name">Oracolo</span>
+        <span class="mode-desc">Viaggio spirituale puro. Solo frecce, serpenti e Sfide Karma</span>
+      </button>
+      <button class="mode-btn party" id="mode-party" onclick="setMode('party')">
+        <div class="mode-icon">🎉</div>
+        <span class="mode-name">Party Game</span>
+        <span class="mode-desc">Versione completa con carte imprevisto e penitenze</span>
+      </button>
+    </div>
+    <div style="font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Numero di giocatori</div>
     <div class="pg-cnt" id="pg-cnt"></div>
     <div id="pg-names"></div>
     <div class="pg-btns">
       <button class="pri" onclick="applyPGSetup()">✓ Inizia</button>
       <button class="sec" onclick="closePGSetup()">Annulla</button>
     </div>
+  </div>
+</div>
+
+<!-- ══════ CARTA IMPREVISTO ══════ -->
+<div id="carta-ov" onclick="event.target===this&&confermCartaDraw()">
+  <div id="carta-md">
+    <div class="drag"></div>
+    <div class="cd-suit" id="cd-suit"></div>
+    <div class="cd-val" id="cd-val"></div>
+    <div class="cd-tipo" id="cd-tipo"></div>
+    <div class="cd-eff" id="cd-eff"></div>
+    <button class="rb" style="width:100%" onclick="confermCartaDraw()">🃏 Tieni la carta</button>
+  </div>
+</div>
+
+<!-- ══════ PENITENZA ══════ -->
+<div id="pen-ov">
+  <div class="pen-hdr">
+    <div class="pen-icon">🎭</div>
+    <div class="pen-title" id="pen-title">Penitenza Mistica!</div>
+    <div class="pen-sub" id="pen-sub">Il gruppo vota a maggioranza una delle tre sfide</div>
+  </div>
+  <div class="pen-body">
+    <div class="pen-opts" id="pen-opts"></div>
+    <div class="pen-note" id="pen-note"></div>
+    <button class="pen-btn" onclick="closePenitenza()">✓ Penitenza Accettata</button>
+  </div>
+</div>
+
+<!-- ══════ REPORT FINALE ══════ -->
+<div id="rpt-ov">
+  <div class="rpt-hdr">
+    <h2>🏆 Coscienza Cosmica Raggiunta!</h2>
+    <p>Copia il report e incollalo nell'AI per ricevere la risposta del Maha Lila</p>
+  </div>
+  <div class="rpt-body">
+    <div class="rpt-txt" id="rpt-txt"></div>
+    <button class="rpt-btn pri" id="rpt-copy-btn" onclick="copyReport()">📋 Copia Report</button>
+    <button class="rpt-btn sec" onclick="closeReport()">✕ Chiudi</button>
   </div>
 </div>
 
@@ -676,9 +791,63 @@ const DOTS = {
   6:[1,0,1,1,0,1,1,0,1]
 };
 const P_COLORS = ['#e74c3c','#3498db','#27ae60','#f39c12','#9b59b6','#e67e22'];
+
+const SFX = (() => {
+  let _ctx = null;
+  let muted = localStorage.getItem('ml_sfx') === '0';
+  function ac() {
+    if (!_ctx) _ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (_ctx.state === 'suspended') _ctx.resume();
+    return _ctx;
+  }
+  function tone(freq, type, start, dur, vol) {
+    try {
+      const c = ac(), o = c.createOscillator(), g = c.createGain();
+      o.connect(g); g.connect(c.destination);
+      o.type = type;
+      o.frequency.setValueAtTime(freq, c.currentTime + start);
+      g.gain.setValueAtTime(0.001, c.currentTime + start);
+      g.gain.linearRampToValueAtTime(vol, c.currentTime + start + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + start + dur);
+      o.start(c.currentTime + start);
+      o.stop(c.currentTime + start + dur + 0.01);
+    } catch(e) {}
+  }
+  function noise(start, dur, vol) {
+    try {
+      const c = ac(), buf = c.createBuffer(1, Math.ceil(c.sampleRate * dur), c.sampleRate);
+      const d = buf.getChannelData(0);
+      for(let i = 0; i < d.length; i++) d[i] = (Math.random()*2-1) * (1 - i/d.length);
+      const src = c.createBufferSource(), g = c.createGain();
+      g.gain.value = vol; src.buffer = buf;
+      src.connect(g); g.connect(c.destination);
+      src.start(c.currentTime + start);
+    } catch(e) {}
+  }
+  return {
+    get muted() { return muted; },
+    toggle() { muted = !muted; localStorage.setItem('ml_sfx', muted ? '0' : '1'); return muted; },
+    roll()      { if(muted) return; noise(0, 0.04, 0.3); noise(0.08, 0.04, 0.25); },
+    land(type)  {
+      if(muted) return;
+      if(type==='testa'||type==='scocca') { tone(280,'sine',0,0.32,0.3); tone(200,'sine',0.15,0.38,0.25); tone(150,'sine',0.3,0.48,0.2); }
+      else if(type==='punta'||type==='at'||type==='freccia') { tone(392,'sine',0,0.18,0.25); tone(523,'sine',0.1,0.18,0.25); tone(659,'sine',0.2,0.28,0.3); }
+      else if(type==='win') { [523,659,784,1047].forEach((f,i)=>tone(f,'sine',i*0.13,0.42,0.3)); tone(1047,'sine',0.56,0.9,0.4); }
+      else { tone(660,'sine',0,0.28,0.15); }
+    },
+    quiz()      { if(muted) return; tone(440,'square',0,0.09,0.15); tone(554,'square',0.1,0.09,0.15); },
+    correct()   { if(muted) return; tone(523,'sine',0,0.16,0.3); tone(659,'sine',0.13,0.16,0.3); tone(784,'sine',0.26,0.32,0.35); },
+    wrong()     { if(muted) return; tone(220,'sawtooth',0,0.22,0.2); tone(165,'sawtooth',0.2,0.34,0.2); },
+    penitenza() { if(muted) return; tone(110,'sawtooth',0,0.12,0.2); tone(138,'sawtooth',0.1,0.12,0.2); tone(110,'sawtooth',0.2,0.48,0.25); },
+    carta()     { if(muted) return; noise(0,0.03,0.35); tone(880,'sine',0.04,0.24,0.2); },
+    turn()      { if(muted) return; tone(440,'sine',0,0.14,0.2); tone(550,'sine',0.12,0.14,0.15); }
+  };
+})();
+
 let players = JSON.parse(localStorage.getItem('ml_players')||'[]');
+let gameMode = localStorage.getItem('ml_mode') || 'oracolo';
 if(!players.length) players = [{name:'Giocatore 1',pos:68,hist:[]}];
-players.forEach(p => { if(!p.hist) p.hist = []; }); // compat con salvataggi precedenti
+players.forEach(p => { if(!p.hist) p.hist = []; if(!p.path) p.path = []; if(!p.domanda) p.domanda = ''; if(!p.penitenze) p.penitenze = []; if(!p.carte) p.carte = []; if(p.carteDrawn===undefined) p.carteDrawn = 0; }); // compat
 let currentP = +localStorage.getItem('ml_cp')||0;
 if(currentP >= players.length) currentP = 0;
 let myPos = players[currentP].pos;
@@ -717,7 +886,7 @@ function renderHist() {
 }
 
 function resetDice() {
-  players.forEach(p => { p.pos = 68; p.hist = []; });
+  players.forEach(p => { p.pos = 68; p.hist = []; p.path = []; p.penitenze = []; p.carte = []; p.carteDrawn = 0; });
   currentP = 0;
   savePlayers();
   renderHist();
@@ -765,15 +934,18 @@ function processRoll(r) {
   const np = (waiting && r===1) ? 1 : waiting ? 68 : calcNewPos(myPos, r);
   setPos(np);
   const _lo = L[np];
+  if(!waiting) sfx.land(np === 68 ? 'win' : (_lo?.type || 'neutral'));
   let drMsg = `Uscito: ${r} ${dIcons[r]}`;
   if(waiting && r!==1) drMsg += ' — Devi uscire 1 per entrare nel gioco';
   else if(waiting) drMsg += ' → Entrato! Sei alla casella 1 — Nascita';
   else drMsg += np>1 ? ` → casella ${np}${_lo?' — '+_lo.name:''}` : '';
   document.getElementById('dr').textContent = drMsg;
   players[currentP].hist.push(r);
+  if(!(waiting && np === 68)) players[currentP].path.push({n: np, via: 'dado'});
   savePlayers();
   renderHist();
   console.log('[dado] r:', r, '| waiting:', waiting, '| np:', np, '| _lo:', _lo?.type);
+  if(!waiting && np === 68) { canRoll = false; setTimeout(() => showReport(currentP), 1000); return; }
   if(players.length > 1) {
     if(!waiting && _lo && (_lo.type==='testa' || _lo.type==='scocca')) {
       console.log('[dado] → showModal');
@@ -784,11 +956,17 @@ function processRoll(r) {
       console.log('[dado] → auto-nextTurn in 1.5s');
       setTimeout(() => nextTurn(), 1500);
     } else {
-      console.log('[dado] → showTurnToast');
-      showTurnToast();
+      if(!waiting && triggerPenitenza(np)) setTimeout(() => showPenitenza(np), 700);
+      else { console.log('[dado] → showTurnToast'); showTurnToast(); }
     }
   } else {
-    canRoll = true;
+    if(!waiting && _lo && (_lo.type==='testa' || _lo.type==='scocca')) {
+      console.log('[dado] singolo → showModal');
+      setTimeout(() => showModal(np), 700);
+    } else {
+      if(!waiting && triggerPenitenza(np)) setTimeout(() => showPenitenza(np), 700);
+      else canRoll = true;
+    }
   }
 }
 
@@ -796,6 +974,7 @@ function physRoll(r) {
   console.log('[dado] physRoll — canRoll:', canRoll, '| r:', r);
   if(!canRoll) return;
   canRoll = false;
+  sfx.roll();
   const df = document.getElementById('df');
   df.classList.remove('roll'); void df.offsetWidth; df.classList.add('roll');
   processRoll(r);
@@ -805,6 +984,7 @@ function rollDice() {
   console.log('[dado] rollDice — canRoll:', canRoll, '| P:', currentP, players[currentP]?.name, '| pos:', myPos);
   if(!canRoll) return;
   canRoll = false;
+  sfx.roll();
   const df = document.getElementById('df');
   df.classList.remove('roll');
   void df.offsetWidth;
@@ -873,11 +1053,13 @@ function showModal(n) {
     <div class="mt">Non ci sono serpenti né frecce qui.<br><br>
     In <strong>Modalità 2</strong>: pesca una carta dal Mazzo Imprevisti e applica l'effetto.</div>
   `;
+  sfx.quiz();
   document.getElementById('mo').classList.add('open');
 }
 
 function closeModal() {
   document.getElementById('mo').classList.remove('open');
+  if(players.length <= 1) canRoll = true;
 }
 
 // ══════════════════════════════════════════
@@ -1085,6 +1267,7 @@ function skAns(c) {
   });
   document.getElementById('sk-expl').classList.add('show');
   const correct = c === q.a;
+  if(correct) sfx.correct(); else sfx.wrong();
   setTimeout(()=>{
     const { isTesta, phase, dest, origin, stepsGained, seq, revSeq } = skState;
     if (isTesta) {
@@ -1134,7 +1317,16 @@ function skBridge(msg) {
 }
 
 function skEnd(msg, ok, pos) {
+  const isTesta = skState.isTesta;
+  players[currentP].path.push({n: pos, via: isTesta ? 'serpente' : 'freccia', ok});
+  savePlayers();
   setPos(pos);
+  if(pos === 68) {
+    document.getElementById('sk').classList.remove('open');
+    skState = null;
+    setTimeout(() => showReport(currentP), 700);
+    return;
+  }
   const lo = L[pos];
   document.getElementById('sk-body').innerHTML = `
     <div class="sk-msg ${ok?'ok-msg':'ko-msg'}">${msg}</div>
@@ -1146,6 +1338,7 @@ function closeSK() {
   document.getElementById('sk').classList.remove('open');
   skState = null;
   if(players.length > 1) showTurnToast();
+  else canRoll = true;
 }
 
 // ══════════════════════════════════════════
@@ -1199,6 +1392,7 @@ function showTurnToast() {
 let _autoAdv = null;
 
 function nextTurn() {
+  sfx.turn();
   if(_autoAdv) { clearTimeout(_autoAdv); _autoAdv = null; }
   console.log('[nextTurn] → P:', (currentP+1)%players.length, players[(currentP+1)%players.length]?.name);
   canRoll = true;
@@ -1211,6 +1405,7 @@ function nextTurn() {
     : `🎲 Turno di: ${players[currentP].name}`;
   renderHist();
   setPos(myPos);
+  renderCarte();
 }
 
 let _pgCount = 1;
@@ -1218,6 +1413,7 @@ function openPGSetup() {
   _pgCount = players.length;
   document.getElementById('pg-cnt').innerHTML = [1,2,3,4,5,6].map(n =>
     `<button onclick="setPGCount(${n})" ${n===_pgCount?'class="sel"':''}>${n}</button>`).join('');
+  setMode(gameMode);
   renderPGNames();
   document.getElementById('pg-ov').classList.add('open');
 }
@@ -1233,6 +1429,10 @@ function renderPGNames() {
     <div class="pg-ni">
       <div class="pdot" style="background:${P_COLORS[i%6]}"></div>
       <input id="pgname${i}" value="${(players[i]?.name||'Giocatore '+(i+1)).replace(/"/g,'&quot;')}" placeholder="Giocatore ${i+1}">
+    </div>
+    <div class="pg-domanda">
+      <div class="pg-dlbl">💭 Domanda al Maha Lila</div>
+      <textarea id="pgdomanda${i}" placeholder="Cosa vuoi chiedere al Maha Lila in questa partita?">${players[i]?.domanda||''}</textarea>
     </div>`).join('');
 }
 
@@ -1240,18 +1440,43 @@ function applyPGSetup() {
   players = Array.from({length:_pgCount},(_,i) => {
     const inp = document.getElementById('pgname'+i);
     const name = inp ? inp.value.trim()||('Giocatore '+(i+1)) : 'Giocatore '+(i+1);
-    return {name, pos: 68, hist: []}; // sempre fresh-start a 68
+    const dInp = document.getElementById('pgdomanda'+i);
+    const domanda = dInp ? dInp.value.trim() : (players[i]?.domanda||'');
+    return {name, pos: 68, hist: [], path: [], domanda, penitenze: [], carte: [], carteDrawn: 0};
   });
   currentP = 0;
   myPos = players[0].pos;
+  localStorage.setItem('ml_mode', gameMode);
   savePlayers();
   closePGSetup();
   setPos(myPos);
+  updateModeBadge();
   document.getElementById('dr').textContent = players.length > 1 ? `🎲 Turno di: ${players[0].name}` : 'Tocca per lanciare!';
 }
 
 function closePGSetup() {
   document.getElementById('pg-ov').classList.remove('open');
+}
+
+function setMode(m) {
+  gameMode = m;
+  const ob = document.getElementById('mode-oracolo');
+  const pb = document.getElementById('mode-party');
+  if(ob) { ob.classList.toggle('sel', m==='oracolo'); ob.classList.remove('party'); }
+  if(pb) { pb.classList.toggle('sel', m==='party'); pb.classList.toggle('party', m==='party'); }
+}
+
+function updateModeBadge() {
+  const b = document.getElementById('mode-badge-ph');
+  if(!b) return;
+  b.className = 'mode-badge ' + gameMode;
+  b.textContent = gameMode === 'party' ? '🎉 Party' : '🔮 Oracolo';
+}
+
+function toggleSFX() {
+  const m = SFX.toggle();
+  const btn = document.getElementById('sfx-btn');
+  if(btn) btn.textContent = m ? '🔇' : '🔊';
 }
 
 // ══════════════════════════════════════════
@@ -1345,6 +1570,214 @@ function drawCard() {
 
 // ══════════════════════════════════════════
 // INIT
+
+
+// ══════════════════════════════════════════
+// CARTE IMPREVISTO
+// ══════════════════════════════════════════
+let _cartaPending = null;
+
+function triggerCarta(n) {
+  if(gameMode !== 'party') return false;
+  if(!lo || lo.type !== 'neutral') return false;
+  const p = players[currentP];
+  if(!p.carte) p.carte = [];
+  if((p.carteDrawn||0) >= 2) return false;
+  return Math.random() < 0.35;
+}
+
+function showCartaDraw(n) {
+  const isRed = Math.random() < 0.5;
+  const deck = isRed ? CARTE_R : CARTE_N;
+  const card = deck[Math.floor(Math.random()*deck.length)];
+  const suit = isRed ? '♥' : '♠';
+  const color = isRed ? '#c0392b' : '#2c3e50';
+  _cartaPending = {tipo: isRed?'R':'N', card};
+  document.getElementById('cd-suit').textContent = suit;
+  document.getElementById('cd-suit').style.color = color;
+  document.getElementById('cd-val').textContent = card.v;
+  document.getElementById('cd-val').style.color = color;
+  document.getElementById('cd-tipo').textContent = isRed ? '♥ Carta Rossa — Buon Karma ✨' : '♠ Carta Nera — Monello del Caos 😈';
+  document.getElementById('cd-tipo').style.color = color;
+  document.getElementById('cd-eff').textContent = card.e;
+  sfx.carta();
+  document.getElementById('carta-ov').classList.add('open');
+}
+
+function confermCartaDraw() {
+  if(_cartaPending) {
+    const p = players[currentP];
+    if(!p.carte) p.carte = [];
+    p.carte.push(_cartaPending);
+    p.carteDrawn = (p.carteDrawn||0) + 1;
+    _cartaPending = null;
+    savePlayers();
+  }
+  document.getElementById('carta-ov').classList.remove('open');
+  renderCarte();
+  resumeAfterNeutral();
+}
+
+function renderCarte() {
+  const box = document.getElementById('carte-box');
+  const list = document.getElementById('carte-list');
+  if(!box || !list) return;
+  const p = players[currentP];
+  const carte = p?.carte || [];
+  box.style.display = carte.length ? '' : 'none';
+  list.innerHTML = carte.map((c,i) => `
+    <div class="carta-item${c.tipo==='N'?' nera':''}">
+      <div class="carta-lbl">${c.tipo==='R'?'♥ Carta Rossa':'♠ Carta Nera'}</div>
+      <div class="carta-val">${c.card.v}</div>
+      <div class="carta-eff">${c.card.e}</div>
+      <button class="carta-usa" onclick="usaCarta(${i})">Usa questa carta</button>
+    </div>`).join('');
+}
+
+function usaCarta(idx) {
+  const p = players[currentP];
+  const c = p?.carte?.[idx];
+  if(!c) return;
+  const isRed = c.tipo === 'R';
+  document.getElementById('mc').innerHTML = `
+    <div class="badge ${isRed?'scocca':'coda'}">${isRed?'✨ Buon Karma':'😈 Monello del Caos'}</div>
+    <div class="mnum">Carta ${isRed?'Rossa':'Nera'}</div>
+    <div class="mtit">${c.card.v}</div>
+    <div class="mtheme">${c.card.e}</div>
+    <button class="sk-btn pri" style="margin-top:14px" onclick="confermUsoCarta(${idx});closeModal()">✓ Effetto Applicato — Scarta</button>
+    <button class="sk-btn sec" style="margin-top:8px" onclick="closeModal()">Annulla</button>`;
+  document.getElementById('mo').classList.add('open');
+}
+
+function confermUsoCarta(idx) {
+  const p = players[currentP];
+  if(!p?.carte) return;
+  p.carte.splice(idx, 1);
+  savePlayers();
+  renderCarte();
+}
+
+// ══════════════════════════════════════════
+// PENITENZA
+// ══════════════════════════════════════════
+let _penPiano = null;
+
+function triggerPenitenza(n) {
+  if(gameMode !== 'party') return false;
+  if(!lo || lo.type !== 'neutral') return false;
+  const piano = Math.ceil(n / 9);
+  const p = players[currentP];
+  if(!p.penitenze) p.penitenze = [];
+  if(p.penitenze.length >= 3) return false;
+  if(p.penitenze.includes(piano)) return false;
+  return Math.random() < 0.40;
+}
+
+function showPenitenza(n) {
+  const piano = Math.ceil(n / 9);
+  const penData = PEN.find(p => p.r === piano);
+  if(!penData) { resumeAfterNeutral(); return; }
+  _penPiano = piano;
+  const p = players[currentP];
+  const rimanenti = 3 - (p.penitenze?.length || 0);
+  document.getElementById('pen-title').textContent = `🎭 Penitenza! — Piano ${piano} · ${penData.el}`;
+  document.getElementById('pen-sub').textContent = `Casella ${n} — ${L[n]?.name || ''}`;
+  document.getElementById('pen-opts').innerHTML = penData.opts.map((o,i) =>
+    `<div class="pen-opt"><strong>Opzione ${i+1} — “${o.n}”</strong><p>${o.d}</p></div>`).join('');
+  document.getElementById('pen-note').textContent =
+    `Il gruppo vota a maggioranza. Penitenze rimanenti per ${p.name}: ${rimanenti - 1} dopo questa.`;
+  sfx.penitenza();
+  document.getElementById('pen-ov').classList.add('open');
+}
+
+function closePenitenza() {
+  if(_penPiano !== null) {
+    if(!players[currentP].penitenze) players[currentP].penitenze = [];
+    players[currentP].penitenze.push(_penPiano);
+    savePlayers();
+    _penPiano = null;
+  }
+  document.getElementById('pen-ov').classList.remove('open');
+  resumeAfterNeutral();
+}
+
+function resumeAfterNeutral() {
+  if(players.length > 1) showTurnToast();
+  else canRoll = true;
+}
+
+// ══════════════════════════════════════════
+// REPORT FINALE
+// ══════════════════════════════════════════
+function buildReportText(p) {
+  const tl = {start:'Inizio',coda:'Coda Serpente',testa:'Testa Serpente',scocca:'Scocca Freccia',punta:'Punta Freccia',neutral:'Casella Neutra'};
+  const lines = [];
+  lines.push('══════════════════════════════════════════');
+  lines.push('       RAPPORTO DI VIAGGIO — MAHA LILA');
+  lines.push('══════════════════════════════════════════');
+  lines.push('');
+  lines.push('GIOCATORE: ' + p.name);
+  lines.push('');
+  lines.push('DOMANDA AL MAHA LILA:');
+  lines.push(p.domanda ? '"' + p.domanda + '"' : '(nessuna domanda annotata)');
+  lines.push('');
+  lines.push('──────────────────────────────────────────');
+  lines.push('PERCORSO (in ordine cronologico):');
+  lines.push('──────────────────────────────────────────');
+  lines.push('');
+  (p.path||[]).forEach((entry, idx) => {
+    const lo = L[entry.n];
+    const loName = lo ? lo.name : 'Casella ' + entry.n;
+    const loType = lo ? (tl[lo.type]||lo.type) : '';
+    let line = (idx+1) + '. Casella ' + entry.n + ' \u2014 ' + loName;
+    if(loType) line += ' [' + loType + ']';
+    if(entry.via==='serpente') line += entry.ok ? '  \u2728 (serpente annullato — Sfida Karma)' : '  \ud83d\udc0d (discesa via serpente)';
+    if(entry.via==='freccia') line += entry.ok ? '  \ud83c\udff9 (freccia percorsa completamente)' : '  \ud83c\udff9 (salita parziale sulla freccia)';
+    lines.push(line);
+    if(lo && lo.tema) lines.push('   \u201c' + lo.tema + '\u201d');
+    lines.push('');
+  });
+  lines.push('──────────────────────────────────────────');
+  lines.push('\ud83c\udfc6 LOKA 68 \u2014 COSCIENZA COSMICA: il viaggio \u00e8 compiuto.');
+  lines.push('');
+  lines.push('══════════════════════════════════════════');
+  lines.push('');
+  lines.push('ISTRUZIONI PER L\'AI:');
+  lines.push('Sei un interprete del Maha Lila, il gioco spirituale vedico.');
+  lines.push('Analizza il percorso del giocatore attraverso le loka visitate.');
+  lines.push('Considera la domanda iniziale come l\'intenzione del viaggio.');
+  lines.push('Interpreta le caselle (frecce = virtù, serpenti = vizi) come risposta');
+  lines.push('simbolica del Maha Lila alla domanda posta. Produci una lettura');
+  lines.push('narrativa e spiritualmente significativa del percorso.');
+  return lines.join('\n');
+}
+
+function showReport(pIdx) {
+  const p = players[pIdx];
+  document.getElementById('rpt-txt').textContent = buildReportText(p);
+  document.getElementById('rpt-copy-btn').textContent = '\ud83d\udccb Copia Report';
+  document.getElementById('rpt-ov').classList.add('open');
+  canRoll = false;
+}
+
+function closeReport() {
+  document.getElementById('rpt-ov').classList.remove('open');
+  if(players.length > 1) showTurnToast(); else canRoll = true;
+}
+
+function copyReport() {
+  const txt = document.getElementById('rpt-txt').textContent;
+  const btn = document.getElementById('rpt-copy-btn');
+  (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject())
+    .then(() => { btn.textContent = '\u2713 Copiato!'; setTimeout(()=>{ btn.textContent='\ud83d\udccb Copia Report'; },2200); })
+    .catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); btn.textContent = '\u2713 Copiato!'; setTimeout(()=>{ btn.textContent='\ud83d\udccb Copia Report'; },2200); } catch(e){}
+      document.body.removeChild(ta);
+    });
+}
 // ══════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
   renderDice(1);
@@ -1357,6 +1790,11 @@ document.addEventListener('DOMContentLoaded', () => {
   filterLoka('all', null);
   renderQ();
   buildRegole();
+  renderCarte();
+  updateModeBadge();
+  setMode(gameMode);
+  const _sfxBtn = document.getElementById('sfx-btn');
+  if(_sfxBtn) _sfxBtn.textContent = SFX.muted ? '🔇' : '🔊';
   // Generate apple-touch-icon dynamically
   try {
     const cv = document.createElement('canvas');
