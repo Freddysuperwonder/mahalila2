@@ -792,7 +792,7 @@ const DOTS = {
 };
 const P_COLORS = ['#e74c3c','#3498db','#27ae60','#f39c12','#9b59b6','#e67e22'];
 
-const SFX = (() => {
+const sfx = (() => {
   let _ctx = null;
   let muted = localStorage.getItem('ml_sfx') === '0';
   function ac() {
@@ -1474,7 +1474,7 @@ function updateModeBadge() {
 }
 
 function toggleSFX() {
-  const m = SFX.toggle();
+  const m = sfx.toggle();
   const btn = document.getElementById('sfx-btn');
   if(btn) btn.textContent = m ? '🔇' : '🔊';
 }
@@ -1794,7 +1794,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateModeBadge();
   setMode(gameMode);
   const _sfxBtn = document.getElementById('sfx-btn');
-  if(_sfxBtn) _sfxBtn.textContent = SFX.muted ? '🔇' : '🔊';
+  if(_sfxBtn) _sfxBtn.textContent = sfx.muted ? '🔇' : '🔊';
   // Generate apple-touch-icon dynamically
   try {
     const cv = document.createElement('canvas');
