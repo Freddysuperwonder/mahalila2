@@ -694,7 +694,7 @@ const QTPL = {
     s:["Le caselle neutrali rappresentano stazioni del cammino che richiedono osservazione e presenza.","L'esperienza quotidiana è il campo in cui si manifesta ogni qualità interiore.","Ogni loka del percorso porta un'opportunità specifica di crescita e integrazione.","Il cammino interiore si nutre di attenzione a ogni piano dell'esperienza.","La comprensione profonda nasce dall'osservazione diretta più che dall'analisi teorica.","Le pratiche interiori rendono concreto ciò che altrimenti rimane solo concetto.","La vita offre costantemente occasioni per riconoscere i propri stati interiori.","Portare attenzione a ciò che si trascura è un atto essenziale di consapevolezza.","Tutto ciò che viene riconosciuto può essere trasformato.","La consapevolezza è la chiave che apre ogni aspetto del percorso interiore.","Il cammino spirituale è un sistema integrato in cui ogni parte influenza le altre.","La qualità dell'esperienza dipende dalla qualità dell'attenzione portata.","Ogni tappa del percorso, vissuta con presenza, contribuisce alla liberazione della coscienza."]
   }
 };
-const WRONG=[["Solo in situazioni di forte stress o crisi","In modo sempre positivo e benefico"],["Ha scarso o nessun effetto rilevante","Genera sempre maggiore chiarezza e crescita"],["Non è possibile trasformarlo, va solo accettato","Solo attraverso la forza di volontà e il controllo"],["Certezza assoluta e giudizio immediato","Distacco totale e indifferenza emotiva"],["Non ha alcuna influenza sulle relazioni","Migliora sempre e automaticamente le relazioni"],["Ignorarlo completamente nella vita quotidiana","Intensificare le attività e le distrazioni esterne"],["Non ha alcun legame con la sofferenza interiore","Elimina automaticamente qualsiasi forma di sofferenza"],["Non ci sono rischi: si risolve da solo nel tempo","I rischi riguardano solo il piano fisico, non interiore"],["Non è possibile usarlo come occasione positiva","Solo con l'aiuto di un esperto spirituale esterno"],["La stessa qualità, ma praticata con maggiore intensità","Nessuna qualità interiore può riequilibrarlo da sola"],["Separandosi da tutto ciò che riguarda questo tema","Evitando ogni forma di riflessione o auto-osservazione"],["Nessun ruolo: l'auto-osservazione è inutile","Aumenta solo confusione e auto-critica negativa"],["Non offre alcun insegnamento: va eliminato","Solo chi è già illuminato può ricavarne insegnamento"]];
+const WRONG=[["Prevalentemente nei momenti di grande intensità emotiva o di crisi","Come un processo graduale, visibile soprattutto nel lungo periodo"],["Stimola una ricerca più profonda di sé, spingendo verso la trasformazione","Ha effetti variabili: dipende dal livello di consapevolezza già raggiunto"],["Comprendendo a fondo le sue origini e le cause profonde che lo generano","Solo attraverso la forza di volontà e una disciplina rigorosa e costante"],["Un'analisi critica e razionale della propria esperienza interiore","Distacco totale e indifferenza emotiva verso ciò che si osserva"],["Si riflette nelle relazioni solo quando è presente in forma molto intensa","Influenza principalmente la comunicazione verbale, non le dinamiche profonde"],["Una disciplina fisica regolare e la costante cura del benessere corporeo","Circondarsi di persone positive che supportino attivamente il cambiamento"],["È spesso una risposta adattiva che emerge da una sofferenza preesistente","Il legame è indiretto: intervengono sempre altri fattori nel mezzo"],["Crea disagio nel breve termine, ma tende ad attenuarsi naturalmente nel tempo","I rischi principali sono relazionali e comportamentali, non interiori"],["Aspettando che l'esperienza si sedimenti naturalmente prima di agire su di essa","Condividendolo con altri in un percorso di gruppo o comunità spirituale"],["La stessa qualità, portata a un livello di maggiore profondità e consapevolezza","Accettare entrambi i poli senza intervenire, lasciando che si bilancino da soli"],["Attraverso un processo graduale di sostituzione dei vecchi schemi con nuovi","Cercando un supporto esterno che aiuti a mantenere il processo nel tempo"],["Ha un ruolo essenziale, ma diventa davvero efficace solo nelle fasi avanzate","Aumenta inizialmente confusione e auto-critica, prima di portare chiarezza"],["Insegna principalmente la natura impermanente e transitoria delle esperienze","Offre soprattutto una comprensione intellettuale più chiara dei propri limiti"]];
 // 71 loka × 13 carte = 923 domande generate dai template
 const QD_BUILD=(()=>{
   const out=[];
@@ -794,36 +794,63 @@ const P_COLORS = ['#e74c3c','#3498db','#27ae60','#f39c12','#9b59b6','#e67e22'];
 
 const sfx = (() => {
   let _ctx = null;
+  let _resuming = false;
   let muted = localStorage.getItem('ml_sfx') === '0';
+
   function ac() {
     if (!_ctx) _ctx = new (window.AudioContext || window.webkitAudioContext)();
-    if (_ctx.state === 'suspended') _ctx.resume();
+    if (_ctx.state === 'suspended') {
+      _resuming = true;
+      _ctx.resume().then(() => { _resuming = false; }).catch(() => { _resuming = false; });
+    }
     return _ctx;
   }
+
+  // proactively unlock context on every touch so resume is done before the sound call
+  if (typeof document !== 'undefined') {
+    document.addEventListener('touchstart', function() {
+      if (_ctx && _ctx.state === 'suspended') _ctx.resume().catch(()=>{});
+    }, {passive: true, capture: true});
+  }
+
+  // offset added to all scheduled times when context just woke from suspension
+  function now(c) { return c.currentTime + (_resuming ? 0.15 : 0); }
+
   function tone(freq, type, start, dur, vol) {
     try {
-      const c = ac(), o = c.createOscillator(), g = c.createGain();
+      const c = ac();
+      const t = now(c) + start;
+      const o = c.createOscillator(), g = c.createGain();
       o.connect(g); g.connect(c.destination);
       o.type = type;
-      o.frequency.setValueAtTime(freq, c.currentTime + start);
-      g.gain.setValueAtTime(0.001, c.currentTime + start);
-      g.gain.linearRampToValueAtTime(vol, c.currentTime + start + 0.01);
-      g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + start + dur);
-      o.start(c.currentTime + start);
-      o.stop(c.currentTime + start + dur + 0.01);
+      o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.001, t);
+      g.gain.linearRampToValueAtTime(vol, t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      o.start(t);
+      o.stop(t + dur + 0.01);
     } catch(e) {}
   }
   function noise(start, dur, vol) {
     try {
-      const c = ac(), buf = c.createBuffer(1, Math.ceil(c.sampleRate * dur), c.sampleRate);
+      const c = ac();
+      const t = now(c) + start;
+      const buf = c.createBuffer(1, Math.ceil(c.sampleRate * dur), c.sampleRate);
       const d = buf.getChannelData(0);
       for(let i = 0; i < d.length; i++) d[i] = (Math.random()*2-1) * (1 - i/d.length);
       const src = c.createBufferSource(), g = c.createGain();
       g.gain.value = vol; src.buffer = buf;
       src.connect(g); g.connect(c.destination);
-      src.start(c.currentTime + start);
+      src.start(t);
     } catch(e) {}
   }
+
+  // play sequential melody notes via setTimeout so each tone() call is fresh
+  function seq(notes) {
+    notes.forEach(([delay, freq, type, dur, vol]) =>
+      setTimeout(() => tone(freq, type, 0, dur, vol), delay));
+  }
+
   return {
     get muted() { return muted; },
     toggle() { muted = !muted; localStorage.setItem('ml_sfx', muted ? '0' : '1'); return muted; },
@@ -832,8 +859,29 @@ const sfx = (() => {
       if(muted) return;
       if(type==='testa'||type==='scocca') { tone(280,'sine',0,0.32,0.3); tone(200,'sine',0.15,0.38,0.25); tone(150,'sine',0.3,0.48,0.2); }
       else if(type==='punta'||type==='at'||type==='freccia') { tone(392,'sine',0,0.18,0.25); tone(523,'sine',0.1,0.18,0.25); tone(659,'sine',0.2,0.28,0.3); }
-      else if(type==='win') { [523,659,784,1047].forEach((f,i)=>tone(f,'sine',i*0.13,0.42,0.3)); tone(1047,'sine',0.56,0.9,0.4); }
+      else if(type==='win') {
+        seq([
+          [0,  130,'sawtooth',1.8,0.12],[0,  196,'sawtooth',1.8,0.09],
+          [0,  392,'sawtooth',0.16,0.3],[180,523,'sawtooth',0.16,0.3],
+          [360,659,'sawtooth',0.16,0.32],[540,784,'sawtooth',0.16,0.34],
+          [750,784,'sawtooth',0.18,0.34],[950,1047,'sawtooth',0.18,0.38],
+          [1160,523,'sawtooth',1.1,0.32],[1160,659,'sawtooth',1.1,0.26],
+          [1160,784,'sawtooth',1.1,0.3],[1160,1047,'sawtooth',1.1,0.35]
+        ]);
+      }
       else { tone(660,'sine',0,0.28,0.15); }
+    },
+    enter() {
+      if(muted) return;
+      // trill via setTimeout so each tone is a fresh call with current AudioContext time
+      seq([
+        [0,523,'sawtooth',0.08,0.26],[65,587,'sawtooth',0.08,0.26],
+        [130,523,'sawtooth',0.08,0.26],[195,587,'sawtooth',0.08,0.26],
+        [260,523,'sawtooth',0.08,0.26],[325,587,'sawtooth',0.08,0.26],
+        [390,523,'sawtooth',0.08,0.26],[455,587,'sawtooth',0.08,0.26],
+        [570,392,'sawtooth',0.14,0.3],[720,523,'sawtooth',0.14,0.3],
+        [870,659,'sawtooth',0.14,0.32],[1020,784,'sawtooth',0.45,0.38]
+      ]);
     },
     quiz()      { if(muted) return; tone(440,'square',0,0.09,0.15); tone(554,'square',0.1,0.09,0.15); },
     correct()   { if(muted) return; tone(523,'sine',0,0.16,0.3); tone(659,'sine',0.13,0.16,0.3); tone(784,'sine',0.26,0.32,0.35); },
@@ -934,7 +982,8 @@ function processRoll(r) {
   const np = (waiting && r===1) ? 1 : waiting ? 68 : calcNewPos(myPos, r);
   setPos(np);
   const _lo = L[np];
-  if(!waiting) sfx.land(np === 68 ? 'win' : (_lo?.type || 'neutral'));
+  if(waiting && np === 1) sfx.enter();
+  else if(!waiting) sfx.land(np === 68 ? 'win' : (_lo?.type || 'neutral'));
   let drMsg = `Uscito: ${r} ${dIcons[r]}`;
   if(waiting && r!==1) drMsg += ' — Devi uscire 1 per entrare nel gioco';
   else if(waiting) drMsg += ' → Entrato! Sei alla casella 1 — Nascita';
