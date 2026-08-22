@@ -858,7 +858,8 @@ const sfx = (() => {
     roll()      { if(muted) return; noise(0, 0.04, 0.3); noise(0.08, 0.04, 0.25); },
     land(type)  {
       if(muted) return;
-      if(type==='testa'||type==='scocca') { tone(280,'sine',0,0.32,0.3); tone(200,'sine',0.15,0.38,0.25); tone(150,'sine',0.3,0.48,0.2); }
+      if(type==='testa') { tone(280,'sine',0,0.32,0.3); tone(200,'sine',0.15,0.38,0.25); tone(150,'sine',0.3,0.48,0.2); }
+      else if(type==='scocca') { tone(523,'sawtooth',0,0.12,0.22); tone(659,'sawtooth',0.1,0.12,0.25); tone(784,'sawtooth',0.2,0.14,0.28); tone(1047,'sawtooth',0.32,0.3,0.32); }
       else if(type==='punta'||type==='at'||type==='freccia') { tone(392,'sine',0,0.18,0.25); tone(523,'sine',0.1,0.18,0.25); tone(659,'sine',0.2,0.28,0.3); }
       else if(type==='win') {
         seq([
