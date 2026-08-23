@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -21,17 +21,17 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;background:var(--bg);color:var(--ink)}
-/* ── Layout ── */
+/* -- Layout -- */
 #app{display:flex;flex-direction:column;height:100%}
 .page{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
   padding-bottom:calc(var(--nav) + var(--safe-b) + 16px);display:none}
 .page.active{display:block}
-/* ── Header ── */
+/* -- Header -- */
 .ph{background:linear-gradient(150deg,var(--acc) 0%,#3e2810 100%);color:#fff;
   padding:calc(var(--safe-t) + 18px) 20px 22px;position:sticky;top:0;z-index:10}
 .ph h1{font-size:26px;font-weight:800;letter-spacing:-.4px}
 .ph p{font-size:13px;opacity:.75;margin-top:3px}
-/* ── Bottom Nav ── */
+/* -- Bottom Nav -- */
 #nav{position:fixed;bottom:0;left:0;right:0;
   background:rgba(255,253,248,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   border-top:1px solid var(--line);z-index:100;
@@ -41,20 +41,20 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
   gap:3px;border:none;background:none;color:var(--muted);font-size:10px;font-weight:600;cursor:pointer;transition:color .2s}
 .nb.active{color:var(--acc)}
 .nb svg{width:24px;height:24px}
-/* ── Cards ── */
+/* -- Cards -- */
 .card{background:var(--paper);border-radius:16px;padding:18px;
   box-shadow:0 2px 12px rgba(0,0,0,.07);margin-bottom:12px}
 .card h3{font-size:15px;font-weight:700;color:var(--acc);margin-bottom:10px}
 .card p,.card li{font-size:14px;line-height:1.7;margin-bottom:5px}
 .card ul,.card ol{padding-left:18px}
-/* ── Section Tabs ── */
+/* -- Section Tabs -- */
 .stabs{display:flex;gap:8px;padding:12px 14px;background:var(--paper);
   border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .stabs::-webkit-scrollbar{display:none}
 .stab{padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;
   border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .2s}
 .stab.active{background:var(--acc);color:#fff;border-color:var(--acc)}
-/* ── Modal ── */
+/* -- Modal -- */
 #mo{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end}
 #mo.open{display:flex}
 #md{background:var(--paper);border-radius:24px 24px 0 0;width:100%;max-height:82vh;
@@ -68,7 +68,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .badge.punta{background:var(--arrow-h);color:#fff}
 .badge.neutral{background:var(--soft);color:var(--muted)}
 .badge.start{background:#f4ecdf;color:var(--acc)}
-/* ── Dice ── */
+/* -- Dice -- */
 .dc{display:flex;flex-direction:column;align-items:center;padding:36px 20px;gap:28px}
 .dw{width:130px;height:130px;cursor:pointer;user-select:none}
 #df{width:130px;height:130px;background:var(--paper);border-radius:22px;
@@ -96,7 +96,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .hd{width:42px;height:42px;background:var(--paper);border-radius:10px;
   display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;
   color:var(--acc);box-shadow:0 2px 8px rgba(0,0,0,.08)}
-/* ── Position tracker ── */
+/* -- Position tracker -- */
 .pos-box{margin-top:0;padding:15px 16px;background:var(--soft);border-radius:14px;border:1px solid var(--line);width:100%;max-width:320px}
 .pos-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .pos-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--acc)}
@@ -104,7 +104,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .pos-ctl strong{font-size:26px;font-weight:800;min-width:32px;text-align:center;line-height:1}
 .pos-btn{width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--bg);border:none;font-size:20px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .pos-info{font-size:13px;color:var(--muted);margin-bottom:10px;min-height:16px;line-height:1.4}
-/* ── Board ── */
+/* -- Board -- */
 .bl{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;background:var(--paper);border-bottom:1px solid var(--line)}
 .li{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
 .ld{width:12px;height:12px;border-radius:3px}
@@ -122,7 +122,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .bc.punta{background:var(--arrow-h);color:#fff;border-color:#126030}
 .bc.neutral{background:#f7f2e8;color:#aaa;border-color:#e0d8cc}
 .bc.empty{background:transparent;border:none;pointer-events:none}
-/* ── Loka List ── */
+/* -- Loka List -- */
 .ll{padding:10px}
 .lc{background:var(--paper);border-radius:14px;overflow:hidden;
   box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:10px}
@@ -145,7 +145,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .conn{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:600;margin-top:8px}
 .conn.s{background:#fff0f0;color:#8B0000}
 .conn.a{background:var(--arrow-b);color:var(--arrow-h)}
-/* ── Quiz ── */
+/* -- Quiz -- */
 .qprog{display:flex;justify-content:space-between;align-items:center;
   padding:10px 14px;background:var(--paper);border-bottom:1px solid var(--line)}
 .qpt{font-size:13px;font-weight:600;color:var(--muted)}
@@ -171,7 +171,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .qnext{margin-top:14px;width:100%;padding:14px;border:none;border-radius:13px;
   background:var(--acc);color:#fff;font-size:15px;font-weight:700;cursor:pointer;display:none}
 .qnext.show{display:block}
-/* ── Regole tabs ── */
+/* -- Regole tabs -- */
 .rtabs{display:flex;background:var(--paper);border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .rtabs::-webkit-scrollbar{display:none}
 .rtab{padding:12px 14px;font-size:13px;font-weight:600;border:none;background:none;
@@ -179,7 +179,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .rtab.active{color:var(--acc);border-bottom-color:var(--acc)}
 .rc{padding:14px;display:none}
 .rc.active{display:block}
-/* ── Carte ── */
+/* -- Carte -- */
 .cdb{width:100%;padding:20px;border:none;border-radius:18px;
   background:linear-gradient(135deg,var(--acc),#3e2810);color:#fff;
   font-size:17px;font-weight:700;cursor:pointer;margin-bottom:14px;
@@ -197,7 +197,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .cbadge.ros span{background:#ffe8e8;color:#c0392b}
 .cbadge.ner span{background:#e8e8e8;color:#2c3e50}
 .cbadge.jok span{background:var(--soft);color:var(--acc)}
-/* ── Penitenze ── */
+/* -- Penitenze -- */
 .ps{padding:10px}
 .pr{background:var(--paper);border-radius:14px;overflow:hidden;
   box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:10px}
@@ -213,7 +213,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .po{padding:11px;border-radius:10px;background:var(--soft);margin-bottom:8px}
 .pol{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--acc);margin-bottom:3px}
 .po p{font-size:13px;line-height:1.55}
-/* ── Modal content ── */
+/* -- Modal content -- */
 .mnum{font-size:12px;color:var(--muted);margin-bottom:4px}
 .mtit{font-size:24px;font-weight:800;margin-bottom:10px;line-height:1.2}
 .mtheme{font-size:14px;color:var(--muted);font-style:italic;padding:11px;
@@ -224,7 +224,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
   margin-top:12px;font-size:13px;font-weight:600}
 .mconn.ms{background:#fff0f0;color:#8B0000}
 .mconn.ma{background:var(--arrow-b);color:var(--arrow-h)}
-/* ── Sfida Karma overlay ── */
+/* -- Sfida Karma overlay -- */
 #sk{position:fixed;inset:0;background:var(--paper);z-index:300;overflow-y:auto;
   padding-bottom:80px;display:none}
 #sk.open{display:block}
@@ -244,7 +244,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
   font-weight:700;cursor:pointer;margin-top:10px;transition:opacity .2s}
 .sk-btn.pri{background:var(--acc);color:#fff}
 .sk-btn.sec{background:var(--soft);color:var(--ink)}
-/* ═══ MULTIGIOCATORE ═══ */
+/* --- MULTIGIOCATORE --- */
 #pbar{display:flex;align-items:center;gap:6px;padding:6px 16px 4px;overflow-x:auto;scrollbar-width:none}
 #pbar::-webkit-scrollbar{display:none}
 .pchip{display:flex;flex-direction:column;align-items:center;padding:5px 10px;border-radius:10px;border:2px solid var(--pc);min-width:56px;flex-shrink:0;transition:all .15s}
@@ -267,7 +267,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .pg-ni .pdot{width:13px;height:13px;border-radius:50%;flex-shrink:0}
 .pg-ni input{flex:1;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:var(--paper);color:var(--ink);outline:none}
 .pg-ni input:focus{border-color:var(--acc)}
-/* ── Mode selector ── */
+/* -- Mode selector -- */
 .mode-sel{display:flex;gap:8px;margin-bottom:16px}
 .mode-btn{flex:1;padding:12px 8px;border-radius:14px;border:2px solid var(--line);background:var(--paper);cursor:pointer;text-align:center;transition:all .18s;display:flex;flex-direction:column;align-items:center}
 .mode-btn.sel{border-color:var(--acc);background:var(--soft)}
@@ -286,15 +286,15 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 #curr-player-tag.multi{display:flex}
 #curr-player-tag .cp-lbl{font-size:10px;font-weight:700;opacity:.65;letter-spacing:.8px;text-transform:uppercase}
 #curr-player-tag .cp-nm{font-size:24px;font-weight:800;letter-spacing:.1px}
-/* ── Domanda setup ── */
+/* -- Domanda setup -- */
 .pg-domanda{margin:0 0 12px 21px}
 .pg-dlbl{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
 .pg-domanda textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:var(--paper);color:var(--ink);resize:vertical;min-height:68px;font-family:inherit;outline:none;display:block}
 .pg-domanda textarea:focus{border-color:var(--acc)}
-/* ── Report overlay ── */
+/* -- Report overlay -- */
 #rpt-ov{position:fixed;inset:0;background:var(--paper);z-index:400;overflow-y:auto;padding-bottom:80px;display:none}
 #rpt-ov.open{display:block}
-/* ── Penitenza overlay ── */
+/* -- Penitenza overlay -- */
 #pen-ov{position:fixed;inset:0;background:var(--paper);z-index:350;overflow-y:auto;padding-bottom:80px;display:none}
 #pen-ov.open{display:block}
 .pen-hdr{background:linear-gradient(150deg,#7b4ea4 0%,#3d1a6e 100%);color:#fff;padding:calc(var(--safe-t)+20px) 18px 22px;text-align:center}
@@ -308,7 +308,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .pen-opt p{font-size:13px;line-height:1.6;color:var(--ink);margin:0}
 .pen-note{font-size:12px;color:var(--muted);text-align:center;margin-bottom:14px;font-style:italic}
 .pen-btn{width:100%;padding:14px;border-radius:12px;border:none;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:8px;display:block;background:#7b4ea4;color:#fff}
-/* ── Carte Imprevisto (mano) ── */
+/* -- Carte Imprevisto (mano) -- */
 .carte-box{margin-top:10px;padding:14px 16px;background:var(--paper);border-radius:14px;border:1px solid var(--line);width:100%;max-width:320px}
 .carte-box h3{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
 .carta-item{background:var(--soft);border-radius:12px;padding:12px 14px;margin-bottom:8px;border-left:4px solid #c0392b}
@@ -318,7 +318,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .carta-eff{font-size:12px;line-height:1.55;color:var(--ink)}
 .carta-usa{margin-top:8px;padding:6px 14px;border-radius:8px;border:none;background:#c0392b;color:#fff;font-size:12px;font-weight:700;cursor:pointer}
 .carta-item.nera .carta-usa{background:#2c3e50}
-/* ── Carta draw bottom sheet ── */
+/* -- Carta draw bottom sheet -- */
 #carta-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:360;display:none;align-items:flex-end}
 #carta-ov.open{display:flex}
 #carta-md{background:var(--paper);border-radius:24px 24px 0 0;width:100%;padding:20px 20px calc(20px + var(--safe-b));-webkit-overflow-scrolling:touch}
@@ -339,19 +339,19 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 <body>
 <div id="app">
 
-<!-- ══════ DADO ══════ -->
+<!-- ------ DADO ------ -->
 <div class="page active" id="page-dado">
   <div class="ph"><h1>🎲 Dado</h1><p>Tocca il dado o il pulsante per lanciare<span class="mode-badge" id="mode-badge-ph"></span></p></div>
-  <div id="pbar"><div id="pchips" style="display:flex;gap:6px;flex:1;overflow:hidden"></div><button class="pg-btn" onclick="openPGSetup()" title="Configura giocatori">👥</button><button class="pg-btn" id="dice-mode-btn" onclick="toggleDiceMode()" title="Dado fisico/virtuale">🎯</button><button class="pg-btn" id="sfx-btn" onclick="toggleSFX()" title="Suoni">🔊</button></div>
+  <div id="pbar"><div id="pchips" style="display:flex;gap:6px;flex:1;overflow:hidden"></div><button class="pg-btn" onclick="openPGSetup()" title="Configura giocatori">??</button><button class="pg-btn" id="dice-mode-btn" onclick="toggleDiceMode()" title="Dado fisico/virtuale">??</button><button class="pg-btn" id="sfx-btn" onclick="toggleSFX()" title="Suoni">🔊</button></div>
   <div class="dc">
     <div id="dw-area" class="dw" onclick="rollDice()"><div id="df"></div></div>
     <div id="phys-pad">
-      <button class="phys-btn" onclick="physRoll(1)">⚀</button>
-      <button class="phys-btn" onclick="physRoll(2)">⚁</button>
-      <button class="phys-btn" onclick="physRoll(3)">⚂</button>
-      <button class="phys-btn" onclick="physRoll(4)">⚃</button>
-      <button class="phys-btn" onclick="physRoll(5)">⚄</button>
-      <button class="phys-btn" onclick="physRoll(6)">⚅</button>
+      <button class="phys-btn" onclick="physRoll(1)">?</button>
+      <button class="phys-btn" onclick="physRoll(2)">?</button>
+      <button class="phys-btn" onclick="physRoll(3)">?</button>
+      <button class="phys-btn" onclick="physRoll(4)">?</button>
+      <button class="phys-btn" onclick="physRoll(5)">?</button>
+      <button class="phys-btn" onclick="physRoll(6)">?</button>
     </div>
     <div id="curr-player-tag"><span class="cp-lbl">Turno di</span><span class="cp-nm" id="cp-nm"></span></div>
     <div class="dr" id="dr">Tocca per lanciare!</div>
@@ -360,7 +360,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
         <h3 style="margin:0">Ultimi lanci</h3>
         <span id="dh-count" style="font-size:11px;color:var(--muted);font-weight:600">0 lanci</span>
-        <button id="undo-btn" onclick="undo()" disabled style="font-size:11px;padding:4px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);cursor:pointer;color:var(--muted)">↩ Annulla</button>
+        <button id="undo-btn" onclick="undo()" disabled style="font-size:11px;padding:4px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);cursor:pointer;color:var(--muted)">? Annulla</button>
         <button onclick="resetDice()" style="font-size:11px;padding:4px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);cursor:pointer;color:var(--muted)">Azzera</button>
       </div>
       <div class="hh" id="dh"></div>
@@ -371,36 +371,36 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
     </div>
     <div class="pos-box">
       <div class="pos-row">
-        <span class="pos-lbl">📍 Mia casella</span>
+        <span class="pos-lbl">?? Mia casella</span>
         <div class="pos-ctl">
-          <button class="pos-btn" onclick="adjPos(-1)">−</button>
+          <button class="pos-btn" onclick="adjPos(-1)">-</button>
           <strong id="pos-n">1</strong>
           <button class="pos-btn" onclick="adjPos(+1)">+</button>
         </div>
       </div>
       <div id="pos-info" class="pos-info"></div>
-      <button class="rb" style="width:100%" onclick="openQuizAtPos()">📚 Quiz — casella <span id="pos-n2">1</span></button>
+      <button class="rb" style="width:100%" onclick="openQuizAtPos()">?? Quiz è casella <span id="pos-n2">1</span></button>
     </div>
     <div class="carte-box" id="carte-box" style="display:none">
-      <h3>🃏 Le tue Carte Imprevisto</h3>
+      <h3>?? Le tue Carte Imprevisto</h3>
       <div id="carte-list"></div>
     </div>
   </div>
 </div>
 
-<!-- ══════ TABELLONE ══════ -->
+<!-- ------ TABELLONE ------ -->
 <div class="page" id="page-tabellone">
-  <div class="ph"><h1>🗺️ Tabellone</h1><p>72 caselle · vinci sulla 68</p></div>
+  <div class="ph"><h1>🗺️ Tabellone</h1><p>72 caselle è vinci sulla 68</p></div>
   <div class="bl">
-    <div class="li"><div class="ld" style="background:var(--snake-h)"></div>Testa 🐍</div>
+    <div class="li"><div class="ld" style="background:var(--snake-h)"></div>Testa ??</div>
     <div class="li"><div class="ld" style="background:#fff0f0;border:1px solid #c0392b"></div>Coda</div>
-    <div class="li"><div class="ld" style="background:var(--arrow-h)"></div>Punta 🏹</div>
+    <div class="li"><div class="ld" style="background:var(--arrow-h)"></div>Punta ??</div>
     <div class="li"><div class="ld" style="background:var(--arrow-b);border:1px solid #27ae60"></div>Scocca</div>
   </div>
   <div class="bg" id="bg"></div>
 </div>
 
-<!-- ══════ LOKA ══════ -->
+<!-- ------ LOKA ------ -->
 <div class="page" id="page-loka">
   <div class="ph"><h1>📖 Loka</h1><p>40 caselle speciali del percorso</p></div>
   <div class="stabs" id="loka-tabs">
@@ -413,10 +413,10 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
   <div class="ll" id="ll"></div>
 </div>
 
-<!-- ══════ QUIZ ══════ -->
+<!-- ------ QUIZ ------ -->
 <div class="page" id="page-quiz">
   <div class="ph"><h1>❓ Quiz</h1><p>923 domande · 71 loka × carta 1–13</p></div>
-  <div class="qprog"><span class="qpt" id="qpt">Domanda 1 di 923</span><span class="qps" id="qps">0 ✓</span></div>
+  <div class="qprog"><span class="qpt" id="qpt">Domanda 1 di 923</span><span class="qps" id="qps">0 ?</span></div>
   <div class="stabs" id="quiz-tabs">
     <button class="stab" id="stab-pos" onclick="setQF('pos',this)">📍 Casella <span id="qtab-pos">1</span></button>
     <button class="stab active" onclick="setQF('all',this)">Tutte (923)</button>
@@ -429,13 +429,13 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
   <div class="qc" id="qc"></div>
 </div>
 
-<!-- ══════ MANUALE ══════ -->
+<!-- ------ MANUALE ------ -->
 <div class="page" id="page-regole">
   <div class="ph"><h1>📜 Manuale</h1><p>Regole, carte e penitenze</p></div>
   <div class="rtabs">
-    <button class="rtab active" onclick="showRT('r1',this)">Modalità 1</button>
-    <button class="rtab" onclick="showRT('r2',this)">Modalità 2</button>
-    <button class="rtab" onclick="showRT('carte',this)">🃏 Carte</button>
+    <button class="rtab active" onclick="showRT('r1',this)">ModalitÈ 1</button>
+    <button class="rtab" onclick="showRT('r2',this)">ModalitÈ 2</button>
+    <button class="rtab" onclick="showRT('carte',this)">?? Carte</button>
     <button class="rtab" onclick="showRT('pen',this)">Penitenze</button>
   </div>
   <div class="rc active" id="r1"></div>
@@ -486,16 +486,16 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 
 <div id="pg-ov">
   <div class="pgm">
-    <h2>👥 Configura Partita</h2>
-    <div style="font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Modalità di gioco</div>
+    <h2>?? Configura Partita</h2>
+    <div style="font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">ModalitÈ di gioco</div>
     <div class="mode-sel">
       <button class="mode-btn" id="mode-oracolo" onclick="setMode('oracolo')">
-        <div class="mode-icon">🔮</div>
+        <div class="mode-icon">??</div>
         <span class="mode-name">Oracolo</span>
         <span class="mode-desc">Viaggio spirituale puro. Solo frecce, serpenti e Sfide Karma</span>
       </button>
       <button class="mode-btn party" id="mode-party" onclick="setMode('party')">
-        <div class="mode-icon">🎉</div>
+        <div class="mode-icon">??</div>
         <span class="mode-name">Party Game</span>
         <span class="mode-desc">Versione completa con carte imprevisto e penitenze</span>
       </button>
@@ -504,13 +504,13 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
     <div class="pg-cnt" id="pg-cnt"></div>
     <div id="pg-names"></div>
     <div class="pg-btns">
-      <button class="pri" onclick="applyPGSetup()">✓ Inizia</button>
+      <button class="pri" onclick="applyPGSetup()">? Inizia</button>
       <button class="sec" onclick="closePGSetup()">Annulla</button>
     </div>
   </div>
 </div>
 
-<!-- ══════ CARTA IMPREVISTO ══════ -->
+<!-- ------ CARTA IMPREVISTO ------ -->
 <div id="carta-ov" onclick="event.target===this&&confermCartaDraw()">
   <div id="carta-md">
     <div class="drag"></div>
@@ -518,11 +518,11 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
     <div class="cd-val" id="cd-val"></div>
     <div class="cd-tipo" id="cd-tipo"></div>
     <div class="cd-eff" id="cd-eff"></div>
-    <button class="rb" style="width:100%" onclick="confermCartaDraw()">🃏 Tieni la carta</button>
+    <button class="rb" style="width:100%" onclick="confermCartaDraw()">?? Tieni la carta</button>
   </div>
 </div>
 
-<!-- ══════ PENITENZA ══════ -->
+<!-- ------ PENITENZA ------ -->
 <div id="pen-ov">
   <div class="pen-hdr">
     <div class="pen-icon">🎭</div>
@@ -532,27 +532,27 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
   <div class="pen-body">
     <div class="pen-opts" id="pen-opts"></div>
     <div class="pen-note" id="pen-note"></div>
-    <button class="pen-btn" onclick="closePenitenza()">✓ Penitenza Accettata</button>
+    <button class="pen-btn" onclick="closePenitenza()">? Penitenza Accettata</button>
   </div>
 </div>
 
-<!-- ══════ REPORT FINALE ══════ -->
+<!-- ------ REPORT FINALE ------ -->
 <div id="rpt-ov">
   <div class="rpt-hdr">
-    <h2>🏆 Coscienza Cosmica Raggiunta!</h2>
+    <h2>?? Coscienza Cosmica Raggiunta!</h2>
     <p>Copia il report e incollalo nell'AI per ricevere la risposta del Maha Lila</p>
   </div>
   <div class="rpt-body">
     <div class="rpt-txt" id="rpt-txt"></div>
-    <button class="rpt-btn pri" id="rpt-copy-btn" onclick="copyReport()">📋 Copia Report</button>
-    <button class="rpt-btn sec" onclick="closeReport()">✕ Chiudi</button>
+    <button class="rpt-btn pri" id="rpt-copy-btn" onclick="copyReport()">?? Copia Report</button>
+    <button class="rpt-btn sec" onclick="closeReport()">? Chiudi</button>
   </div>
 </div>
 
 <script>
-// ══════════════════════════════════════════
+// ------------------------------------------
 // DATA
-// ══════════════════════════════════════════
+// ------------------------------------------
 const L = {
   1:{name:"Nascita",type:"start",tema:"Il primo passo del cammino dell'anima, il manifestarsi della coscienza nel gioco dell'esistenza.",guida:"Ogni nuovo inizio porta in sé l'innocenza e la potenzialità del tutto: onora il tuo punto di partenza.",spiega:"La nascita è sia un arrivo che una domanda: chi siamo, da dove veniamo, dove andiamo. È l'invito a vivere con presenza e curiosità l'intero viaggio."},
   2:{name:"Illusione",type:"coda",sf:63,tema:"Percezione distorta della realtà, false convinzioni, attaccamenti mentali.",guida:"La verità emerge attraverso auto-osservazione, sincerità e presenza consapevole.",spiega:"L'illusione si dissolve quando la mente smette di proiettare e inizia a vedere con chiarezza."},
@@ -665,38 +665,38 @@ const JOKERS = [
   {v:"Joker Nero",e:"Urla «CAOS!» — tutti i giocatori passano la propria pedina al giocatore alla propria sinistra, ereditando la sua posizione."}
 ];
 
-// ══════════════════════════════════════════
-// QUIZ TEMPLATES — 71 loka × 13 carte = 923 domande
-// ══════════════════════════════════════════
+// ------------------------------------------
+// QUIZ TEMPLATES è 71 loka è 13 carte = 923 domande
+// ------------------------------------------
 const QTPL = {
   coda:{
     q:["Come si manifesta {n} nella vita interiore?","Qual è l'effetto principale di {n} sulla consapevolezza personale?","Come si può iniziare a trasformare {n}?","Quale atteggiamento mentale aiuta a riconoscere {n}?","In che modo {n} influenza le relazioni con gli altri?","Quale pratica quotidiana aiuta a superare {n}?","Come si collega {n} alla sofferenza interiore?","Qual è il rischio di ignorare {n}?","Come si può usare {n} come occasione di crescita?","Quale qualità opposta aiuta a riequilibrare {n}?","Come si può integrare maggiore consapevolezza rispetto a {n}?","Quale ruolo ha l'auto-osservazione nel lavoro su {n}?","Quale insegnamento profondo può offrire {n} quando viene compreso?"],
-    a:["Attraverso schemi interiori ricorrenti e reazioni automatiche","Limita la chiarezza e rallenta la crescita interiore","Con presenza, sincerità e volontà di cambiamento","Apertura e osservazione senza giudizio","Può creare distanza, incomprensioni o aspettative distorte","Meditazione, riflessione e piccoli atti consapevoli","Alimenta tensione, attaccamento e disagio","Può consolidarsi e diventare un ostacolo più profondo","Riconoscendolo e trasformandolo in consapevolezza","La qualità opposta, coltivata con costanza, aiuta a ristabilire equilibrio","Con attenzione ai propri pensieri, parole e azioni","Aiuta a riconoscere il meccanismo prima che prenda il controllo","Può insegnare discernimento, umiltà e verità"],
-    s:["Questo loka si rivela nei comportamenti abituali e nelle risposte emotive non osservate.","Quando non riconosciuto, ostacola lucidità, equilibrio e comprensione di sé.","Ogni trasformazione inizia dal riconoscimento onesto di ciò che accade dentro.","Una mente aperta permette di vedere il problema con precisione invece di negarlo.","Le dinamiche interiori irrisolte si riflettono nella qualità delle relazioni.","La continuità nelle pratiche aiuta a sciogliere gradualmente gli automatismi.","Quando domina la mente, aumenta il senso di sofferenza e disordine.","Ciò che non viene guardato tende a ripetersi e radicarsi con maggiore forza.","Ogni ombra può diventare una soglia di comprensione se affrontata con coraggio.","Ogni tendenza disarmonica si riequilibra sviluppando la virtù complementare.","La trasformazione si radica nella vita concreta attraverso scelte quotidiane lucide.","Osservare sé stessi in tempo reale permette di interrompere reazioni abituali.","Anche le difficoltà interiori, se comprese, diventano insegnamenti preziosi."]
+    a:["Attraverso schemi interiori ricorrenti e reazioni automatiche","Limita la chiarezza e rallenta la crescita interiore","Con presenza, sincerità e volontà di cambiamento","Apertura e osservazione senza giudizio","PuÈ creare distanza, incomprensioni o aspettative distorte","Meditazione, riflessione e piccoli atti consapevoli","Alimenta tensione, attaccamento e disagio","PuÈ consolidarsi e diventare un ostacolo più profondo","Riconoscendolo e trasformandolo in consapevolezza","La qualità opposta, coltivata con costanza, aiuta a ristabilire equilibrio","Con attenzione ai propri pensieri, parole e azioni","Aiuta a riconoscere il meccanismo prima che prenda il controllo","PuÈ insegnare discernimento, umiltà e verità"],
+    s:["Questo loka si rivela nei comportamenti abituali e nelle risposte emotive non osservate.","Quando non riconosciuto, ostacola lucidità, equilibrio e comprensione di sé.","Ogni trasformazione inizia dal riconoscimento onesto di ciò che accade dentro.","Una mente aperta permette di vedere il problema con precisione invece di negarlo.","Le dinamiche interiori irrisolte si riflettono nella qualità delle relazioni.","La continuità nelle pratiche aiuta a sciogliere gradualmente gli automatismi.","Quando domina la mente, aumenta il senso di sofferenza e disordine.","CiÈ che non viene guardato tende a ripetersi e radicarsi con maggiore forza.","Ogni ombra può diventare una soglia di comprensione se affrontata con coraggio.","Ogni tendenza disarmonica si riequilibra sviluppando la virtù complementare.","La trasformazione si radica nella vita concreta attraverso scelte quotidiane lucide.","Osservare sé stessi in tempo reale permette di interrompere reazioni abituali.","Anche le difficoltÈ interiori, se comprese, diventano insegnamenti preziosi."]
   },
   testa:{
-    q:["Come si esprime {n} nel pensiero e nel comportamento?","Quale effetto ha {n} sulla lucidità mentale?","Come si può riconoscere la presenza di {n} in sé stessi?","Quale pratica aiuta a trasformare {n}?","In che modo {n} altera le relazioni interpersonali?","Qual è un segnale che {n} sta diventando dannoso?","Come si può interrompere il ciclo di {n}?","Quale ruolo ha la consapevolezza nel lavoro su {n}?","Come {n} può essere trasformato in apprendimento interiore?","Quale atteggiamento opposto favorisce il riequilibrio di {n}?","Come si può prevenire il ritorno di {n} nella vita quotidiana?","Quale legame esiste tra {n} e sofferenza emotiva?","Quale comprensione profonda aiuta a liberarsi da {n}?"],
-    a:["Si manifesta attraverso schemi mentali ripetitivi e reazioni distorte","Riduce chiarezza, equilibrio e capacità di discernimento","Osservando i propri pensieri automatici e i propri giudizi","Meditazione, ascolto interiore e riflessione sincera","Può generare incomprensione, conflitto o distanza","Quando produce chiusura, risentimento o ripetizione di schemi dannosi","Interrompendo l'automatismo con presenza e scelta consapevole","Permette di vedere il processo interno e non solo il suo effetto","Usandolo come specchio delle proprie paure o attaccamenti","Apertura, equilibrio e responsabilità personale","Con vigilanza interiore e pratiche costanti","Alimenta tensione e instabilità interiore","Capire che nessun automatismo mentale coincide con la propria essenza"],
-    s:["Le teste agiscono sul piano mentale, influenzando interpretazioni, giudizi e decisioni.","Quando domina la mente, questo stato confonde la visione e orienta verso risposte poco lucide.","Riconoscere il tono interno della mente è essenziale per accorgersi di ciò che la condiziona.","Una pratica regolare scioglie gradualmente i meccanismi mentali più rigidi.","Ciò che avviene nella mente si riflette nel modo di relazionarsi con gli altri.","Il danno emerge quando il pensiero smette di essere strumento e diventa prigione.","Fermarsi prima di reagire consente di cambiare direzione mentale ed emotiva.","La consapevolezza illumina il meccanismo profondo, rendendo possibile la trasformazione.","Ogni distorsione rivela qualcosa che chiede comprensione e lavoro interiore.","Coltivare l'opposto armonico riduce la forza della tendenza disfunzionale.","La prevenzione nasce dalla continuità, non da interventi occasionali.","Quando il pensiero si irrigidisce, aumenta il disagio emotivo e relazionale.","La libertà cresce quando si smette di identificarsi con i propri schemi mentali."]
+    q:["Come si esprime {n} nel pensiero e nel comportamento?","Quale effetto ha {n} sulla luciditÈ mentale?","Come si può riconoscere la presenza di {n} in sé stessi?","Quale pratica aiuta a trasformare {n}?","In che modo {n} altera le relazioni interpersonali?","Qual è un segnale che {n} sta diventando dannoso?","Come si può interrompere il ciclo di {n}?","Quale ruolo ha la consapevolezza nel lavoro su {n}?","Come {n} può essere trasformato in apprendimento interiore?","Quale atteggiamento opposto favorisce il riequilibrio di {n}?","Come si può prevenire il ritorno di {n} nella vita quotidiana?","Quale legame esiste tra {n} e sofferenza emotiva?","Quale comprensione profonda aiuta a liberarsi da {n}?"],
+    a:["Si manifesta attraverso schemi mentali ripetitivi e reazioni distorte","Riduce chiarezza, equilibrio e capacità di discernimento","Osservando i propri pensieri automatici e i propri giudizi","Meditazione, ascolto interiore e riflessione sincera","PuÈ generare incomprensione, conflitto o distanza","Quando produce chiusura, risentimento o ripetizione di schemi dannosi","Interrompendo l'automatismo con presenza e scelta consapevole","Permette di vedere il processo interno e non solo il suo effetto","Usandolo come specchio delle proprie paure o attaccamenti","Apertura, equilibrio e responsabilitÈ personale","Con vigilanza interiore e pratiche costanti","Alimenta tensione e instabilità interiore","Capire che nessun automatismo mentale coincide con la propria essenza"],
+    s:["Le teste agiscono sul piano mentale, influenzando interpretazioni, giudizi e decisioni.","Quando domina la mente, questo stato confonde la visione e orienta verso risposte poco lucide.","Riconoscere il tono interno della mente è essenziale per accorgersi di ciò che la condiziona.","Una pratica regolare scioglie gradualmente i meccanismi mentali più rigidi.","CiÈ che avviene nella mente si riflette nel modo di relazionarsi con gli altri.","Il danno emerge quando il pensiero smette di essere strumento e diventa prigione.","Fermarsi prima di reagire consente di cambiare direzione mentale ed emotiva.","La consapevolezza illumina il meccanismo profondo, rendendo possibile la trasformazione.","Ogni distorsione rivela qualcosa che chiede comprensione e lavoro interiore.","Coltivare l'opposto armonico riduce la forza della tendenza disfunzionale.","La prevenzione nasce dalla continuità, non da interventi occasionali.","Quando il pensiero si irrigidisce, aumenta il disagio emotivo e relazionale.","La libertà cresce quando si smette di identificarsi con i propri schemi mentali."]
   },
   scocca:{
     q:["Qual è il significato di {n} nel percorso interiore?","Come si può coltivare {n} nella vita quotidiana?","Quale beneficio offre {n} alla crescita personale?","In che modo {n} influenza le relazioni?","Quale pratica rafforza {n}?","Come si riconosce la presenza autentica di {n}?","Quale ostacolo può indebolire {n}?","Come si può proteggere e sviluppare {n} nel tempo?","Quale legame esiste tra {n} e consapevolezza?","Come può {n} guidare le scelte quotidiane?","Quale atteggiamento mentale sostiene {n}?","Come si può condividere {n} con gli altri?","Quale insegnamento profondo trasmette {n}?"],
-    a:["\u00c8 una qualità portante che sostiene equilibrio e maturazione","Attraverso pratica costante, attenzione e coerenza","Rafforza chiarezza, stabilità e direzione","Favorisce fiducia, rispetto e armonia","Una pratica consapevole e regolare","Si riconosce da coerenza, semplicità e continuità","Distrazione, incoerenza o rigidità","Proteggendola con presenza, verifica interiore e pratica","La consapevolezza ne è la base e il nutrimento","Offrendo un criterio etico e spirituale nelle decisioni","Umiltà, pazienza e perseveranza","Con l'esempio e con una presenza autentica","Che la vera forza nasce da un lavoro interiore stabile"],
-    s:["Le scocche rappresentano risorse interiori che strutturano il cammino con stabilità.","Le virtù si sviluppano nella continuità delle azioni più che nelle intenzioni astratte.","Questa qualità aiuta a vivere con maggiore presenza e senso interiore.","Le qualità interiori autentiche si manifestano nel modo in cui ci si relaziona.","Ripetizione, ascolto e intenzione rendono questa qualità più viva e concreta.","Quando è autentica, questa qualità non è ostentata ma visibile nei fatti.","Ogni qualità interiore può indebolirsi se non viene nutrita con attenzione.","Ciò che viene coltivato con costanza diventa parte del proprio carattere.","Senza presenza interiore anche una qualità positiva rischia di diventare superficiale.","Le scocche sono punti di appoggio per scegliere in modo più allineato.","Le qualità profonde crescono in una mente non arrogante e non impulsiva.","Le virtù si trasmettono soprattutto attraverso il modo di essere.","L'evoluzione richiede radici profonde e un lavoro interiore stabile."]
+    a:["\u00c8 una qualità portante che sostiene equilibrio e maturazione","Attraverso pratica costante, attenzione e coerenza","Rafforza chiarezza, stabilità e direzione","Favorisce fiducia, rispetto e armonia","Una pratica consapevole e regolare","Si riconosce da coerenza, semplicitÈ e continuità","Distrazione, incoerenza o rigidità","Proteggendola con presenza, verifica interiore e pratica","La consapevolezza ne è la base e il nutrimento","Offrendo un criterio etico e spirituale nelle decisioni","Umiltà, pazienza e perseveranza","Con l'esempio e con una presenza autentica","Che la vera forza nasce da un lavoro interiore stabile"],
+    s:["Le scocche rappresentano risorse interiori che strutturano il cammino con stabilità.","Le virtù si sviluppano nella continuità delle azioni più che nelle intenzioni astratte.","Questa qualità aiuta a vivere con maggiore presenza e senso interiore.","Le qualità interiori autentiche si manifestano nel modo in cui ci si relaziona.","Ripetizione, ascolto e intenzione rendono questa qualità più viva e concreta.","Quando è autentica, questa qualità non è ostentata ma visibile nei fatti.","Ogni qualità interiore può indebolirsi se non viene nutrita con attenzione.","CiÈ che viene coltivato con costanza diventa parte del proprio carattere.","Senza presenza interiore anche una qualità positiva rischia di diventare superficiale.","Le scocche sono punti di appoggio per scegliere in modo più allineato.","Le qualità profonde crescono in una mente non arrogante e non impulsiva.","Le virtù si trasmettono soprattutto attraverso il modo di essere.","L'evoluzione richiede radici profonde e un lavoro interiore stabile."]
   },
   punta:{
     q:["Cosa rappresenta {n} nel percorso spirituale?","Come si può avvicinare l'esperienza di {n}?","Quale effetto ha {n} sulla vita interiore?","In che modo {n} orienta la crescita personale?","Quale pratica aiuta a coltivare {n}?","Come si riconosce la presenza di {n} nella propria vita?","Quale ostacolo può allontanare da {n}?","Come si può integrare {n} nella quotidianità?","Quale legame esiste tra {n} e consapevolezza?","Come può {n} aiutare a superare le difficoltà?","Quale atteggiamento mentale favorisce {n}?","Come si può condividere con gli altri la qualità di {n}?","Quale insegnamento essenziale porta {n}?"],
     a:["Rappresenta una meta elevata o uno stato superiore di coscienza","Attraverso pratica, apertura e trasformazione interiore","Genera maggiore ampiezza, pace o lucidità","Offre una direzione nobile verso cui tendere","Meditazione, contemplazione e presenza consapevole","Si riconosce da una maggiore armonia e da una percezione più ampia","Attaccamento, paura o chiusura mentale","Trasformandolo in un orientamento pratico nelle scelte di ogni giorno","La consapevolezza è il ponte che rende questa qualità accessibile","Ricordando una visione più ampia del senso dell'esperienza","Fiducia, apertura e umiltà","Con autenticità, gentilezza e testimonianza","Che l'essere umano può trasformarsi e partecipare a una realtà più ampia"],
-    s:["Le punte indicano esiti evolutivi, direzioni profonde e possibilità di compimento interiore.","Gli stati più alti non si afferrano con sforzo ma si preparano con dedizione.","Quando questa qualità emerge, la vita interiore si ordina e si espande.","Le punte funzionano come orientamenti che elevano l'intenzione e il comportamento.","Le pratiche interiori aiutano a stabilizzare stati più sottili e profondi.","Gli stati evoluti si manifestano con più pace, chiarezza e coerenza.","Ciò che irrigidisce l'io ostacola il contatto con dimensioni più elevate.","Una meta spirituale diventa reale quando ispira il vivere concreto.","Senza presenza interiore, anche gli ideali più alti restano astratti.","Le mete interiori aiutano a non perdersi dentro le difficoltà momentanee.","Gli stati più elevati maturano in una mente ricettiva e non rigida.","Ciò che è reale interiormente si comunica attraverso il modo di stare nel mondo.","Il cammino interiore ha una direzione luminosa e concreta."]
+    s:["Le punte indicano esiti evolutivi, direzioni profonde e possibilità di compimento interiore.","Gli stati più alti non si afferrano con sforzo ma si preparano con dedizione.","Quando questa qualità emerge, la vita interiore si ordina e si espande.","Le punte funzionano come orientamenti che elevano l'intenzione e il comportamento.","Le pratiche interiori aiutano a stabilizzare stati più sottili e profondi.","Gli stati evoluti si manifestano con più pace, chiarezza e coerenza.","CiÈ che irrigidisce l'io ostacola il contatto con dimensioni più elevate.","Una meta spirituale diventa reale quando ispira il vivere concreto.","Senza presenza interiore, anche gli ideali più alti restano astratti.","Le mete interiori aiutano a non perdersi dentro le difficoltÈ momentanee.","Gli stati più elevati maturano in una mente ricettiva e non rigida.","CiÈ che è reale interiormente si comunica attraverso il modo di stare nel mondo.","Il cammino interiore ha una direzione luminosa e concreta."]
   },
   neutral:{
     q:["Che ruolo ha {n} nel cammino spirituale?","Come si manifesta {n} nell'esperienza quotidiana?","Quale lezione offre {n} alla coscienza?","In che modo {n} si collega alla crescita interiore?","Come si può approfondire la comprensione di {n}?","Quale pratica favorisce l'integrazione di {n}?","Come si riconosce la presenza di {n} nella propria vita?","Quale aspetto di {n} richiede maggiore attenzione?","Come può {n} diventare una risorsa sul cammino?","Quale legame esiste tra {n} e la consapevolezza di sé?","Come si integra {n} con gli altri aspetti del percorso?","Quale atteggiamento aiuta a vivere pienamente {n}?","Quale insegnamento profondo porta {n}?"],
-    a:["Rappresenta un piano o una qualità che richiede comprensione e integrazione","Attraverso le sensazioni, i pensieri e le risposte alle situazioni quotidiane","Invita a riconoscere i propri pattern di risposta e a sviluppare consapevolezza","Ogni piano dell'esperienza offre un'opportunità di comprensione e trasformazione","Attraverso riflessione, osservazione diretta e pratica interiore costante","La presenza consapevole e la riflessione regolare ne favoriscono l'integrazione","Si riconosce nei momenti di risposta automatica o di particolare risonanza interiore","L'aspetto che sfugge alla consapevolezza ordinaria è spesso il più significativo","Diventa una risorsa quando viene osservato e integrato con intenzione","La consapevolezza trasforma ogni esperienza in uno strumento di comprensione","Tutto il percorso è interconnesso: ogni aspetto riflette e nutre gli altri","Presenza, curiosità e non giudizio permettono di attraversarlo in modo autentico","Ogni esperienza, compresa e integrata, diventa parte della saggezza del cammino"],
+    a:["Rappresenta un piano o una qualità che richiede comprensione e integrazione","Attraverso le sensazioni, i pensieri e le risposte alle situazioni quotidiane","Invita a riconoscere i propri pattern di risposta e a sviluppare consapevolezza","Ogni piano dell'esperienza offre un'opportunità di comprensione e trasformazione","Attraverso riflessione, osservazione diretta e pratica interiore costante","La presenza consapevole e la riflessione regolare ne favoriscono l'integrazione","Si riconosce nei momenti di risposta automatica o di particolare risonanza interiore","L'aspetto che sfugge alla consapevolezza ordinaria è spesso il più significativo","Diventa una risorsa quando viene osservato e integrato con intenzione","La consapevolezza trasforma ogni esperienza in uno strumento di comprensione","Tutto il percorso è interconnesso: ogni aspetto riflette e nutre gli altri","Presenza, curiositÈ e non giudizio permettono di attraversarlo in modo autentico","Ogni esperienza, compresa e integrata, diventa parte della saggezza del cammino"],
     s:["Le caselle neutrali rappresentano stazioni del cammino che richiedono osservazione e presenza.","L'esperienza quotidiana è il campo in cui si manifesta ogni qualità interiore.","Ogni loka del percorso porta un'opportunità specifica di crescita e integrazione.","Il cammino interiore si nutre di attenzione a ogni piano dell'esperienza.","La comprensione profonda nasce dall'osservazione diretta più che dall'analisi teorica.","Le pratiche interiori rendono concreto ciò che altrimenti rimane solo concetto.","La vita offre costantemente occasioni per riconoscere i propri stati interiori.","Portare attenzione a ciò che si trascura è un atto essenziale di consapevolezza.","Tutto ciò che viene riconosciuto può essere trasformato.","La consapevolezza è la chiave che apre ogni aspetto del percorso interiore.","Il cammino spirituale è un sistema integrato in cui ogni parte influenza le altre.","La qualità dell'esperienza dipende dalla qualità dell'attenzione portata.","Ogni tappa del percorso, vissuta con presenza, contribuisce alla liberazione della coscienza."]
   }
 };
 const WRONG=[["Prevalentemente nei momenti di grande intensità emotiva o di crisi","Come un processo graduale, visibile soprattutto nel lungo periodo"],["Stimola una ricerca più profonda di sé, spingendo verso la trasformazione","Ha effetti variabili: dipende dal livello di consapevolezza già raggiunto"],["Comprendendo a fondo le sue origini e le cause profonde che lo generano","Solo attraverso la forza di volontà e una disciplina rigorosa e costante"],["Un'analisi critica e razionale della propria esperienza interiore","Distacco totale e indifferenza emotiva verso ciò che si osserva"],["Si riflette nelle relazioni solo quando è presente in forma molto intensa","Influenza principalmente la comunicazione verbale, non le dinamiche profonde"],["Una disciplina fisica regolare e la costante cura del benessere corporeo","Circondarsi di persone positive che supportino attivamente il cambiamento"],["È spesso una risposta adattiva che emerge da una sofferenza preesistente","Il legame è indiretto: intervengono sempre altri fattori nel mezzo"],["Crea disagio nel breve termine, ma tende ad attenuarsi naturalmente nel tempo","I rischi principali sono relazionali e comportamentali, non interiori"],["Aspettando che l'esperienza si sedimenti naturalmente prima di agire su di essa","Condividendolo con altri in un percorso di gruppo o comunità spirituale"],["La stessa qualità, portata a un livello di maggiore profondità e consapevolezza","Accettare entrambi i poli senza intervenire, lasciando che si bilancino da soli"],["Attraverso un processo graduale di sostituzione dei vecchi schemi con nuovi","Cercando un supporto esterno che aiuti a mantenere il processo nel tempo"],["Ha un ruolo essenziale, ma diventa davvero efficace solo nelle fasi avanzate","Aumenta inizialmente confusione e auto-critica, prima di portare chiarezza"],["Insegna principalmente la natura impermanente e transitoria delle esperienze","Offre soprattutto una comprensione intellettuale più chiara dei propri limiti"]];
-// 71 loka × 13 carte = 923 domande generate dai template
+// 71 loka è 13 carte = 923 domande generate dai template
 const QD_BUILD=(()=>{
   const out=[];
   Object.entries(L).filter(([n])=>+n!==1).forEach(([n,lo])=>{
@@ -715,20 +715,20 @@ const QD_BUILD=(()=>{
 })();
 const _QD_STATIC = [
   {n:12,name:"Invidia",type:"testa",q:"Come si manifesta l'invidia nelle relazioni interpersonali?",opts:["Con gioia per il successo altrui","Con indifferenza","Con sentimenti di risentimento e confronto costante"],a:2,s:"L'invidia si manifesta con risentimento e confronto costante, deteriorando relazioni e benessere personale."},
-  {n:16,name:"Avversione",type:"testa",q:"Qual è l'effetto dell'avversione sul benessere psicologico?",opts:["Non ha effetti","Genera stress e isolamento","Favorisce la serenità"],a:1,s:"L'avversione genera stress e isolamento, creando tensioni interne e difficoltà nelle relazioni."},
+  {n:16,name:"Avversione",type:"testa",q:"Qual è l'effetto dell'avversione sul benessere psicologico?",opts:["Non ha effetti","Genera stress e isolamento","Favorisce la serenità"],a:1,s:"L'avversione genera stress e isolamento, creando tensioni interne e difficoltÈ nelle relazioni."},
   {n:24,name:"Cattive Compagnie",type:"testa",q:"Come possono influenzare la nostra mente le cattive compagnie?",opts:["Sempre aiutano a crescere","Non hanno alcun effetto","Possono rafforzare abitudini negative e pensieri limitanti"],a:2,s:"Le cattive compagnie rafforzano abitudini negative e pensieri limitanti, influenzando negativamente la mente."},
   {n:29,name:"Fede Cieca",type:"testa",q:"Quale rischio psicologico può derivare dalla fede cieca?",opts:["Maggiore apertura mentale","Perdita di senso critico e possibile fanatismo","Crescita personale"],a:1,s:"La fede cieca può portare alla perdita del senso critico e a forme di fanatismo."},
-  {n:44,name:"Cecità / Inganno",type:"testa",q:"Come si manifesta la cecità mentale nella vita quotidiana?",opts:["Con incapacità di vedere le proprie ombre e limiti","Con apertura mentale","Con chiarezza e consapevolezza"],a:0,s:"La cecità mentale si manifesta come incapacità di vedere le proprie ombre e limiti."},
+  {n:44,name:"CecitÈ / Inganno",type:"testa",q:"Come si manifesta la cecitÈ mentale nella vita quotidiana?",opts:["Con incapacità di vedere le proprie ombre e limiti","Con apertura mentale","Con chiarezza e consapevolezza"],a:0,s:"La cecitÈ mentale si manifesta come incapacità di vedere le proprie ombre e limiti."},
   {n:52,name:"Violenza",type:"testa",q:"Quale emozione spesso precede un comportamento violento?",opts:["Gioia","Rabbia","Calma"],a:1,s:"L'ira spesso precede comportamenti violenti, portando a reazioni impulsive e dannose."},
   {n:55,name:"Egocentrismo",type:"testa",q:"Come si manifesta l'egocentrismo nel comportamento quotidiano?",opts:["Concentrandosi solo sui propri bisogni e desideri","Collaborando con gli altri","Ascoltando gli altri con empatia"],a:0,s:"L'egocentrismo si manifesta concentrandosi solo sui propri bisogni, limitando l'empatia."},
-  {n:61,name:"Intelletto Negativo",type:"testa",q:"Quale atteggiamento caratterizza l'intelletto negativo?",opts:["Empatia","Curiosità e apertura","Giudizio affrettato e pregiudizio"],a:2,s:"L'intelletto negativo è caratterizzato da giudizio affrettato e pregiudizio."},
-  {n:63,name:"Torpore",type:"testa",q:"Quale abitudine mentale può causare torpore?",opts:["Procrastinazione e inattività","Attività fisica","Meditazione"],a:0,s:"La procrastinazione e l'inattività causano torpore, riducendo energia e motivazione."},
+  {n:61,name:"Intelletto Negativo",type:"testa",q:"Quale atteggiamento caratterizza l'intelletto negativo?",opts:["Empatia","CuriositÈ e apertura","Giudizio affrettato e pregiudizio"],a:2,s:"L'intelletto negativo è caratterizzato da giudizio affrettato e pregiudizio."},
+  {n:63,name:"Torpore",type:"testa",q:"Quale abitudine mentale può causare torpore?",opts:["Procrastinazione e inattività","AttivitÈ fisica","Meditazione"],a:0,s:"La procrastinazione e l'inattività causano torpore, riducendo energia e motivazione."},
   {n:2,name:"Illusione",type:"coda",q:"Come si manifesta l'illusione nella percezione della realtà?",opts:["Con accettazione","Con chiarezza e verità","Attraverso false convinzioni e distorsioni"],a:2,s:"L'illusione si manifesta attraverso false convinzioni e distorsioni della realtà."},
-  {n:3,name:"Ira",type:"coda",q:"Qual è l'effetto dell'ira sul comportamento umano?",opts:["Favorisce la calma","Non ha effetti","Può portare a reazioni impulsive e dannose"],a:2,s:"L'ira può portare a reazioni impulsive e dannose, alterando il comportamento."},
-  {n:4,name:"Avidità / Gola",type:"coda",q:"Come si manifesta l'avidità nella vita quotidiana?",opts:["Desiderio eccessivo di accumulare e consumare","Indifferenza","Condivisione e generosità"],a:0,s:"L'avidità si manifesta come desiderio eccessivo di accumulare e consumare."},
-  {n:6,name:"Confusione",type:"coda",q:"Quale stato mentale caratterizza la confusione?",opts:["Chiarezza e determinazione","Incertezza e difficoltà a prendere decisioni","Calma e serenità"],a:1,s:"La confusione è uno stato di incertezza e difficoltà a prendere decisioni."},
-  {n:7,name:"Superbia / Vanità",type:"coda",q:"Come si manifesta la superbia nel comportamento?",opts:["Umiltà e rispetto","Senso di superiorità e bisogno di ammirazione","Indifferenza"],a:1,s:"La superbia si manifesta con senso di superiorità e bisogno di ammirazione."},
-  {n:8,name:"Avarizia",type:"coda",q:"Quale atteggiamento caratterizza l'avarizia?",opts:["Rifiuto di condividere risorse e paura della perdita","Indifferenza","Generosità e apertura"],a:0,s:"L'avarizia è caratterizzata dal rifiuto di condividere risorse e dalla paura della perdita."},
+  {n:3,name:"Ira",type:"coda",q:"Qual è l'effetto dell'ira sul comportamento umano?",opts:["Favorisce la calma","Non ha effetti","PuÈ portare a reazioni impulsive e dannose"],a:2,s:"L'ira può portare a reazioni impulsive e dannose, alterando il comportamento."},
+  {n:4,name:"AviditÈ / Gola",type:"coda",q:"Come si manifesta l'avidità nella vita quotidiana?",opts:["Desiderio eccessivo di accumulare e consumare","Indifferenza","Condivisione e generosità"],a:0,s:"L'avidità si manifesta come desiderio eccessivo di accumulare e consumare."},
+  {n:6,name:"Confusione",type:"coda",q:"Quale stato mentale caratterizza la confusione?",opts:["Chiarezza e determinazione","Incertezza e difficoltÈ a prendere decisioni","Calma e serenità"],a:1,s:"La confusione è uno stato di incertezza e difficoltÈ a prendere decisioni."},
+  {n:7,name:"Superbia / Vanità",type:"coda",q:"Come si manifesta la superbia nel comportamento?",opts:["UmiltÈ e rispetto","Senso di superioritÈ e bisogno di ammirazione","Indifferenza"],a:1,s:"La superbia si manifesta con senso di superioritÈ e bisogno di ammirazione."},
+  {n:8,name:"Avarizia",type:"coda",q:"Quale atteggiamento caratterizza l'avarizia?",opts:["Rifiuto di condividere risorse e paura della perdita","Indifferenza","GenerositÈ e apertura"],a:0,s:"L'avarizia è caratterizzata dal rifiuto di condividere risorse e dalla paura della perdita."},
   {n:9,name:"Desiderio",type:"coda",q:"Come può il desiderio influenzare le scelte personali?",opts:["Sempre portando felicità","Non influenzando","Spingendo verso obiettivi ma anche verso insoddisfazione"],a:2,s:"Il desiderio può spingere verso obiettivi ma anche generare insoddisfazione se non equilibrato."},
   {n:13,name:"Lamento",type:"coda",q:"Qual è l'effetto del lamento continuo sulla mente?",opts:["Mantiene uno stato di insoddisfazione e passività","Non ha effetti","Favorisce la risoluzione dei problemi"],a:0,s:"Il lamento continuo mantiene uno stato di insoddisfazione e passività, bloccando il cambiamento."},
   {n:35,name:"Purgatorio",type:"coda",q:"Come si può interpretare il purgatorio in senso psicologico?",opts:["Come una punizione eterna","Come uno stato di transizione e trasformazione interiore","Come una condizione fissa"],a:1,s:"Il purgatorio può essere interpretato come uno stato di transizione e trasformazione interiore."},
@@ -737,21 +737,21 @@ const _QD_STATIC = [
   // Scocche (basi freccia)
   {n:10,name:"Disciplina Interiore",type:"scocca",q:"Cosa distingue la disciplina autentica dalla rigidità?",opts:["Sono la stessa cosa","La disciplina autentica è fedeltà consapevole a un percorso scelto, non costrizione","La rigidità porta sempre a risultati migliori"],a:1,s:"La disciplina autentica nasce dalla scelta libera e serve la crescita; la rigidità è chiusura all'adattamento."},
   {n:17,name:"Compassione",type:"scocca",q:"Come si esprime la vera compassione senza perdere il proprio equilibrio?",opts:["Sacrificandosi completamente per gli altri","Con empatia attiva e presenza, senza dissolversi nel dolore altrui","Mantenendo totale distacco emotivo"],a:1,s:"La compassione matura è empatia attiva che tocca il dolore dell'altro senza esserne sopraffatta."},
-  {n:20,name:"Dare",type:"scocca",q:"Qual è il fondamento del dare autentico?",opts:["Il bisogno di essere riconosciuti per il proprio gesto","La libertà interiore e il non attaccamento al frutto del dono","Aspettarsi sempre una contropartita equa"],a:1,s:"Il dare autentico nasce da libertà interiore: non cerca approvazione né contropartita."},
-  {n:22,name:"Dharma",type:"scocca",q:"Cosa caratterizza la vita vissuta secondo il proprio dharma?",opts:["Il rispetto formale di tutte le regole sociali","L'azione coerente con la propria natura profonda e con la responsabilità verso il tutto","Il raggiungimento del successo materiale"],a:1,s:"Il dharma è la via giusta rispetto alla propria verità interiore, non un codice esterno imposto."},
-  {n:27,name:"Spirito di Servizio",type:"scocca",q:"Come si distingue il servizio autentico dal servilismo?",opts:["Non esiste differenza sostanziale","Il servizio autentico nasce dalla scelta libera e dalla dignità personale","Il servilismo è più altruistico del servizio"],a:1,s:"Il servizio autentico viene dalla dignità e dalla scelta libera; il servilismo è sottomissione priva di libertà."},
+  {n:20,name:"Dare",type:"scocca",q:"Qual è il fondamento del dare autentico?",opts:["Il bisogno di essere riconosciuti per il proprio gesto","La libertà interiore e il non attaccamento al frutto del dono","Aspettarsi sempre una contropartita equa"],a:1,s:"Il dare autentico nasce da libertà interiore: non cerca approvazione nÈ contropartita."},
+  {n:22,name:"Dharma",type:"scocca",q:"Cosa caratterizza la vita vissuta secondo il proprio dharma?",opts:["Il rispetto formale di tutte le regole sociali","L'azione coerente con la propria natura profonda e con la responsabilitÈ verso il tutto","Il raggiungimento del successo materiale"],a:1,s:"Il dharma è la via giusta rispetto alla propria verità interiore, non un codice esterno imposto."},
+  {n:27,name:"Spirito di Servizio",type:"scocca",q:"Come si distingue il servizio autentico dal servilismo?",opts:["Non esiste differenza sostanziale","Il servizio autentico nasce dalla scelta libera e dalla dignitÈ personale","Il servilismo è più altruistico del servizio"],a:1,s:"Il servizio autentico viene dalla dignitÈ e dalla scelta libera; il servilismo è sottomissione priva di libertà."},
   {n:28,name:"Dovere Interiore",type:"scocca",q:"Quale forza orienta il dovere interiore a differenza del dovere esterno?",opts:["La pressione del giudizio sociale","La voce profonda della propria coscienza e del senso di responsabilità","La paura delle conseguenze negative"],a:1,s:"Il dovere interiore è una chiamata silenziosa della coscienza, non una costrizione esterna."},
   {n:37,name:"Insight",type:"scocca",q:"Quale condizione interiore favorisce maggiormente l'emergere di un insight genuino?",opts:["Il continuo rumore mentale e l'analisi ossessiva","Il silenzio interiore e l'osservazione senza pregiudizi","L'accumulo di molta teoria e concetti"],a:1,s:"L'insight emerge nel silenzio: è la comprensione improvvisa che nasce dall'osservazione diretta."},
-  {n:45,name:"Saggezza",type:"scocca",q:"In cosa si distingue la saggezza dalla semplice conoscenza?",opts:["Più si sa, più automaticamente si diventa saggi","La saggezza integra conoscenza, esperienza e umiltà in discernimento vivo","La saggezza è solo innata, non si può coltivare"],a:1,s:"La saggezza trasforma il sapere in orientamento giusto attraverso esperienza e umiltà."},
+  {n:45,name:"Saggezza",type:"scocca",q:"In cosa si distingue la saggezza dalla semplice conoscenza?",opts:["PiÈ si sa, più automaticamente si diventa saggi","La saggezza integra conoscenza, esperienza e umiltà in discernimento vivo","La saggezza è solo innata, non si può coltivare"],a:1,s:"La saggezza trasforma il sapere in orientamento giusto attraverso esperienza e umiltà."},
   {n:46,name:"Discernimento",type:"scocca",q:"Come si esercita il discernimento in una scelta difficile?",opts:["Lasciandosi guidare dall'impulso del momento","Con una mente limpida che distingue l'essenziale dal superfluo","Affidandosi sempre al parere della maggioranza"],a:1,s:"Il discernimento richiede una mente limpida e non dominata dall'impulso: vede l'essenziale."},
   {n:54,name:"Devozione",type:"scocca",q:"Cosa alimenta la devozione autentica nel cammino spirituale?",opts:["L'abitudine e la ripetizione meccanica del rito","L'amore profondo e l'orientamento del cuore verso ciò che si considera sacro","La paura delle conseguenze se non si è devoti"],a:1,s:"La devozione autentica nasce dall'amore, non dall'abitudine o dalla paura."},
   // Punte (destinazioni freccia)
-  {n:23,name:"Paradiso Terrestre",type:"punta",q:"Cosa rappresenta il Paradiso Terrestre nel cammino spirituale interiore?",opts:["Il possesso di grandi ricchezze materiali","L'armonia tra vita interiore e realtà vissuta con presenza e gratitudine","L'assenza permanente di ogni difficoltà"],a:1,s:"Il Paradiso Terrestre è uno stato di coscienza: armonia e semplicità che tornano a coincidere."},
-  {n:32,name:"Equilibrio",type:"punta",q:"Come si mantiene l'equilibrio di fronte alle polarità della vita?",opts:["Scegliendo sempre un solo polo e rifiutando l'altro","Attraverso flessibilità, cura di sé e capacità di stare nel cambiamento","Evitando ogni situazione di conflitto"],a:1,s:"L'equilibrio è dinamico: non immobilità, ma capacità di restare centrati nel cambiamento."},
+  {n:23,name:"Paradiso Terrestre",type:"punta",q:"Cosa rappresenta il Paradiso Terrestre nel cammino spirituale interiore?",opts:["Il possesso di grandi ricchezze materiali","L'armonia tra vita interiore e realtà vissuta con presenza e gratitudine","L'assenza permanente di ogni difficoltà"],a:1,s:"Il Paradiso Terrestre è uno stato di coscienza: armonia e semplicitÈ che tornano a coincidere."},
+  {n:32,name:"Equilibrio",type:"punta",q:"Come si mantiene l'equilibrio di fronte alle polaritÈ della vita?",opts:["Scegliendo sempre un solo polo e rifiutando l'altro","Attraverso flessibilità, cura di sé e capacità di stare nel cambiamento","Evitando ogni situazione di conflitto"],a:1,s:"L'equilibrio è dinamico: non immobilità, ma capacità di restare centrati nel cambiamento."},
   {n:41,name:"Mente Collettiva",type:"punta",q:"Cosa nutre e rafforza la mente collettiva in un gruppo?",opts:["La competizione costante e il giudizio reciproco","Dialogo autentico, fiducia e scambio sincero tra i partecipanti","Il silenzio e l'isolamento di ciascuno"],a:1,s:"La mente collettiva cresce nella relazione autentica, nel dialogo e nella fiducia reciproca."},
   {n:50,name:"Spirito di Rinuncia",type:"punta",q:"Cosa distingue la vera rinuncia spirituale dall'autorepressione?",opts:["Sono la stessa cosa: entrambe richiedono sacrificio","La vera rinuncia è scelta consapevole che libera spazio interiore per qualcosa di più alto","L'autorepressione è più efficace sul piano spirituale"],a:1,s:"La rinuncia autentica è liberatoria: nasce dalla scelta, non dalla paura o dal sacrificio forzato."},
   {n:60,name:"Intelletto Positivo",type:"punta",q:"Quale atteggiamento contraddistingue l'intelletto positivo?",opts:["Certezza assoluta e rifiuto del dubbio","Curiosità, umiltà e apertura continua all'apprendimento","Critica sistematica verso tutto ciò che è nuovo"],a:1,s:"L'intelletto positivo è aperto, curioso e umile: non nega i problemi ma li affronta con lucidità."},
-  {n:62,name:"Felicità",type:"punta",q:"Dove risiede la fonte della felicità autentica secondo il cammino spirituale?",opts:["Nel raggiungimento di obiettivi e possessi esterni","Nell'allineamento tra mente, cuore e vita vissuta con gratitudine e presenza","Nel piacere sensoriale continuamente rinnovato"],a:1,s:"La felicità autentica è allineamento interiore con la propria verità, più profondo del piacere."},
+  {n:62,name:"Felicità",type:"punta",q:"Dove risiede la fonte della felicitÈ autentica secondo il cammino spirituale?",opts:["Nel raggiungimento di obiettivi e possessi esterni","Nell'allineamento tra mente, cuore e vita vissuta con gratitudine e presenza","Nel piacere sensoriale continuamente rinnovato"],a:1,s:"La felicitÈ autentica è allineamento interiore con la propria verità, più profondo del piacere."},
   {n:66,name:"Beatitudine",type:"punta",q:"Come si distingue la beatitudine dall'euforia emotiva passeggera?",opts:["Non c'è differenza: sono entrambe temporanee","La beatitudine è uno stato interiore stabile, indipendente dalle circostanze esterne","L'euforia è più duratura e profonda della beatitudine"],a:1,s:"La beatitudine è stabilità interiore: non dipende dalle circostanze ma dall'essere centrati."},
   {n:67,name:"Sacra Distruzione",type:"punta",q:"Quando una distruzione può essere definita 'sacra' nel percorso interiore?",opts:["Quando causa sofferenza visibile agli altri","Quando dissolve ciò che non serve più aprendo spazio per una rinascita autentica","La distruzione non è mai positiva"],a:1,s:"La distruzione è sacra quando apre a un ordine più vero: dissolvere il vecchio per rinascere."},
   {n:68,name:"Coscienza Cosmica",type:"punta",q:"Cosa caratterizza l'esperienza della coscienza cosmica?",opts:["La separazione totale dalla vita quotidiana","La percezione viva dell'unità e dell'interconnessione di tutte le cose","Il distacco freddo da emozioni e relazioni"],a:1,s:"La coscienza cosmica dissolve i confini: è percezione diretta dell'unità che permea ogni cosa."},
@@ -781,7 +781,7 @@ const PEN = [
     {n:"Il Servo del Re",d:"Prendi un cartone o giornale e sventola il vicino di destra per i prossimi 2 minuti."},
     {n:"L'Incenso Vivente",d:"Resta in piedi in un angolo della stanza immobile come una statua per tutto il prossimo giro."},
     {n:"Il Drago",d:"Emetti il ruggito più terrificante che puoi per almeno 10 secondi. Il gruppo giudica a maggioranza se è abbastanza spaventoso."},
-    {n:"La Fiamma Ammansita",d:"Chiedi scusa, con grande solennità e inchino, a ogni giocatore per qualcosa di completamente immaginario ma credibile."},
+    {n:"La Fiamma Ammansita",d:"Chiedi scusa, con grande solennitÈ e inchino, a ogni giocatore per qualcosa di completamente immaginario ma credibile."},
     {n:"Il Carbone Ardente",d:"Fai 10 flessioni (o, se non puoi, canta l'inno nazionale a squarciagola dall'inizio alla fine)."}
   ]},
   {r:4,c:"28–36",el:"💨 Aria",opts:[
@@ -820,15 +820,15 @@ const PEN = [
     {n:"Il Guru Sacrificale",d:"Gioca l'intero prossimo giro stando seduto o in ginocchio sul pavimento."},
     {n:"La Prova del Tempio",d:"Il gruppo prova a farti ridere o il solletico per 15 secondi. Rimani serio come un monaco zen."},
     {n:"L'Ultimo Distacco",d:"Scegli un giocatore dietro di te e regalagli subito 4 delle tue caselle."},
-    {n:"Il Bodhisattva Servitore",d:"Esegui senza discussioni il primo ordine ragionevole che ti dà qualsiasi giocatore nei prossimi 2 minuti."},
+    {n:"Il Bodhisattva Servitore",d:"Esegui senza discussioni il primo ordine ragionevole che ti dÈ qualsiasi giocatore nei prossimi 2 minuti."},
     {n:"Il Fuoco di Gioia",d:"Esegui la danza della vittoria più scenografica che puoi per 15 secondi. Il gruppo applaude o fischia a seconda della performance."},
     {n:"Il Dono Finale",d:"Il tuo prossimo lancio del dado va al giocatore più indietro di te: avanza lui di quei passi, non tu."}
   ]}
 ];
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // NAVIGATION
-// ══════════════════════════════════════════
+// ------------------------------------------
 function showPage(name, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nb').forEach(b => b.classList.remove('active'));
@@ -836,9 +836,9 @@ function showPage(name, btn) {
   if (btn) btn.classList.add('active');
 }
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // DICE
-// ══════════════════════════════════════════
+// ------------------------------------------
 const DOTS = {
   1:[0,0,0,0,1,0,0,0,0],
   2:[1,0,0,0,0,0,0,0,1],
@@ -1033,7 +1033,7 @@ function toggleDiceMode() {
   document.getElementById('rb-virtual').style.display = physicalDice ? 'none' : '';
   document.getElementById('phys-pad').classList.toggle('open', physicalDice);
   document.getElementById('dice-mode-btn').title = physicalDice ? 'Passa a dado virtuale' : 'Passa a dado fisico';
-  document.getElementById('dice-mode-btn').textContent = physicalDice ? '🎲' : '🎯';
+  document.getElementById('dice-mode-btn').textContent = physicalDice ? '??' : '??';
   document.getElementById('dr').textContent = physicalDice ? 'Tocca il numero uscito sul dado fisico' : 'Tocca per lanciare!';
 }
 
@@ -1041,15 +1041,16 @@ function processRoll(r) {
   renderDice(r);
   const dIcons = ['','⚀','⚁','⚂','⚃','⚄','⚅'];
   const waiting = myPos === 68;
-  const np = (waiting && r===1) ? 1 : waiting ? 68 : calcNewPos(myPos, r);
+  const entryOk = waiting && (gameMode === 'party' ? r % 2 === 0 : r === 6);
+  const np = entryOk ? 1 : waiting ? 68 : calcNewPos(myPos, r);
   setPos(np);
   const _lo = L[np];
   if(waiting && np === 1) sfx.enter();
   else if(!waiting) sfx.land(np === 68 ? 'win' : (_lo?.type || 'neutral'));
   let drMsg = `Uscito: ${r} ${dIcons[r]}`;
-  if(waiting && r!==1) drMsg += ' — Devi uscire 1 per entrare nel gioco';
-  else if(waiting) drMsg += ' → Entrato! Sei alla casella 1 — Nascita';
-  else drMsg += np>1 ? ` → casella ${np}${_lo?' — '+_lo.name:''}` : '';
+  if(waiting && r!==1) drMsg += ' è Devi uscire 1 per entrare nel gioco';
+  else if(waiting) drMsg += ' ? Entrato! Sei alla casella 1 è Nascita';
+  else drMsg += np>1 ? ` ? casella ${np}${_lo?' è '+_lo.name:''}` : '';
   document.getElementById('dr').textContent = drMsg;
   players[currentP].hist.push(r);
   if(!(waiting && np === 68)) players[currentP].path.push({n: np, via: 'dado'});
@@ -1059,26 +1060,26 @@ function processRoll(r) {
   if(!waiting && np === 68) { canRoll = false; setTimeout(() => showReport(currentP), 1000); return; }
   if(players.length > 1) {
     if(!waiting && _lo && (_lo.type==='testa' || _lo.type==='scocca')) {
-      console.log('[dado] → showModal');
+      console.log('[dado] ? showModal');
       setTimeout(() => showModal(np), 700);
     } else if(waiting) {
       if(np === 1) {
-        // player just entered — toast so they know to hand device over
+        // player just entered è toast so they know to hand device over
         showTurnToast();
       } else {
         const ni = (currentP+1) % players.length;
-        document.getElementById('dr').textContent += ` — turno di ${players[ni].name}`;
+        document.getElementById('dr').textContent += ` è turno di ${players[ni].name}`;
         if(_autoAdv) clearTimeout(_autoAdv);
         _autoAdv = setTimeout(() => nextTurn(), 1500);
       }
     } else {
       if(!waiting && triggerPenitenza(np)) setTimeout(() => showPenitenza(np), 700);
       else if(!waiting && triggerCarta(np)) setTimeout(() => showCartaDraw(np), 700);
-      else { console.log('[dado] → showTurnToast'); showTurnToast(); }
+      else { console.log('[dado] ? showTurnToast'); showTurnToast(); }
     }
   } else {
     if(!waiting && _lo && (_lo.type==='testa' || _lo.type==='scocca')) {
-      console.log('[dado] singolo → showModal');
+      console.log('[dado] singolo ? showModal');
       setTimeout(() => showModal(np), 700);
     } else {
       if(!waiting && triggerPenitenza(np)) setTimeout(() => showPenitenza(np), 700);
@@ -1089,7 +1090,7 @@ function processRoll(r) {
 }
 
 function physRoll(r) {
-  console.log('[dado] physRoll — canRoll:', canRoll, '| r:', r);
+  console.log('[dado] physRoll è canRoll:', canRoll, '| r:', r);
   if(!canRoll) return;
   canRoll = false;
   saveUndo();
@@ -1100,7 +1101,7 @@ function physRoll(r) {
 }
 
 function rollDice() {
-  console.log('[dado] rollDice — canRoll:', canRoll, '| P:', currentP, players[currentP]?.name, '| pos:', myPos);
+  console.log('[dado] rollDice è canRoll:', canRoll, '| P:', currentP, players[currentP]?.name, '| pos:', myPos);
   if(!canRoll) return;
   canRoll = false;
   saveUndo();
@@ -1119,9 +1120,9 @@ function rollDice() {
   }, 55);
 }
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // BOARD
-// ══════════════════════════════════════════
+// ------------------------------------------
 function buildBoard() {
   const rows = [];
   for (let row = 8; row >= 1; row--) {
@@ -1143,18 +1144,18 @@ function buildBoard() {
   ).join('');
 }
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // MODAL
-// ══════════════════════════════════════════
+// ------------------------------------------
 function showModal(n) {
   const lo = L[n];
-  const tl = {start:'Inizio',coda:'Coda 🐍',testa:'Testa 🐍',scocca:'Scocca 🏹',punta:'Punta ⭐',neutral:'Neutrale'};
+  const tl = {start:'Inizio',coda:'Coda 🐍',testa:'Testa 🐍',scocca:'Scocca 🏹',punta:'Punta ?',neutral:'Neutrale'};
   let conn = '';
   if (lo) {
-    if (lo.st!=null){const d=L[lo.st];conn=`<div class="mconn ms">🐍 Il serpente porta alla casella ${lo.st} — ${d?d.name:''}</div>`;}
-    else if(lo.sf!=null){const f=L[lo.sf];conn=`<div class="mconn ms">🐍 Arrivi qui dalla testa in casella ${lo.sf} — ${f?f.name:''}</div>`;}
-    else if(lo.at!=null){const d=L[lo.at];conn=`<div class="mconn ma">🏹 La freccia porta alla casella ${lo.at} — ${d?d.name:''}</div>`;}
-    else if(lo.af!=null){const f=L[lo.af];conn=`<div class="mconn ma">🏹 Arrivi qui dalla casella ${lo.af} — ${f?f.name:''}</div>`;}
+    if (lo.st!=null){const d=L[lo.st];conn=`<div class="mconn ms">?? Il serpente porta alla casella ${lo.st} è ${d?d.name:''}</div>`;}
+    else if(lo.sf!=null){const f=L[lo.sf];conn=`<div class="mconn ms">?? Arrivi qui dalla testa in casella ${lo.sf} è ${f?f.name:''}</div>`;}
+    else if(lo.at!=null){const d=L[lo.at];conn=`<div class="mconn ma">?? La freccia porta alla casella ${lo.at} è ${d?d.name:''}</div>`;}
+    else if(lo.af!=null){const f=L[lo.af];conn=`<div class="mconn ma">?? Arrivi qui dalla casella ${lo.af} è ${f?f.name:''}</div>`;}
   }
   document.getElementById('mc').innerHTML = lo ? `
     <div class="badge ${lo.type}">${tl[lo.type]||'Casella'}</div>
@@ -1165,13 +1166,13 @@ function showModal(n) {
     ${lo.spiega?`<div class="ml">Spiegazione</div><div class="mt">${lo.spiega}</div>`:''}
     ${lo.summary?`<div class="mt" style="margin-top:8px">${lo.summary}</div>`:''}
     ${conn}
-    ${(lo.st!=null||lo.at!=null)?`<button class="sk-btn pri" style="margin-top:14px" onclick="startSfidaKarma(${n});closeModal()">⚡ Sfida Karma</button>`:''}
+    ${(lo.st!=null||lo.at!=null)?`<button class="sk-btn pri" style="margin-top:14px" onclick="startSfidaKarma(${n});closeModal()">? Sfida Karma</button>`:''}
   ` : `
     <div class="badge neutral">Casella Neutra</div>
     <div class="mnum">Casella ${n}</div>
     <div class="mtit">Casella Neutra</div>
-    <div class="mt">Non ci sono serpenti né frecce qui.<br><br>
-    In <strong>Modalità 2</strong>: pesca una carta dal Mazzo Imprevisti e applica l'effetto.</div>
+    <div class="mt">Non ci sono serpenti nÈ frecce qui.<br><br>
+    In <strong>ModalitÈ 2</strong>: pesca una carta dal Mazzo Imprevisti e applica l'effetto.</div>
   `;
   sfx.quiz();
   document.getElementById('mo').classList.add('open');
@@ -1183,9 +1184,9 @@ function closeModal() {
   else if(!canRoll && !skState) showTurnToast();
 }
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // LOKA LIST
-// ══════════════════════════════════════════
+// ------------------------------------------
 let lokaF = 'all';
 function filterLoka(f, btn) {
   lokaF = f;
@@ -1201,17 +1202,17 @@ function filterLoka(f, btn) {
 
   document.getElementById('ll').innerHTML = items.map(([n,lo])=>{
     let cs='';
-    if(lo.st!=null) cs=`→ Serpente scende a ${lo.st}`;
-    else if(lo.sf!=null) cs=`← Serpente viene da ${lo.sf}`;
-    else if(lo.at!=null) cs=`→ Freccia sale a ${lo.at}`;
-    else if(lo.af!=null) cs=`← Freccia viene da ${lo.af}`;
+    if(lo.st!=null) cs=`? Serpente scende a ${lo.st}`;
+    else if(lo.sf!=null) cs=`? Serpente viene da ${lo.sf}`;
+    else if(lo.at!=null) cs=`? Freccia sale a ${lo.at}`;
+    else if(lo.af!=null) cs=`? Freccia viene da ${lo.af}`;
     const isSnake = lo.st!=null||lo.sf!=null;
     return `<div class="lc" id="lk${n}">
       <div class="lch" onclick="toggleLoka(${n})">
         <div class="lnb ${lo.type}">${n}</div>
         <div class="lci">
           <div class="lct">${lo.name}</div>
-          <div class="lcs">${tl[lo.type]||''} · ${cs}</div>
+          <div class="lcs">${tl[lo.type]||''} è ${cs}</div>
         </div>
         <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
@@ -1219,11 +1220,11 @@ function filterLoka(f, btn) {
         ${lo.tema?`<div class="lbl">Tema</div><div class="ltxt">${lo.tema}</div>`:''}
         ${lo.guida?`<div class="lbl">Risposta guida</div><div class="ltxt">${lo.guida}</div>`:''}
         ${lo.spiega?`<div class="lbl">Spiegazione</div><div class="ltxt">${lo.spiega}</div>`:''}
-        ${lo.st!=null?`<span class="conn s">🐍 Serpente → casella ${lo.st} (${L[lo.st]?L[lo.st].name:''})</span>`:''}
-        ${lo.sf!=null?`<span class="conn s">🐍 Arrivi da casella ${lo.sf} (${L[lo.sf]?L[lo.sf].name:''})</span>`:''}
-        ${lo.sf2!=null?`<span class="conn s">🐍 Arrivi anche da casella ${lo.sf2} (${L[lo.sf2]?L[lo.sf2].name:''})</span>`:''}
-        ${lo.at!=null?`<span class="conn a">🏹 Freccia → casella ${lo.at} (${L[lo.at]?L[lo.at].name:''})</span>`:''}
-        ${lo.af!=null?`<span class="conn a">🏹 Vieni da casella ${lo.af} (${L[lo.af]?L[lo.af].name:''})</span>`:''}
+        ${lo.st!=null?`<span class="conn s">?? Serpente ? casella ${lo.st} (${L[lo.st]?L[lo.st].name:''})</span>`:''}
+        ${lo.sf!=null?`<span class="conn s">?? Arrivi da casella ${lo.sf} (${L[lo.sf]?L[lo.sf].name:''})</span>`:''}
+        ${lo.sf2!=null?`<span class="conn s">?? Arrivi anche da casella ${lo.sf2} (${L[lo.sf2]?L[lo.sf2].name:''})</span>`:''}
+        ${lo.at!=null?`<span class="conn a">?? Freccia ? casella ${lo.at} (${L[lo.at]?L[lo.at].name:''})</span>`:''}
+        ${lo.af!=null?`<span class="conn a">?? Vieni da casella ${lo.af} (${L[lo.af]?L[lo.af].name:''})</span>`:''}
       </div>
     </div>`;
   }).join('');
@@ -1233,9 +1234,9 @@ function toggleLoka(n) {
   document.getElementById('lk'+n).classList.toggle('open');
 }
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // QUIZ
-// ══════════════════════════════════════════
+// ------------------------------------------
 let qF='all', qIdx=0, qScore=0, qAns=false, qList=[...QD];
 
 function setQF(f, btn) {
@@ -1253,7 +1254,7 @@ function renderQ() {
   if (!qList.length || qIdx >= qList.length) { showQDone(); return; }
   const q = qList[qIdx];
   document.getElementById('qc').innerHTML = `<div class="qcard">
-    <div class="qnum">Casella ${q.n} · ${q.name}</div>
+    <div class="qnum">Casella ${q.n} è ${q.name}</div>
     <div class="qq">${q.q}</div>
     <div class="qopts">${q.opts.map((o,i)=>`
       <div class="qo" onclick="ansQ(${i})" id="qo${i}">
@@ -1261,7 +1262,7 @@ function renderQ() {
       </div>`).join('')}
     </div>
     <div class="qexpl" id="qexpl">${q.s}</div>
-    <button class="qnext" id="qnext" onclick="nextQ()">Prossima →</button>
+    <button class="qnext" id="qnext" onclick="nextQ()">Prossima ?</button>
   </div>`;
 }
 
@@ -1287,26 +1288,26 @@ function nextQ() {
 
 function updQProg() {
   document.getElementById('qpt').textContent=`Domanda ${Math.min(qIdx+1,qList.length||1)} di ${qList.length}`;
-  document.getElementById('qps').textContent=`${qScore} ✓`;
+  document.getElementById('qps').textContent=`${qScore} ?`;
 }
 
 function showQDone() {
   const p=qList.length?Math.round(qScore/qList.length*100):0;
   document.getElementById('qc').innerHTML=`<div class="qcard" style="text-align:center;padding:32px 22px">
-    <div style="font-size:52px;margin-bottom:14px">🎉</div>
+    <div style="font-size:52px;margin-bottom:14px">??</div>
     <div style="font-size:21px;font-weight:800;margin-bottom:8px">Quiz completato!</div>
-    <div style="font-size:15px;color:var(--muted);margin-bottom:24px">${qScore} su ${qList.length} corrette · ${p}%</div>
+    <div style="font-size:15px;color:var(--muted);margin-bottom:24px">${qScore} su ${qList.length} corrette è ${p}%</div>
     <button class="rb" onclick="restartQ()" style="width:100%;padding:14px">Riprova</button>
   </div>`;
 }
 
 function restartQ() { qIdx=0; qScore=0; qAns=false; if(qF==='all') qList=[...QD]; else if(qF==='pos') qList=QD.filter(q=>q.n===myPos); else qList=QD.filter(q=>q.type===qF); renderQ(); }
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // SFIDA KARMA
-// ══════════════════════════════════════════
+// ------------------------------------------
 const SEQS = {
-  // frecce (scocca→punta)
+  // frecce (scocca?punta)
   10:[10,11,12,26,25,24,23],
   17:[17,20,34,39,52,57,58,69],
   20:[20,21,34,33,32],
@@ -1317,7 +1318,7 @@ const SEQS = {
   45:[45,44,46,47,48,62,61,60,66,67],
   46:[46,63,62],
   54:[54,55,53,56,57,70,69,68],
-  // serpenti (testa→coda)
+  // serpenti (testa?coda)
   72:[72,71,56,57,52,51],
   55:[55,54,53,38,35,20,17,16,3],
   61:[61,48,43,31,24,13],
@@ -1336,15 +1337,15 @@ function startSfidaKarma(n) {
   const isTesta = lo.type === 'testa';
   const dest = isTesta ? lo.st : lo.at;
   const seq = SEQS[n] || (isTesta ? [n, dest] : [n, dest]);
-  const revSeq = [...seq].reverse(); // per serpenti: coda→testa
+  const revSeq = [...seq].reverse(); // per serpenti: coda?testa
   skState = { origin:n, dest, isTesta, phase:isTesta?'gate':'advance', stepsGained:0, qUsed:[], seq, revSeq };
   const hdr = document.getElementById('sk-hdr');
   hdr.className = 'sk-hdr' + (isTesta ? '' : ' arr');
   hdr.innerHTML = `<div class="sk-icon">${isTesta?'🐍':'🏹'}</div>
-    <div class="sk-title">${lo.name} (${n}) → ${L[dest].name} (${dest})</div>
+    <div class="sk-title">${lo.name} (${n}) ? ${L[dest].name} (${dest})</div>
     <div class="sk-sub">${isTesta
-      ? 'Prima risposta sbagliata: scendi senza recupero · Giusta: scendi ma poi risali loka per loka'
-      : 'Ogni risposta giusta avanza di 1 loka · Prima sbagliata: stop'}</div>`;
+      ? 'Prima risposta sbagliata: scendi senza recupero è Giusta: scendi ma poi risali loka per loka'
+      : 'Ogni risposta giusta avanza di 1 loka è Prima sbagliata: stop'}</div>`;
   document.getElementById('sk').classList.add('open');
   skNextQ();
 }
@@ -1364,14 +1365,14 @@ function skNextQ() {
   const totalSteps = seq.length - 1;
   const stepLabel = isTesta
     ? (phase==='gate'
-        ? '❓ Prima domanda — supera per iniziare il recupero'
-        : `🔼 Recupero · step ${stepsGained+1}/${totalSteps} · ora in casella ${revSeq[stepsGained]}`)
-    : `🏹 Avanzamento · step ${stepsGained+1}/${totalSteps} · ora in casella ${seq[stepsGained]}`;
+        ? '? Prima domanda è supera per iniziare il recupero'
+        : `?? Recupero è step ${stepsGained+1}/${totalSteps} è ora in casella ${revSeq[stepsGained]}`)
+    : `?? Avanzamento è step ${stepsGained+1}/${totalSteps} è ora in casella ${seq[stepsGained]}`;
   document.getElementById('sk-body').innerHTML = `
     <div class="sk-step">${stepLabel}</div>
-    <div class="sk-step" style="margin-top:-4px;color:var(--acc2)">🃏 Carta: <strong>${cardLabel}</strong> · ${lokaName} (${currentN})</div>
+    <div class="sk-step" style="margin-top:-4px;color:var(--acc2)">?? Carta: <strong>${cardLabel}</strong> è ${lokaName} (${currentN})</div>
     <div class="qcard">
-      <div class="qnum">Casella ${q.n} · ${q.name}</div>
+      <div class="qnum">Casella ${q.n} è ${q.name}</div>
       <div class="qq">${q.q}</div>
       <div class="qopts">${q.opts.map((o,i)=>`
         <div class="qo" onclick="skAns(${i})" id="sko${i}"><span class="ql">${String.fromCharCode(65+i)}</span>${o}</div>`).join('')}
@@ -1394,36 +1395,36 @@ function skAns(c) {
     if (isTesta) {
       if (phase === 'gate') {
         if (!correct) {
-          skEnd(`🐍 Risposta errata. Scendi direttamente alla casella <strong>${dest} — ${L[dest].name}</strong>. Nessun recupero.`, false, dest);
+          skEnd(`?? Risposta errata. Scendi direttamente alla casella <strong>${dest} è ${L[dest].name}</strong>. Nessun recupero.`, false, dest);
         } else {
           skState.phase = 'recover';
-          skBridge(`✓ Risposta giusta! Scendi alla casella ${dest} — <strong>${L[dest].name}</strong>. Ora rispondi per risalire!`);
+          skBridge(`? Risposta giusta! Scendi alla casella ${dest} è <strong>${L[dest].name}</strong>. Ora rispondi per risalire!`);
         }
       } else {
         if (!correct) {
           const pos = revSeq[stepsGained];
-          skEnd(`🛑 Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' — '+L[pos].name:''}</strong>. Recuperate ${stepsGained} caselle.`, false, pos);
+          skEnd(`?? Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' è '+L[pos].name:''}</strong>. Recuperate ${stepsGained} caselle.`, false, pos);
         } else {
           skState.stepsGained++;
           const pos = revSeq[skState.stepsGained];
           if (skState.stepsGained >= seq.length - 1) {
-            skEnd(`🎉 Serpente annullato! Resti in casella <strong>${origin} — ${L[origin].name}</strong>.`, true, origin);
+            skEnd(`?? Serpente annullato! Resti in casella <strong>${origin} è ${L[origin].name}</strong>.`, true, origin);
           } else {
-            skBridge(`✓ Casella ${pos}${L[pos]?' — '+L[pos].name:''}. Continua!`);
+            skBridge(`? Casella ${pos}${L[pos]?' è '+L[pos].name:''}. Continua!`);
           }
         }
       }
     } else {
       if (!correct) {
         const pos = seq[stepsGained];
-        skEnd(`🛑 Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' — '+L[pos].name:''}</strong>. Avanzate ${stepsGained} caselle.`, false, pos);
+        skEnd(`?? Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' è '+L[pos].name:''}</strong>. Avanzate ${stepsGained} caselle.`, false, pos);
       } else {
         skState.stepsGained++;
         const pos = seq[skState.stepsGained];
         if (skState.stepsGained >= seq.length - 1) {
-          skEnd(`🎉 Freccia completa! Arrivi in casella <strong>${dest} — ${L[dest].name}</strong>!`, true, dest);
+          skEnd(`?? Freccia completa! Arrivi in casella <strong>${dest} è ${L[dest].name}</strong>!`, true, dest);
         } else {
-          skBridge(`✓ Casella ${pos}${L[pos]?' — '+L[pos].name:''}. Continua!`);
+          skBridge(`? Casella ${pos}${L[pos]?' è '+L[pos].name:''}. Continua!`);
         }
       }
     }
@@ -1433,7 +1434,7 @@ function skAns(c) {
 function skBridge(msg) {
   document.getElementById('sk-body').innerHTML = `
     <div class="sk-msg ok-msg">${msg}</div>
-    <button class="sk-btn pri" onclick="skNextQ()">Prossima domanda →</button>
+    <button class="sk-btn pri" onclick="skNextQ()">Prossima domanda ?</button>
     <button class="sk-btn sec" onclick="closeSK()">Fermati qui</button>`;
 }
 
@@ -1451,7 +1452,7 @@ function skEnd(msg, ok, pos) {
   const lo = L[pos];
   document.getElementById('sk-body').innerHTML = `
     <div class="sk-msg ${ok?'ok-msg':'ko-msg'}">${msg}</div>
-    ${lo?`<div class="mtheme" style="margin-top:12px"><strong>${lo.name}</strong> — ${lo.tema}</div>`:''}
+    ${lo?`<div class="mtheme" style="margin-top:12px"><strong>${lo.name}</strong> è ${lo.tema}</div>`:''}
     <button class="sk-btn pri" style="margin-top:14px" onclick="closeSK()">Chiudi</button>`;
 }
 
@@ -1462,16 +1463,16 @@ function closeSK() {
   else canRoll = true;
 }
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // GIOCATORI
-// ══════════════════════════════════════════
+// ------------------------------------------
 function renderPChips() {
   const el = document.getElementById('pchips');
   if(!el) return;
   el.innerHTML = players.map((p,i) => `
     <div class="pchip ${i===currentP?'curr':''}" style="--pc:${P_COLORS[i%6]}">
       <span class="pn">${p.name}</span>
-      <span class="pp">📍${p.pos}</span>
+      <span class="pp">??${p.pos}</span>
     </div>`).join('');
   const tag = document.getElementById('curr-player-tag');
   if(tag) {
@@ -1492,7 +1493,7 @@ function showTurnToast() {
   const ni = (currentP+1) % players.length;
   const tt = document.getElementById('turn-toast');
   if(!tt) return;
-  console.log('[toast] mostra — fine turno di', players[currentP].name, '→', players[ni].name);
+  console.log('[toast] mostra è fine turno di', players[currentP].name, '?', players[ni].name);
   if(_autoAdv) clearTimeout(_autoAdv);
   _autoAdv = setTimeout(() => { console.log('[toast] auto-avanzamento 8s'); nextTurn(); }, 8000);
   document.getElementById('turn-toast-msg').textContent = `Turno di ${players[currentP].name} terminato`;
@@ -1515,15 +1516,15 @@ let _autoAdv = null;
 function nextTurn() {
   sfx.turn();
   if(_autoAdv) { clearTimeout(_autoAdv); _autoAdv = null; }
-  console.log('[nextTurn] → P:', (currentP+1)%players.length, players[(currentP+1)%players.length]?.name);
+  console.log('[nextTurn] ? P:', (currentP+1)%players.length, players[(currentP+1)%players.length]?.name);
   canRoll = true;
   currentP = (currentP+1) % players.length;
   myPos = players[currentP].pos;
   savePlayers();
   document.getElementById('turn-toast').style.display = 'none';
   document.getElementById('dr').textContent = myPos===68
-    ? `🌟 ${players[currentP].name} — Lancia 1 per entrare nel gioco`
-    : `🎲 Turno di: ${players[currentP].name}`;
+    ? `🌟 ${players[currentP].name} è Lancia 1 per entrare nel gioco`
+    : `?? Turno di: ${players[currentP].name}`;
   renderHist();
   setPos(myPos);
   renderCarte();
@@ -1552,7 +1553,7 @@ function renderPGNames() {
       <input id="pgname${i}" value="${(players[i]?.name||'Giocatore '+(i+1)).replace(/"/g,'&quot;')}" placeholder="Giocatore ${i+1}">
     </div>
     <div class="pg-domanda">
-      <div class="pg-dlbl">💭 Domanda al Maha Lila</div>
+      <div class="pg-dlbl">?? Domanda al Maha Lila</div>
       <textarea id="pgdomanda${i}" placeholder="Cosa vuoi chiedere al Maha Lila in questa partita?">${players[i]?.domanda||''}</textarea>
     </div>`).join('');
 }
@@ -1572,7 +1573,7 @@ function applyPGSetup() {
   closePGSetup();
   setPos(myPos);
   updateModeBadge();
-  document.getElementById('dr').textContent = players.length > 1 ? `🎲 Turno di: ${players[0].name}` : 'Tocca per lanciare!';
+  document.getElementById('dr').textContent = players.length > 1 ? `?? Turno di: ${players[0].name}` : 'Tocca per lanciare!';
 }
 
 function closePGSetup() {
@@ -1596,7 +1597,7 @@ function undo() {
   setPos(myPos);
   renderCarte();
   canRoll = true;
-  document.getElementById('dr').textContent = '↩ Turno annullato';
+  document.getElementById('dr').textContent = '? Turno annullato';
   const tt = document.getElementById('turn-toast');
   if(tt) tt.style.display = 'none';
   updateUndoBtn();
@@ -1625,12 +1626,12 @@ function updateModeBadge() {
 function toggleSFX() {
   const m = sfx.toggle();
   const btn = document.getElementById('sfx-btn');
-  if(btn) btn.textContent = m ? '🔇' : '🔊';
+  if(btn) btn.textContent = m ? '??' : '??';
 }
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // REGOLE
-// ══════════════════════════════════════════
+// ------------------------------------------
 function showRT(id, btn) {
   document.querySelectorAll('.rtab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.rc').forEach(c=>c.classList.remove('active'));
@@ -1640,44 +1641,44 @@ function showRT(id, btn) {
 
 function buildRegole() {
   document.getElementById('r1').innerHTML = `
-    <div class="card"><h3>🌱 Modalità 1 — Il Gioco Introspettivo Classico</h3><p>Si concentra sulla crescita personale, sulla riflessione e sulla condivisione profonda tra i partecipanti.</p></div>
-    <div class="card"><h3>🎯 Ingresso</h3><p>Tutti partono <em>fuori</em> dal tabellone. Si entra sulla <strong>Casella 1 solo se esce un 6</strong> — simbolo dell'intenzione pura.</p></div>
-    <div class="card"><h3>🏃 Movimento</h3><p>Il giocatore avanza del numero indicato dal dado.</p></div>
-    <div class="card"><h3>🏹 Frecce (Consonanza Karmica)</h3><p>Se si atterra sulla <strong>base di una freccia</strong>, per attivare la salita il giocatore deve <strong>raccontare un episodio reale</strong> in cui ha vissuto la virtù di quella casella. Se il gruppo valuta il racconto autentico, la pedina sale. Altrimenti resta ferma.</p></div>
-    <div class="card"><h3>🐍 Serpenti (Consonanza Karmica)</h3><p>Se si atterra sulla <strong>testa di un serpente</strong>, il giocatore viene "morso". Per integrare la lezione, deve <strong>confessare una propria debolezza</strong> legata a quel vizio. Poi la pedina scende alla coda del serpente per purificare il percorso.</p></div>
-    <div class="card"><h3>⚡ Sfida Karma (opzione quiz)</h3><p>In alternativa al racconto spirituale, si può attivare la <strong>Sfida Karma</strong> usando le 40 domande del pool karmica.</p><p><strong>🐍 Serpente:</strong> si risponde alla prima domanda. <em>Sbagliata</em> → scendi alla coda senza recupero. <em>Giusta</em> → scendi alla coda ma poi rispondi a quante domande vuoi: ogni risposta giusta vale <strong>+1 loka</strong> verso la testa. Alla prima sbagliata ci si ferma.</p><p><strong>🏹 Freccia:</strong> ogni risposta giusta avanza la pedina di <strong>+1 loka</strong> verso la punta. Alla prima sbagliata ci si ferma dove si è.</p><p>In app: tocca la casella sul tabellone e premi <strong>⚡ Sfida Karma</strong> per la guida interattiva.</p></div>
-    <div class="card"><h3>📔 Diario di Viaggio</h3><p>Si consiglia di annotare le caselle su cui si passa. I blocchi ripetuti sulle stesse caselle rivelano spesso dinamiche psicologiche reali del giocatore.</p></div>
-    <div class="card"><h3>🏆 Fine partita</h3><p>Vince chi atterra <strong>esattamente</strong> sulla casella <strong>68 · Coscienza Cosmica</strong>. Il tabellone finisce al 72: se il lancio porta oltre, si <strong>rimbalza indietro</strong> del numero eccedente (es. da 67 con 6 si <em>atterrebbe</em> al 73, ma siccome non esiste si torna indietro di 1 e ci si ferma al 71). Attenzione al serpente alla <strong>72</strong> — riporta alla Terra (casella 51), scendendo di due piani!</p></div>`;
+    <div class="card"><h3>?? ModalitÈ 1 è Il Gioco Introspettivo Classico</h3><p>Si concentra sulla crescita personale, sulla riflessione e sulla condivisione profonda tra i partecipanti.</p></div>
+    <div class="card"><h3>?? Ingresso</h3><p>Tutti partono <em>fuori</em> dal tabellone. Si entra sulla <strong>Casella 1 solo se esce un 6</strong> è simbolo dell'intenzione pura.</p></div>
+    <div class="card"><h3>?? Movimento</h3><p>Il giocatore avanza del numero indicato dal dado.</p></div>
+    <div class="card"><h3>?? Frecce (Consonanza Karmica)</h3><p>Se si atterra sulla <strong>base di una freccia</strong>, per attivare la salita il giocatore deve <strong>raccontare un episodio reale</strong> in cui ha vissuto la virtù di quella casella. Se il gruppo valuta il racconto autentico, la pedina sale. Altrimenti resta ferma.</p></div>
+    <div class="card"><h3>?? Serpenti (Consonanza Karmica)</h3><p>Se si atterra sulla <strong>testa di un serpente</strong>, il giocatore viene "morso". Per integrare la lezione, deve <strong>confessare una propria debolezza</strong> legata a quel vizio. Poi la pedina scende alla coda del serpente per purificare il percorso.</p></div>
+    <div class="card"><h3>? Sfida Karma (opzione quiz)</h3><p>In alternativa al racconto spirituale, si può attivare la <strong>Sfida Karma</strong> usando le 40 domande del pool karmica.</p><p><strong>?? Serpente:</strong> si risponde alla prima domanda. <em>Sbagliata</em> ? scendi alla coda senza recupero. <em>Giusta</em> ? scendi alla coda ma poi rispondi a quante domande vuoi: ogni risposta giusta vale <strong>+1 loka</strong> verso la testa. Alla prima sbagliata ci si ferma.</p><p><strong>?? Freccia:</strong> ogni risposta giusta avanza la pedina di <strong>+1 loka</strong> verso la punta. Alla prima sbagliata ci si ferma dove si è.</p><p>In app: tocca la casella sul tabellone e premi <strong>? Sfida Karma</strong> per la guida interattiva.</p></div>
+    <div class="card"><h3>?? Diario di Viaggio</h3><p>Si consiglia di annotare le caselle su cui si passa. I blocchi ripetuti sulle stesse caselle rivelano spesso dinamiche psicologiche reali del giocatore.</p></div>
+    <div class="card"><h3>?? Fine partita</h3><p>Vince chi atterra <strong>esattamente</strong> sulla casella <strong>68 è Coscienza Cosmica</strong>. Il tabellone finisce al 72: se il lancio porta oltre, si <strong>rimbalza indietro</strong> del numero eccedente (es. da 67 con 6 si <em>atterrebbe</em> al 73, ma siccome non esiste si torna indietro di 1 e ci si ferma al 71). Attenzione al serpente alla <strong>72</strong> è riporta alla Terra (casella 51), scendendo di due piani!</p></div>`;
 
   document.getElementById('r2').innerHTML = `
-    <div class="card"><h3>🎉 Modalità 2 — Il Party Game della Coscienza</h3><p>Trasforma il viaggio in un gioco dinamico, competitivo e pieno di penitenze esilaranti, ideale per serate in gruppo.</p></div>
-    <div class="card"><h3>🎯 Ingresso</h3><p>Si entra sulla Casella 1 se esce un numero <strong>PARI</strong>. Se esce un numero <strong>DISPARI</strong> si resta fuori, ma si entra subito facendo un <strong>complimento esagerato e teatrale</strong> al giocatore alla propria destra.</p></div>
-    <div class="card"><h3>⚡ Caselle Freccia / Serpente</h3><p>Quando si atterra su una casella speciale, il giocatore sceglie:</p><ul><li><strong>OPZIONE A</strong> — Sfida fisica o penitenza di gruppo.</li><li><strong>OPZIONE B — Sfida Karma</strong> — Il vicino di destra guida il quiz (usa il pulsante ⚡ nell’app). 🐍 <em>Serpente</em>: prima risposta sbagliata = coda senza recupero; giusta = coda ma poi +1 loka per ogni risposta corretta verso la testa. 🏹 <em>Freccia</em>: ogni risposta giusta avanza di +1 loka verso la punta; prima sbagliata = stop.</li></ul></div>
-    <div class="card"><h3>🃏 Se esce il Joker (Opzione B)</h3><p><strong>Sfortuna mistica!</strong> Niente quiz. Il gruppo vota a maggioranza una delle 3 penitenze previste per la riga del tabellone in cui si trova la pedina.</p></div>
-    <div class="card"><h3>🎴 Caselle Neutre</h3><p>Se si atterra su una casella senza freccia né serpente, si pesca una carta dal <strong>Mazzo Imprevisti</strong> principale e si applica l'effetto.</p></div>
-    <div class="card"><h3>🏆 Fine partita</h3><p>Vince chi atterra <strong>esattamente</strong> sulla casella <strong>68 · Coscienza Cosmica</strong>. Il tabellone finisce al 72: se il lancio porta oltre, si <strong>rimbalza indietro</strong> del numero eccedente (es. da 67 con 6 si <em>atterrebbe</em> al 73, ma siccome non esiste si torna indietro di 1 e ci si ferma al 71). Attenzione al serpente alla <strong>72</strong> — riporta alla Terra (casella 51), scendendo di due piani!</p></div>`;
+    <div class="card"><h3>?? ModalitÈ 2 è Il Party Game della Coscienza</h3><p>Trasforma il viaggio in un gioco dinamico, competitivo e pieno di penitenze esilaranti, ideale per serate in gruppo.</p></div>
+    <div class="card"><h3>?? Ingresso</h3><p>Si entra sulla Casella 1 se esce un numero <strong>PARI</strong>. Se esce un numero <strong>DISPARI</strong> si resta fuori, ma si entra subito facendo un <strong>complimento esagerato e teatrale</strong> al giocatore alla propria destra.</p></div>
+    <div class="card"><h3>? Caselle Freccia / Serpente</h3><p>Quando si atterra su una casella speciale, il giocatore sceglie:</p><ul><li><strong>OPZIONE A</strong> è Sfida fisica o penitenza di gruppo.</li><li><strong>OPZIONE B è Sfida Karma</strong> è Il vicino di destra guida il quiz (usa il pulsante ? nell’app). ?? <em>Serpente</em>: prima risposta sbagliata = coda senza recupero; giusta = coda ma poi +1 loka per ogni risposta corretta verso la testa. ?? <em>Freccia</em>: ogni risposta giusta avanza di +1 loka verso la punta; prima sbagliata = stop.</li></ul></div>
+    <div class="card"><h3>?? Se esce il Joker (Opzione B)</h3><p><strong>Sfortuna mistica!</strong> Niente quiz. Il gruppo vota a maggioranza una delle 3 penitenze previste per la riga del tabellone in cui si trova la pedina.</p></div>
+    <div class="card"><h3>?? Caselle Neutre</h3><p>Se si atterra su una casella senza freccia nÈ serpente, si pesca una carta dal <strong>Mazzo Imprevisti</strong> principale e si applica l'effetto.</p></div>
+    <div class="card"><h3>?? Fine partita</h3><p>Vince chi atterra <strong>esattamente</strong> sulla casella <strong>68 è Coscienza Cosmica</strong>. Il tabellone finisce al 72: se il lancio porta oltre, si <strong>rimbalza indietro</strong> del numero eccedente (es. da 67 con 6 si <em>atterrebbe</em> al 73, ma siccome non esiste si torna indietro di 1 e ci si ferma al 71). Attenzione al serpente alla <strong>72</strong> è riporta alla Terra (casella 51), scendendo di due piani!</p></div>`;
 
   document.getElementById('carte').innerHTML = `
-    <button class="cdb" onclick="drawCard()">🃏 Pesca una carta Imprevisti</button>
+    <button class="cdb" onclick="drawCard()">?? Pesca una carta Imprevisti</button>
     <div class="cr" id="cr"></div>
     <div class="card" style="margin-top:14px"><h3>Il Mazzo</h3>
     <ul>
-      <li>♥ ♦ <strong>Carte Rosse</strong> (Cuori & Quadri) = Buon Karma ✨</li>
-      <li>♠ ♣ <strong>Carte Nere</strong> (Picche & Fiori) = Monelli del Caos 😈</li>
-      <li>🃏 <strong>Joker Rosso</strong> = Avanza di 12 o salva da un serpente</li>
-      <li>🃏 <strong>Joker Nero</strong> = Urla «CAOS!» — tutti scambiano posizione</li>
+      <li>? ? <strong>Carte Rosse</strong> (Cuori & Quadri) = Buon Karma ?</li>
+      <li>? ? <strong>Carte Nere</strong> (Picche & Fiori) = Monelli del Caos ??</li>
+      <li>?? <strong>Joker Rosso</strong> = Avanza di 12 o salva da un serpente</li>
+      <li>?? <strong>Joker Nero</strong> = Urla «CAOS!» è tutti scambiano posizione</li>
     </ul></div>`;
 
   const penH = PEN.map(p=>`
     <div class="pr" id="pr${p.r}">
       <div class="prh" onclick="togPen(${p.r})">
         <div class="prb">${p.r}</div>
-        <div class="phi"><h4>Riga ${p.r} · Caselle ${p.c}</h4><p>${p.el}</p></div>
+        <div class="phi"><h4>Riga ${p.r} è Caselle ${p.c}</h4><p>${p.el}</p></div>
         <svg class="prchev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
       <div class="prbd">${p.opts.map((o,i)=>`
         <div class="po">
-          <div class="pol">Opzione ${i+1} — "${o.n}"</div>
+          <div class="pol">Opzione ${i+1} è "${o.n}"</div>
           <p>${o.d}</p>
         </div>`).join('')}
       </div>
@@ -1693,7 +1694,7 @@ function togPen(r) {
 }
 
 function drawCard() {
-  const suits_r=['♥','♦'], suits_n=['♠','♣'];
+  const suits_r=['?','?'], suits_n=['?','?'];
   const rnd = Math.random();
   let card, tipo, suit;
   if (rnd < 0.481) { // 13/27 red cards
@@ -1704,11 +1705,11 @@ function drawCard() {
     tipo='ner'; suit=suits_n[Math.floor(Math.random()*2)];
   } else { // 2/54 jokers
     card = JOKERS[Math.floor(Math.random()*2)];
-    tipo='jok'; suit='🃏';
+    tipo='jok'; suit='??';
   }
   const cr = document.getElementById('cr');
   const color = tipo==='ros'?'#c0392b':tipo==='jok'?'#6e4e2e':'#2c3e50';
-  const badge = tipo==='ros'?'✨ Buon Karma':tipo==='jok'?'🃏 Joker':'😈 Monello del Caos';
+  const badge = tipo==='ros'?'? Buon Karma':tipo==='jok'?'?? Joker':'?? Monello del Caos';
   cr.innerHTML=`
     <div class="csuit" style="color:${color}">${suit}</div>
     <div class="cval" style="color:${color}">${card.v}</div>
@@ -1717,13 +1718,13 @@ function drawCard() {
   cr.classList.remove('show'); void cr.offsetWidth; cr.classList.add('show');
 }
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // INIT
 
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // CARTE IMPREVISTO
-// ══════════════════════════════════════════
+// ------------------------------------------
 let _cartaPending = null;
 
 function triggerCarta(n) {
@@ -1740,14 +1741,14 @@ function showCartaDraw(n) {
   const isRed = Math.random() < 0.5;
   const deck = isRed ? CARTE_R : CARTE_N;
   const card = deck[Math.floor(Math.random()*deck.length)];
-  const suit = isRed ? '♥' : '♠';
+  const suit = isRed ? '?' : '?';
   const color = isRed ? '#c0392b' : '#2c3e50';
   _cartaPending = {tipo: isRed?'R':'N', card};
   document.getElementById('cd-suit').textContent = suit;
   document.getElementById('cd-suit').style.color = color;
   document.getElementById('cd-val').textContent = card.v;
   document.getElementById('cd-val').style.color = color;
-  document.getElementById('cd-tipo').textContent = isRed ? '♥ Carta Rossa — Buon Karma ✨' : '♠ Carta Nera — Monello del Caos 😈';
+  document.getElementById('cd-tipo').textContent = isRed ? '? Carta Rossa è Buon Karma ?' : '? Carta Nera è Monello del Caos ??';
   document.getElementById('cd-tipo').style.color = color;
   document.getElementById('cd-eff').textContent = card.e;
   sfx.carta();
@@ -1777,7 +1778,7 @@ function renderCarte() {
   box.style.display = carte.length ? '' : 'none';
   list.innerHTML = carte.map((c,i) => `
     <div class="carta-item${c.tipo==='N'?' nera':''}">
-      <div class="carta-lbl">${c.tipo==='R'?'♥ Carta Rossa':'♠ Carta Nera'}</div>
+      <div class="carta-lbl">${c.tipo==='R'?'? Carta Rossa':'? Carta Nera'}</div>
       <div class="carta-val">${c.card.v}</div>
       <div class="carta-eff">${c.card.e}</div>
       <button class="carta-usa" onclick="usaCarta(${i})">Usa questa carta</button>
@@ -1790,11 +1791,11 @@ function usaCarta(idx) {
   if(!c) return;
   const isRed = c.tipo === 'R';
   document.getElementById('mc').innerHTML = `
-    <div class="badge ${isRed?'scocca':'coda'}">${isRed?'✨ Buon Karma':'😈 Monello del Caos'}</div>
+    <div class="badge ${isRed?'scocca':'coda'}">${isRed?'? Buon Karma':'?? Monello del Caos'}</div>
     <div class="mnum">Carta ${isRed?'Rossa':'Nera'}</div>
     <div class="mtit">${c.card.v}</div>
     <div class="mtheme">${c.card.e}</div>
-    <button class="sk-btn pri" style="margin-top:14px" onclick="confermUsoCarta(${idx});closeModal()">✓ Effetto Applicato — Scarta</button>
+    <button class="sk-btn pri" style="margin-top:14px" onclick="confermUsoCarta(${idx});closeModal()">? Effetto Applicato è Scarta</button>
     <button class="sk-btn sec" style="margin-top:8px" onclick="closeModal()">Annulla</button>`;
   document.getElementById('mo').classList.add('open');
 }
@@ -1807,9 +1808,9 @@ function confermUsoCarta(idx) {
   renderCarte();
 }
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // PENITENZA
-// ══════════════════════════════════════════
+// ------------------------------------------
 let _penPiano = null;
 
 function triggerPenitenza(n) {
@@ -1831,11 +1832,11 @@ function showPenitenza(n) {
   _penPiano = piano;
   const p = players[currentP];
   const rimanenti = 3 - (p.penitenze?.length || 0);
-  document.getElementById('pen-title').textContent = `🎭 Penitenza! — Piano ${piano} · ${penData.el}`;
-  document.getElementById('pen-sub').textContent = `Casella ${n} — ${L[n]?.name || ''}`;
-  document.getElementById('pen-opts').innerHTML = const penPick=[...penData.opts].sort(()=>Math.random()-0.5).slice(0,3);
+  document.getElementById('pen-title').textContent = `?? Penitenza! è Piano ${piano} è ${penData.el}`;
+  document.getElementById('pen-sub').textContent = `Casella ${n} è ${L[n]?.name || ''}`;
+  const penPick=[...penData.opts].sort(()=>Math.random()-0.5).slice(0,3);
   document.getElementById('pen-opts').innerHTML=penPick.map((o,i) =>
-    `<div class="pen-opt"><strong>Opzione ${i+1} — “${o.n}”</strong><p>${o.d}</p></div>`).join('');
+    `<div class="pen-opt"><strong>Opzione ${i+1} — &ldquo;${o.n}&rdquo;</strong><p>${o.d}</p></div>`).join('');
   document.getElementById('pen-note').textContent =
     `Il gruppo vota a maggioranza. Penitenze rimanenti per ${p.name}: ${rimanenti - 1} dopo questa.`;
   sfx.penitenza();
@@ -1858,24 +1859,24 @@ function resumeAfterNeutral() {
   else canRoll = true;
 }
 
-// ══════════════════════════════════════════
+// ------------------------------------------
 // REPORT FINALE
-// ══════════════════════════════════════════
+// ------------------------------------------
 function buildReportText(p) {
   const tl = {start:'Inizio',coda:'Coda Serpente',testa:'Testa Serpente',scocca:'Scocca Freccia',punta:'Punta Freccia',neutral:'Casella Neutra'};
   const lines = [];
-  lines.push('══════════════════════════════════════════');
-  lines.push('       RAPPORTO DI VIAGGIO — MAHA LILA');
-  lines.push('══════════════════════════════════════════');
+  lines.push('------------------------------------------');
+  lines.push('       RAPPORTO DI VIAGGIO è MAHA LILA');
+  lines.push('------------------------------------------');
   lines.push('');
   lines.push('GIOCATORE: ' + p.name);
   lines.push('');
   lines.push('DOMANDA AL MAHA LILA:');
   lines.push(p.domanda ? '"' + p.domanda + '"' : '(nessuna domanda annotata)');
   lines.push('');
-  lines.push('──────────────────────────────────────────');
+  lines.push('------------------------------------------');
   lines.push('PERCORSO (in ordine cronologico):');
-  lines.push('──────────────────────────────────────────');
+  lines.push('------------------------------------------');
   lines.push('');
   (p.path||[]).forEach((entry, idx) => {
     const lo = L[entry.n];
@@ -1883,16 +1884,16 @@ function buildReportText(p) {
     const loType = lo ? (tl[lo.type]||lo.type) : '';
     let line = (idx+1) + '. Casella ' + entry.n + ' \u2014 ' + loName;
     if(loType) line += ' [' + loType + ']';
-    if(entry.via==='serpente') line += entry.ok ? '  \u2728 (serpente annullato — Sfida Karma)' : '  \ud83d\udc0d (discesa via serpente)';
+    if(entry.via==='serpente') line += entry.ok ? '  \u2728 (serpente annullato è Sfida Karma)' : '  \ud83d\udc0d (discesa via serpente)';
     if(entry.via==='freccia') line += entry.ok ? '  \ud83c\udff9 (freccia percorsa completamente)' : '  \ud83c\udff9 (salita parziale sulla freccia)';
     lines.push(line);
     if(lo && lo.tema) lines.push('   \u201c' + lo.tema + '\u201d');
     lines.push('');
   });
-  lines.push('──────────────────────────────────────────');
+  lines.push('------------------------------------------');
   lines.push('\ud83c\udfc6 LOKA 68 \u2014 COSCIENZA COSMICA: il viaggio \u00e8 compiuto.');
   lines.push('');
-  lines.push('══════════════════════════════════════════');
+  lines.push('------------------------------------------');
   lines.push('');
   lines.push('ISTRUZIONI PER L\'AI:');
   lines.push('Sei un interprete del Maha Lila, il gioco spirituale vedico.');
@@ -1930,13 +1931,13 @@ function copyReport() {
       document.body.removeChild(ta);
     });
 }
-// ══════════════════════════════════════════
+// ------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
   renderDice(1);
   setPos(myPos); // also renders player chips
   if(players.length > 1) document.getElementById('dr').textContent = myPos===68
-    ? `🌟 ${players[currentP].name} — Lancia 1 per entrare nel gioco`
-    : `🎲 Turno di: ${players[currentP].name}`;
+    ? `🌟 ${players[currentP].name} è Lancia 1 per entrare nel gioco`
+    : `?? Turno di: ${players[currentP].name}`;
   renderHist();
   buildBoard();
   filterLoka('all', null);
