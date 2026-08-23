@@ -320,6 +320,10 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 #pen-tmr-cd{font-size:38px;font-weight:900;color:#7b4ea4;margin-bottom:10px;font-variant-numeric:tabular-nums;letter-spacing:-.02em;transition:color .3s}
 #pen-tmr.warn #pen-tmr-cd{color:#e74c3c}
 #pen-tmr-done{width:100%;background:#7b4ea4;color:#fff;border:none;border-radius:8px;padding:9px;font-size:13px;font-weight:700;cursor:pointer}
+#pen-prova{margin-top:8px;display:none;flex-direction:column;gap:6px}
+.pen-prova-btn{width:100%;padding:9px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer}
+.pen-prova-btn.ok{background:#27ae60;color:#fff}
+.pen-prova-btn.ko{background:#e74c3c;color:#fff}
 /* -- Carte Imprevisto (mano) -- */
 .carte-box{margin-top:10px;padding:14px 16px;background:var(--paper);border-radius:14px;border:1px solid var(--line);width:100%;max-width:320px}
 .carte-box h3{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
@@ -555,6 +559,10 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
   <div id="pen-tmr-nm"></div>
   <div id="pen-tmr-cd">—</div>
   <button id="pen-tmr-done" onclick="stopPenTimer(true)">✅ Fatto!</button>
+  <div id="pen-prova" style="display:none">
+    <button class="pen-prova-btn ok" onclick="convalidaProva(true)">✅ Superata +1</button>
+    <button class="pen-prova-btn ko" onclick="convalidaProva(false)">❌ Non superata −1</button>
+  </div>
 </div>
 
 <!-- ------ REPORT FINALE ------ -->
@@ -1887,7 +1895,7 @@ function confermUsoCarta(idx) {
 // ------------------------------------------
 // PENITENZA
 // ------------------------------------------
-let _penPiano = null, _penPickedData = [], _penTimerIv = null, _penTimerPlayer = -1, _penSelected = -1;
+let _penPiano = null, _penPickedData = [], _penTimerIv = null, _penTimerPlayer = -1, _penSelected = -1, _penProvaPlayer = -1;
 
 function selectPenOpt(i) {
   _penSelected = i;
@@ -1918,10 +1926,22 @@ function startPenOpt(i) {
   const o = _penPickedData[i];
   const skip = o ? detectSkipTurns(o.d) : 0;
   if (skip > 0) players[currentP].skipTurns = (players[currentP].skipTurns || 0) + skip;
+  _penProvaPlayer = currentP; // save for validation before currentP may change
   closePenitenza(); // savePlayers() inside captures skipTurns
   if (!o) return;
   const secs = penTime(o.d);
-  if (secs > 0) startPenTimer(secs, o.n);
+  if (secs > 0) {
+    startPenTimer(secs, o.n);
+  } else {
+    // no timer: show widget with only validation buttons
+    const box = document.getElementById('pen-tmr');
+    document.getElementById('pen-tmr-nm').textContent = o.n;
+    document.getElementById('pen-tmr-cd').style.display = 'none';
+    document.getElementById('pen-tmr-done').style.display = 'none';
+    document.getElementById('pen-prova').style.display = 'flex';
+    box.classList.remove('warn');
+    box.style.display = '';
+  }
 }
 
 function startPenTimer(secs, name) {
@@ -1934,7 +1954,10 @@ function startPenTimer(secs, name) {
   nm.textContent = name;
   box.classList.remove('warn');
   box.style.display = '';
+  document.getElementById('pen-tmr-cd').style.display = '';
+  document.getElementById('pen-tmr-done').style.display = '';
   document.getElementById('pen-tmr-done').textContent = '✅ Fatto!';
+  document.getElementById('pen-prova').style.display = 'none';
   const render = () => {
     const m = Math.floor(rem / 60), s = rem % 60;
     cd.textContent = m > 0 ? m + ':' + String(s).padStart(2,'0') : s + 's';
@@ -1949,13 +1972,33 @@ function stopPenTimer(byUser) {
   _penTimerPlayer = -1;
   const box = document.getElementById('pen-tmr');
   if (!box) return;
-  if (byUser) {
-    box.style.display = 'none';
-  } else {
-    document.getElementById('pen-tmr-cd').textContent = '⏰';
-    document.getElementById('pen-tmr-done').textContent = '✅ Chiudi';
-    sfx && sfx.wrong && sfx.wrong();
-  }
+  document.getElementById('pen-tmr-cd').textContent = byUser ? '✔' : '⏰';
+  if (!byUser) sfx && sfx.wrong && sfx.wrong();
+  document.getElementById('pen-tmr-done').style.display = 'none';
+  document.getElementById('pen-prova').style.display = 'flex';
+}
+
+function convalidaProva(ok) {
+  const pi = _penProvaPlayer;
+  _penProvaPlayer = -1;
+  const box = document.getElementById('pen-tmr');
+  if (box) box.style.display = 'none';
+  document.getElementById('pen-tmr-cd').style.display = '';
+  document.getElementById('pen-tmr-cd').textContent = '—';
+  document.getElementById('pen-tmr-done').style.display = '';
+  document.getElementById('pen-prova').style.display = 'none';
+  if (pi < 0 || pi >= players.length) return;
+  const p = players[pi];
+  if (p.pos === 68) return; // still waiting, no movement
+  const newPos = Math.max(1, Math.min(72, p.pos + (ok ? 1 : -1)));
+  p.pos = newPos;
+  if (pi === currentP) { myPos = newPos; setPos(newPos); }
+  savePlayers();
+  renderHist();
+  const dr = document.getElementById('dr');
+  if (dr) dr.textContent = ok
+    ? `✅ Prova superata! ${p.name} → Casella ${newPos}${L[newPos]?' — '+L[newPos].name:''}`
+    : `❌ Non superata. ${p.name} → Casella ${newPos}${L[newPos]?' — '+L[newPos].name:''}`;
 }
 
 function triggerPenitenza(n) {
