@@ -1427,8 +1427,11 @@ function skNextQ() {
     <div class="sk-step" style="margin-top:-4px;color:var(--acc2)">🃏 Carta: <strong>${cardLabel}</strong> — ${lokaName} (${currentN})</div>
     <div class="qcard">
       <div class="qnum">Casella ${q.n} — ${q.name}</div>
-      ${L[q.n]?.tema ? `<div class="qloka-desc">${L[q.n].tema}</div>` : ''}
-      <div class="qq">${q.q}</div>
+      ${(() => { const lo = L[q.n]; if(!lo) return '';
+        return (lo.tema  ? `<div class="qloka-desc">${lo.tema}</div>` : '')
+             + (lo.guida ? `<div class="ml" style="margin-top:8px">Guida</div><div class="mt">${lo.guida}</div>` : '')
+             + (lo.spiega? `<div class="ml">Spiegazione</div><div class="mt">${lo.spiega}</div>` : ''); })()}
+      <div class="qq" style="margin-top:14px">${q.q}</div>
       <div class="qopts">${q.opts.map((o,i)=>`
         <div class="qo" onclick="skAns(${i})" id="sko${i}"><span class="ql">${String.fromCharCode(65+i)}</span>${o}</div>`).join('')}
       </div>
