@@ -1344,8 +1344,8 @@ function startSfidaKarma(n) {
   hdr.innerHTML = `<div class="sk-icon">${isTesta?'🐍':'🏹'}</div>
     <div class="sk-title">${lo.name} (${n}) → ${L[dest].name} (${dest})</div>
     <div class="sk-sub">${isTesta
-      : 'Prima risposta sbagliata: scendi senza recupero — Giusta: scendi ma poi risali loka per loka'
-      : 'Ogni risposta giusta avanza di 1 loka è Prima sbagliata: stop'}</div>`;
+      ? 'Prima risposta sbagliata: scendi senza recupero — Giusta: scendi ma poi risali loka per loka'
+      : 'Ogni risposta giusta avanza di 1 loka — Prima sbagliata: stop'}</div>`;
   document.getElementById('sk').classList.add('open');
   skNextQ();
 }
