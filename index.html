@@ -883,11 +883,23 @@ const sfx = (() => {
     return _ctx;
   }
 
-  // proactively unlock context on every touch so resume is done before the sound call
+  // iOS/PWA unlock: create context + play silent buffer on first gesture to unblock audio
+  function _unlockAudio() {
+    if (!_ctx) _ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (_ctx.state !== 'running') {
+      _ctx.resume().then(() => {
+        const buf = _ctx.createBuffer(1, 1, _ctx.sampleRate);
+        const src = _ctx.createBufferSource();
+        src.buffer = buf;
+        src.connect(_ctx.destination);
+        src.start(0);
+      }).catch(() => {});
+    }
+  }
   if (typeof document !== 'undefined') {
-    document.addEventListener('touchstart', function() {
-      if (_ctx && _ctx.state === 'suspended') _ctx.resume().catch(()=>{});
-    }, {passive: true, capture: true});
+    document.addEventListener('touchstart', _unlockAudio, {passive: true, capture: true});
+    document.addEventListener('touchend',   _unlockAudio, {passive: true, capture: true});
+    document.addEventListener('click',      _unlockAudio, {passive: true, capture: true});
   }
 
   // offset added to all scheduled times when context just woke from suspension
@@ -973,7 +985,7 @@ const sfx = (() => {
 let players = JSON.parse(localStorage.getItem('ml_players')||'[]');
 let gameMode = localStorage.getItem('ml_mode') || 'oracolo';
 if(!players.length) players = [{name:'Giocatore 1',pos:68,hist:[]}];
-players.forEach(p => { if(!p.hist) p.hist = []; if(!p.path) p.path = []; if(!p.domanda) p.domanda = ''; if(!p.penitenze) p.penitenze = []; if(!p.carte) p.carte = []; if(p.carteDrawn===undefined) p.carteDrawn = 0; if(p.skipTurns===undefined) p.skipTurns = 0; }); // compat
+players.forEach(p => { if(!p.hist) p.hist = []; if(!p.path) p.path = []; if(!p.domanda) p.domanda = ''; if(!p.penitenze) p.penitenze = []; if(!p.carte) p.carte = []; if(p.carteDrawn===undefined) p.carteDrawn = 0; if(p.skipTurns===undefined) p.skipTurns = 0; if(!p.activeEffects) p.activeEffects = []; }); // compat
 let currentP = +localStorage.getItem('ml_cp')||0;
 if(currentP >= players.length) currentP = 0;
 let myPos = players[currentP].pos;
@@ -1059,6 +1071,18 @@ function toggleDiceMode() {
 
 function processRoll(r) {
   renderDice(r);
+  // Carta Rossa Regina: advance other active holders by 2 on any roll of 6
+  const reginaBonus = [];
+  if (r === 6 && players.length > 1) {
+    players.forEach((p, j) => {
+      if (j === currentP || p.pos === 68) return;
+      if ((p.activeEffects||[]).some(e => e.type === 'regina_r')) {
+        p.pos = calcNewPos(p.pos, 2);
+        reginaBonus.push(p.name);
+      }
+    });
+    if (reginaBonus.length) savePlayers();
+  }
   const dIcons = ['','⚀','⚁','⚂','⚃','⚄','⚅'];
   const waiting = myPos === 68;
   const entryOk = waiting && (gameMode === 'party' ? r % 2 === 0 : r === 1);
@@ -1071,6 +1095,7 @@ function processRoll(r) {
   if(waiting && !entryOk) drMsg += gameMode === 'party' ? ' — Devi uscire un numero PARI' : ' — deve uscire 1 per entrare nel gioco';
   else if(waiting) drMsg += ' ✅ Entrato! Sei alla casella 1 — Nascita';
   else drMsg += np>1 ? ` → casella ${np}${_lo?' — '+_lo.name:''}` : '';
+  if (reginaBonus.length) drMsg += ` — ♥ ${reginaBonus.join(', ')} +2 (Carta Regina)`;
   document.getElementById('dr').textContent = drMsg;
   players[currentP].hist.push(r);
   if(!(waiting && np === 68)) players[currentP].path.push({n: np, via: 'dado'});
@@ -1540,6 +1565,8 @@ function nextTurn() {
   canRoll = true;
   currentP = (currentP+1) % players.length;
   myPos = players[currentP].pos;
+  if (players[currentP].activeEffects?.length)
+    players[currentP].activeEffects = players[currentP].activeEffects.filter(e => e.type !== 'regina_r');
 
   const timerSkip = _penTimerIv !== null && currentP === _penTimerPlayer;
   const turnSkip  = (players[currentP].skipTurns || 0) > 0;
@@ -1603,7 +1630,7 @@ function applyPGSetup() {
     const name = inp ? inp.value.trim()||('Giocatore '+(i+1)) : 'Giocatore '+(i+1);
     const dInp = document.getElementById('pgdomanda'+i);
     const domanda = dInp ? dInp.value.trim() : (players[i]?.domanda||'');
-    return {name, pos: 68, hist: [], path: [], domanda, penitenze: [], carte: [], carteDrawn: 0, skipTurns: 0};
+    return {name, pos: 68, hist: [], path: [], domanda, penitenze: [], carte: [], carteDrawn: 0, skipTurns: 0, activeEffects: []};
   });
   currentP = 0;
   myPos = players[0].pos;
@@ -1846,6 +1873,10 @@ function confermUsoCarta(idx) {
   const c = p.carte[idx];
   const skip = c ? detectSkipTurns(c.card.e) : 0;
   if (skip > 0) p.skipTurns = (p.skipTurns || 0) + skip;
+  if (c?.tipo === 'R' && c.card.v === 'Regina') {
+    p.activeEffects = (p.activeEffects||[]).filter(e => e.type !== 'regina_r');
+    p.activeEffects.push({type: 'regina_r'});
+  }
   p.carte.splice(idx, 1);
   savePlayers();
   renderCarte();
