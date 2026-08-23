@@ -1447,46 +1447,59 @@ function skAns(c) {
   });
   document.getElementById('sk-expl').classList.add('show');
   const correct = c === q.a;
-  if(correct) sfx.correct(); else sfx.wrong();
-  setTimeout(()=>{
-    const { isTesta, phase, dest, origin, stepsGained, seq, revSeq } = skState;
-    if (isTesta) {
-      if (phase === 'gate') {
-        if (!correct) {
-          skEnd(`❌ Risposta errata. Scendi direttamente alla casella <strong>${dest} — ${L[dest].name}</strong>. Nessun recupero.`, false, dest);
-        } else {
-          skState.phase = 'recover';
-          skBridge(`✅ Risposta giusta! Scendi alla casella ${dest} — <strong>${L[dest].name}</strong>. Ora rispondi per risalire!`);
-        }
+  if (correct) {
+    sfx.correct();
+    setTimeout(() => skAdvance(true), 700);
+  } else {
+    sfx.wrong();
+    // let the player read the correct answer before advancing
+    const btn = document.createElement('button');
+    btn.className = 'sk-btn pri';
+    btn.style.marginTop = '14px';
+    btn.textContent = 'Ho letto — Continua ▶';
+    btn.onclick = () => skAdvance(false);
+    document.querySelector('.qcard')?.appendChild(btn);
+  }
+}
+
+function skAdvance(correct) {
+  const { isTesta, phase, dest, origin, stepsGained, seq, revSeq } = skState;
+  if (isTesta) {
+    if (phase === 'gate') {
+      if (!correct) {
+        skEnd(`❌ Risposta errata. Scendi direttamente alla casella <strong>${dest} — ${L[dest].name}</strong>. Nessun recupero.`, false, dest);
       } else {
-        if (!correct) {
-          const pos = revSeq[stepsGained];
-          skEnd(`❌ Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' — '+L[pos].name:''}</strong>. Recuperate ${stepsGained} caselle.`, false, pos);
-        } else {
-          skState.stepsGained++;
-          const pos = revSeq[skState.stepsGained];
-          if (skState.stepsGained >= seq.length - 1) {
-            skEnd(`✅ Serpente annullato! Resti in casella <strong>${origin} — ${L[origin].name}</strong>.`, true, origin);
-          } else {
-            skBridge(`📍 Casella ${pos}${L[pos]?' è '+L[pos].name:''}. Continua!`);
-          }
-        }
+        skState.phase = 'recover';
+        skBridge(`✅ Risposta giusta! Scendi alla casella ${dest} — <strong>${L[dest].name}</strong>. Ora rispondi per risalire!`);
       }
     } else {
       if (!correct) {
-        const pos = seq[stepsGained];
-        skEnd(`❌ Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' — '+L[pos].name:''}</strong>. Avanzate ${stepsGained} caselle.`, false, pos);
+        const pos = revSeq[stepsGained];
+        skEnd(`❌ Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' — '+L[pos].name:''}</strong>. Recuperate ${stepsGained} caselle.`, false, pos);
       } else {
         skState.stepsGained++;
-        const pos = seq[skState.stepsGained];
+        const pos = revSeq[skState.stepsGained];
         if (skState.stepsGained >= seq.length - 1) {
-          skEnd(`✅ Freccia completa! Arrivi in casella <strong>${dest} — ${L[dest].name}</strong>!`, true, dest);
+          skEnd(`✅ Serpente annullato! Resti in casella <strong>${origin} — ${L[origin].name}</strong>.`, true, origin);
         } else {
           skBridge(`📍 Casella ${pos}${L[pos]?' è '+L[pos].name:''}. Continua!`);
         }
       }
     }
-  }, 700);
+  } else {
+    if (!correct) {
+      const pos = seq[stepsGained];
+      skEnd(`❌ Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' — '+L[pos].name:''}</strong>. Avanzate ${stepsGained} caselle.`, false, pos);
+    } else {
+      skState.stepsGained++;
+      const pos = seq[skState.stepsGained];
+      if (skState.stepsGained >= seq.length - 1) {
+        skEnd(`✅ Freccia completa! Arrivi in casella <strong>${dest} — ${L[dest].name}</strong>!`, true, dest);
+      } else {
+        skBridge(`📍 Casella ${pos}${L[pos]?' è '+L[pos].name:''}. Continua!`);
+      }
+    }
+  }
 }
 
 function skBridge(msg) {
