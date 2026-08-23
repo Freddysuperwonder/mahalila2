@@ -1,4 +1,4 @@
-const CACHE = 'maha-lila-v3';
+const CACHE = 'maha-lila-v7';
 const ASSETS = ['./index.html', './manifest.json'];
 
 self.addEventListener('install', e => {
