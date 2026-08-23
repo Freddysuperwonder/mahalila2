@@ -1234,7 +1234,7 @@ function showModal(n) {
     ${lo.spiega?`<div class="ml">Spiegazione</div><div class="mt">${lo.spiega}</div>`:''}
     ${lo.summary?`<div class="mt" style="margin-top:8px">${lo.summary}</div>`:''}
     ${conn}
-    ${(lo.st!=null||lo.at!=null)?`<button class="sk-btn pri" style="margin-top:14px" onclick="startSfidaKarma(${n});closeModal()">⚡ Sfida Karma</button>`:''}
+    ${(lo.st!=null||lo.at!=null) && gameMode!=='oracolo'?`<button class="sk-btn pri" style="margin-top:14px" onclick="startSfidaKarma(${n});closeModal()">⚡ Sfida Karma</button>`:''}
   ` : `
     <div class="badge neutral">Casella Neutra</div>
     <div class="mnum">Casella ${n}</div>
