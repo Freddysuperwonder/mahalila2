@@ -1010,6 +1010,7 @@ if(currentP >= players.length) currentP = 0;
 let myPos = players[currentP].pos;
 let canRoll = true;
 let _undoState = null;
+let _pendingMove = null;
 
 function calcNewPos(from, roll) {
   let to = from + roll;
@@ -1126,8 +1127,11 @@ function processRoll(r) {
     if(!waiting && _lo && (_lo.type==='testa' || _lo.type==='scocca')) {
       if (gameMode === 'sfida' && (_lo.st!=null || _lo.at!=null))
         setTimeout(() => startSfidaKarma(np), 700);
-      else
+      else {
+        if (_lo.st!=null) _pendingMove = { to: _lo.st, via: 'serpente' };
+        else if (_lo.at!=null) _pendingMove = { to: _lo.at, via: 'freccia' };
         setTimeout(() => showModal(np), 700);
+      }
     } else if(waiting) {
       if(np === 1) {
         // player just entered è toast so they know to hand device over
@@ -1147,8 +1151,11 @@ function processRoll(r) {
     if(!waiting && _lo && (_lo.type==='testa' || _lo.type==='scocca')) {
       if (gameMode === 'sfida' && (_lo.st!=null || _lo.at!=null))
         setTimeout(() => startSfidaKarma(np), 700);
-      else
+      else {
+        if (_lo.st!=null) _pendingMove = { to: _lo.st, via: 'serpente' };
+        else if (_lo.at!=null) _pendingMove = { to: _lo.at, via: 'freccia' };
         setTimeout(() => showModal(np), 700);
+      }
     } else {
       if(!waiting && triggerPenitenza(np)) setTimeout(() => showPenitenza(np), 700);
       else if(!waiting && triggerCarta(np)) setTimeout(() => showCartaDraw(np), 700);
@@ -1235,6 +1242,7 @@ function showModal(n) {
     ${lo.summary?`<div class="mt" style="margin-top:8px">${lo.summary}</div>`:''}
     ${conn}
     ${(lo.st!=null||lo.at!=null) && gameMode!=='oracolo'?`<button class="sk-btn pri" style="margin-top:14px" onclick="startSfidaKarma(${n});closeModal()">⚡ Sfida Karma</button>`:''}
+    ${_pendingMove?`<button class="sk-btn pri" style="margin-top:14px" onclick="applyPendingMove()">✓ Ho condiviso — Continua</button>`:''}
   ` : `
     <div class="badge neutral">Casella Neutra</div>
     <div class="mnum">Casella ${n}</div>
@@ -1246,7 +1254,21 @@ function showModal(n) {
   document.getElementById('mo').classList.add('open');
 }
 
+function applyPendingMove() {
+  const { to, via } = _pendingMove;
+  _pendingMove = null;
+  players[currentP].path.push({ n: to, via });
+  const lo = L[to];
+  document.getElementById('dr').textContent = via === 'serpente'
+    ? `🐍 Discesa → casella ${to}${lo ? ' — ' + lo.name : ''}`
+    : `🏹 Salita → casella ${to}${lo ? ' — ' + lo.name : ''}`;
+  setPos(to);
+  if (to === 68) { closeModal(); setTimeout(() => showReport(currentP), 700); return; }
+  closeModal();
+}
+
 function closeModal() {
+  if (_pendingMove) { applyPendingMove(); return; }
   document.getElementById('mo').classList.remove('open');
   if(players.length <= 1) canRoll = true;
   else if(!canRoll && !skState) showTurnToast();
