@@ -1401,6 +1401,7 @@ const SEQS = {
 let skState = null;
 
 function startSfidaKarma(n) {
+  if (gameMode === 'oracolo') return;
   const lo = L[n];
   const isTesta = lo.type === 'testa';
   const dest = isTesta ? lo.st : lo.at;
