@@ -248,6 +248,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 /* --- MULTIGIOCATORE --- */
 #pbar{display:flex;align-items:center;gap:6px;padding:6px 16px 4px;overflow-x:auto;scrollbar-width:none}
 #pbar::-webkit-scrollbar{display:none}
+#pchips::-webkit-scrollbar{display:none}
 .pchip{display:flex;flex-direction:column;align-items:center;padding:5px 10px;border-radius:10px;border:2px solid var(--pc);min-width:56px;flex-shrink:0;transition:all .15s}
 .pchip.curr{background:var(--pc);color:#fff}
 .pchip:not(.curr){background:var(--paper);color:var(--ink)}
@@ -360,16 +361,16 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 <!-- ------ DADO ------ -->
 <div class="page active" id="page-dado">
   <div class="ph"><h1>🎲 Dado</h1><p>Tocca il dado o il pulsante per lanciare<span class="mode-badge" id="mode-badge-ph"></span></p></div>
-  <div id="pbar"><div id="pchips" style="display:flex;gap:6px;flex:1;overflow:hidden"></div><button class="pg-btn" onclick="openPGSetup()" title="Configura giocatori">⚙️</button><button class="pg-btn" id="dice-mode-btn" onclick="toggleDiceMode()" title="Dado fisico/virtuale">🎲</button><button class="pg-btn" id="sfx-btn" onclick="toggleSFX()" title="Suoni">🔊</button></div>
+  <div id="pbar"><div id="pchips" style="display:flex;gap:6px;flex:1;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch"></div><button class="pg-btn" onclick="openPGSetup()" title="Configura giocatori">⚙️</button><button class="pg-btn" id="dice-mode-btn" onclick="toggleDiceMode()" title="Dado fisico/virtuale">🎲</button><button class="pg-btn" id="sfx-btn" onclick="toggleSFX()" title="Suoni">🔊</button></div>
   <div class="dc">
     <div id="dw-area" class="dw" onclick="rollDice()"><div id="df"></div></div>
     <div id="phys-pad">
-      <button class="phys-btn" onclick="physRoll(1)">?</button>
-      <button class="phys-btn" onclick="physRoll(2)">?</button>
-      <button class="phys-btn" onclick="physRoll(3)">?</button>
-      <button class="phys-btn" onclick="physRoll(4)">?</button>
-      <button class="phys-btn" onclick="physRoll(5)">?</button>
-      <button class="phys-btn" onclick="physRoll(6)">?</button>
+      <button class="phys-btn" onclick="physRoll(1)">⚀</button>
+      <button class="phys-btn" onclick="physRoll(2)">⚁</button>
+      <button class="phys-btn" onclick="physRoll(3)">⚂</button>
+      <button class="phys-btn" onclick="physRoll(4)">⚃</button>
+      <button class="phys-btn" onclick="physRoll(5)">⚄</button>
+      <button class="phys-btn" onclick="physRoll(6)">⚅</button>
     </div>
     <div id="curr-player-tag"><span class="cp-lbl">Turno di</span><span class="cp-nm" id="cp-nm"></span></div>
     <div class="dr" id="dr">Tocca per lanciare!</div>
