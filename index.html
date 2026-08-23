@@ -1441,6 +1441,8 @@ function skNextQ() {
 
 function skAns(c) {
   const q = skState.currentQ;
+  // disable all options immediately to prevent double-tap
+  document.querySelectorAll('.qo').forEach(el => el.onclick = null);
   q.opts.forEach((_,i)=>{
     const el = document.getElementById('sko'+i);
     if(el){ if(i===q.a) el.classList.add('ok'); else if(i===c) el.classList.add('ko'); }
