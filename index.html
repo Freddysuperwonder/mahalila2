@@ -342,7 +342,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 <!-- ------ DADO ------ -->
 <div class="page active" id="page-dado">
   <div class="ph"><h1>🎲 Dado</h1><p>Tocca il dado o il pulsante per lanciare<span class="mode-badge" id="mode-badge-ph"></span></p></div>
-  <div id="pbar"><div id="pchips" style="display:flex;gap:6px;flex:1;overflow:hidden"></div><button class="pg-btn" onclick="openPGSetup()" title="Configura giocatori">??</button><button class="pg-btn" id="dice-mode-btn" onclick="toggleDiceMode()" title="Dado fisico/virtuale">??</button><button class="pg-btn" id="sfx-btn" onclick="toggleSFX()" title="Suoni">🔊</button></div>
+  <div id="pbar"><div id="pchips" style="display:flex;gap:6px;flex:1;overflow:hidden"></div><button class="pg-btn" onclick="openPGSetup()" title="Configura giocatori">⚙️</button><button class="pg-btn" id="dice-mode-btn" onclick="toggleDiceMode()" title="Dado fisico/virtuale">🎲</button><button class="pg-btn" id="sfx-btn" onclick="toggleSFX()" title="Suoni">🔊</button></div>
   <div class="dc">
     <div id="dw-area" class="dw" onclick="rollDice()"><div id="df"></div></div>
     <div id="phys-pad">
@@ -360,7 +360,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
         <h3 style="margin:0">Ultimi lanci</h3>
         <span id="dh-count" style="font-size:11px;color:var(--muted);font-weight:600">0 lanci</span>
-        <button id="undo-btn" onclick="undo()" disabled style="font-size:11px;padding:4px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);cursor:pointer;color:var(--muted)">? Annulla</button>
+        <button id="undo-btn" onclick="undo()" disabled style="font-size:11px;padding:4px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);cursor:pointer;color:var(--muted)">↩️ Annulla</button>
         <button onclick="resetDice()" style="font-size:11px;padding:4px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);cursor:pointer;color:var(--muted)">Azzera</button>
       </div>
       <div class="hh" id="dh"></div>
@@ -371,7 +371,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
     </div>
     <div class="pos-box">
       <div class="pos-row">
-        <span class="pos-lbl">?? Mia casella</span>
+        <span class="pos-lbl">📍 Mia casella</span>
         <div class="pos-ctl">
           <button class="pos-btn" onclick="adjPos(-1)">-</button>
           <strong id="pos-n">1</strong>
@@ -379,10 +379,10 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
         </div>
       </div>
       <div id="pos-info" class="pos-info"></div>
-      <button class="rb" style="width:100%" onclick="openQuizAtPos()">?? Quiz è casella <span id="pos-n2">1</span></button>
+      <button class="rb" style="width:100%" onclick="openQuizAtPos()">📚 Quiz — casella <span id="pos-n2">1</span></button>
     </div>
     <div class="carte-box" id="carte-box" style="display:none">
-      <h3>?? Le tue Carte Imprevisto</h3>
+      <h3>🎴 Le tue Carte Imprevisto</h3>
       <div id="carte-list"></div>
     </div>
   </div>
@@ -390,11 +390,11 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 
 <!-- ------ TABELLONE ------ -->
 <div class="page" id="page-tabellone">
-  <div class="ph"><h1>🗺️ Tabellone</h1><p>72 caselle è vinci sulla 68</p></div>
+  <div class="ph"><h1>🗺️ Tabellone</h1><p>72 caselle · vinci sulla 68</p></div>
   <div class="bl">
-    <div class="li"><div class="ld" style="background:var(--snake-h)"></div>Testa ??</div>
+    <div class="li"><div class="ld" style="background:var(--snake-h)"></div>Testa 🐍</div>
     <div class="li"><div class="ld" style="background:#fff0f0;border:1px solid #c0392b"></div>Coda</div>
-    <div class="li"><div class="ld" style="background:var(--arrow-h)"></div>Punta ??</div>
+    <div class="li"><div class="ld" style="background:var(--arrow-h)"></div>Punta ⭐</div>
     <div class="li"><div class="ld" style="background:var(--arrow-b);border:1px solid #27ae60"></div>Scocca</div>
   </div>
   <div class="bg" id="bg"></div>
@@ -433,9 +433,9 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 <div class="page" id="page-regole">
   <div class="ph"><h1>📜 Manuale</h1><p>Regole, carte e penitenze</p></div>
   <div class="rtabs">
-    <button class="rtab active" onclick="showRT('r1',this)">ModalitÈ 1</button>
-    <button class="rtab" onclick="showRT('r2',this)">ModalitÈ 2</button>
-    <button class="rtab" onclick="showRT('carte',this)">?? Carte</button>
+    <button class="rtab active" onclick="showRT('r1',this)">Modalità 1</button>
+    <button class="rtab" onclick="showRT('r2',this)">Modalità 2</button>
+    <button class="rtab" onclick="showRT('carte',this)">🎴 Carte</button>
     <button class="rtab" onclick="showRT('pen',this)">Penitenze</button>
   </div>
   <div class="rc active" id="r1"></div>
@@ -486,16 +486,16 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 
 <div id="pg-ov">
   <div class="pgm">
-    <h2>?? Configura Partita</h2>
-    <div style="font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">ModalitÈ di gioco</div>
+    <h2>⚙️ Configura Partita</h2>
+    <div style="font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Modalità di gioco</div>
     <div class="mode-sel">
       <button class="mode-btn" id="mode-oracolo" onclick="setMode('oracolo')">
-        <div class="mode-icon">??</div>
+        <div class="mode-icon">🔮</div>
         <span class="mode-name">Oracolo</span>
         <span class="mode-desc">Viaggio spirituale puro. Solo frecce, serpenti e Sfide Karma</span>
       </button>
       <button class="mode-btn party" id="mode-party" onclick="setMode('party')">
-        <div class="mode-icon">??</div>
+        <div class="mode-icon">🎉</div>
         <span class="mode-name">Party Game</span>
         <span class="mode-desc">Versione completa con carte imprevisto e penitenze</span>
       </button>
@@ -504,7 +504,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
     <div class="pg-cnt" id="pg-cnt"></div>
     <div id="pg-names"></div>
     <div class="pg-btns">
-      <button class="pri" onclick="applyPGSetup()">? Inizia</button>
+      <button class="pri" onclick="applyPGSetup()">▶ Inizia</button>
       <button class="sec" onclick="closePGSetup()">Annulla</button>
     </div>
   </div>
@@ -518,7 +518,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
     <div class="cd-val" id="cd-val"></div>
     <div class="cd-tipo" id="cd-tipo"></div>
     <div class="cd-eff" id="cd-eff"></div>
-    <button class="rb" style="width:100%" onclick="confermCartaDraw()">?? Tieni la carta</button>
+    <button class="rb" style="width:100%" onclick="confermCartaDraw()">✋ Tieni la carta</button>
   </div>
 </div>
 
@@ -532,20 +532,20 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
   <div class="pen-body">
     <div class="pen-opts" id="pen-opts"></div>
     <div class="pen-note" id="pen-note"></div>
-    <button class="pen-btn" onclick="closePenitenza()">? Penitenza Accettata</button>
+    <button class="pen-btn" onclick="closePenitenza()">✅ Penitenza Accettata</button>
   </div>
 </div>
 
 <!-- ------ REPORT FINALE ------ -->
 <div id="rpt-ov">
   <div class="rpt-hdr">
-    <h2>?? Coscienza Cosmica Raggiunta!</h2>
+    <h2>🌟 Coscienza Cosmica Raggiunta!</h2>
     <p>Copia il report e incollalo nell'AI per ricevere la risposta del Maha Lila</p>
   </div>
   <div class="rpt-body">
     <div class="rpt-txt" id="rpt-txt"></div>
-    <button class="rpt-btn pri" id="rpt-copy-btn" onclick="copyReport()">?? Copia Report</button>
-    <button class="rpt-btn sec" onclick="closeReport()">? Chiudi</button>
+    <button class="rpt-btn pri" id="rpt-copy-btn" onclick="copyReport()">📋 Copia Report</button>
+    <button class="rpt-btn sec" onclick="closeReport()">✖ Chiudi</button>
   </div>
 </div>
 
@@ -1033,7 +1033,7 @@ function toggleDiceMode() {
   document.getElementById('rb-virtual').style.display = physicalDice ? 'none' : '';
   document.getElementById('phys-pad').classList.toggle('open', physicalDice);
   document.getElementById('dice-mode-btn').title = physicalDice ? 'Passa a dado virtuale' : 'Passa a dado fisico';
-  document.getElementById('dice-mode-btn').textContent = physicalDice ? '??' : '??';
+  document.getElementById('dice-mode-btn').textContent = physicalDice ? '🎲' : '📱';
   document.getElementById('dr').textContent = physicalDice ? 'Tocca il numero uscito sul dado fisico' : 'Tocca per lanciare!';
 }
 
@@ -1041,16 +1041,16 @@ function processRoll(r) {
   renderDice(r);
   const dIcons = ['','⚀','⚁','⚂','⚃','⚄','⚅'];
   const waiting = myPos === 68;
-  const entryOk = waiting && (gameMode === 'party' ? r % 2 === 0 : r === 6);
+  const entryOk = waiting && (gameMode === 'party' ? r % 2 === 0 : r === 1);
   const np = entryOk ? 1 : waiting ? 68 : calcNewPos(myPos, r);
   setPos(np);
   const _lo = L[np];
   if(waiting && np === 1) sfx.enter();
   else if(!waiting) sfx.land(np === 68 ? 'win' : (_lo?.type || 'neutral'));
   let drMsg = `Uscito: ${r} ${dIcons[r]}`;
-  if(waiting && r!==1) drMsg += ' è Devi uscire 1 per entrare nel gioco';
-  else if(waiting) drMsg += ' ? Entrato! Sei alla casella 1 è Nascita';
-  else drMsg += np>1 ? ` ? casella ${np}${_lo?' è '+_lo.name:''}` : '';
+  if(waiting && !entryOk) drMsg += gameMode === 'party' ? ' — Devi uscire un numero PARI' : ' — deve uscire 1 per entrare nel gioco';
+  else if(waiting) drMsg += ' ✅ Entrato! Sei alla casella 1 — Nascita';
+  else drMsg += np>1 ? ` → casella ${np}${_lo?' — '+_lo.name:''}` : '';
   document.getElementById('dr').textContent = drMsg;
   players[currentP].hist.push(r);
   if(!(waiting && np === 68)) players[currentP].path.push({n: np, via: 'dado'});
@@ -1068,7 +1068,7 @@ function processRoll(r) {
         showTurnToast();
       } else {
         const ni = (currentP+1) % players.length;
-        document.getElementById('dr').textContent += ` è turno di ${players[ni].name}`;
+        document.getElementById('dr').textContent += ` — turno di ${players[ni].name}`;
         if(_autoAdv) clearTimeout(_autoAdv);
         _autoAdv = setTimeout(() => nextTurn(), 1500);
       }
@@ -1149,13 +1149,13 @@ function buildBoard() {
 // ------------------------------------------
 function showModal(n) {
   const lo = L[n];
-  const tl = {start:'Inizio',coda:'Coda 🐍',testa:'Testa 🐍',scocca:'Scocca 🏹',punta:'Punta ?',neutral:'Neutrale'};
+  const tl = {start:'Inizio',coda:'Coda 🐍',testa:'Testa 🐍',scocca:'Scocca 🏹',punta:'Punta ⭐',neutral:'Neutrale'};
   let conn = '';
   if (lo) {
-    if (lo.st!=null){const d=L[lo.st];conn=`<div class="mconn ms">?? Il serpente porta alla casella ${lo.st} è ${d?d.name:''}</div>`;}
-    else if(lo.sf!=null){const f=L[lo.sf];conn=`<div class="mconn ms">?? Arrivi qui dalla testa in casella ${lo.sf} è ${f?f.name:''}</div>`;}
-    else if(lo.at!=null){const d=L[lo.at];conn=`<div class="mconn ma">?? La freccia porta alla casella ${lo.at} è ${d?d.name:''}</div>`;}
-    else if(lo.af!=null){const f=L[lo.af];conn=`<div class="mconn ma">?? Arrivi qui dalla casella ${lo.af} è ${f?f.name:''}</div>`;}
+    if (lo.st!=null){const d=L[lo.st];conn=`<div class="mconn ms">🐍 Il serpente porta alla casella ${lo.st} — ${d?d.name:''}</div>`;}
+    else if(lo.sf!=null){const f=L[lo.sf];conn=`<div class="mconn ms">🐍 Arrivi qui dalla testa in casella ${lo.sf} — ${f?f.name:''}</div>`;}
+    else if(lo.at!=null){const d=L[lo.at];conn=`<div class="mconn ma">🏹 La freccia porta alla casella ${lo.at} — ${d?d.name:''}</div>`;}
+    else if(lo.af!=null){const f=L[lo.af];conn=`<div class="mconn ma">🏹 Arrivi qui dalla casella ${lo.af} — ${f?f.name:''}</div>`;}
   }
   document.getElementById('mc').innerHTML = lo ? `
     <div class="badge ${lo.type}">${tl[lo.type]||'Casella'}</div>
@@ -1166,7 +1166,7 @@ function showModal(n) {
     ${lo.spiega?`<div class="ml">Spiegazione</div><div class="mt">${lo.spiega}</div>`:''}
     ${lo.summary?`<div class="mt" style="margin-top:8px">${lo.summary}</div>`:''}
     ${conn}
-    ${(lo.st!=null||lo.at!=null)?`<button class="sk-btn pri" style="margin-top:14px" onclick="startSfidaKarma(${n});closeModal()">? Sfida Karma</button>`:''}
+    ${(lo.st!=null||lo.at!=null)?`<button class="sk-btn pri" style="margin-top:14px" onclick="startSfidaKarma(${n});closeModal()">⚡ Sfida Karma</button>`:''}
   ` : `
     <div class="badge neutral">Casella Neutra</div>
     <div class="mnum">Casella ${n}</div>
@@ -1202,10 +1202,10 @@ function filterLoka(f, btn) {
 
   document.getElementById('ll').innerHTML = items.map(([n,lo])=>{
     let cs='';
-    if(lo.st!=null) cs=`? Serpente scende a ${lo.st}`;
-    else if(lo.sf!=null) cs=`? Serpente viene da ${lo.sf}`;
-    else if(lo.at!=null) cs=`? Freccia sale a ${lo.at}`;
-    else if(lo.af!=null) cs=`? Freccia viene da ${lo.af}`;
+    if(lo.st!=null) cs=`🐍 Serpente scende a ${lo.st}`;
+    else if(lo.sf!=null) cs=`🐍 Serpente viene da ${lo.sf}`;
+    else if(lo.at!=null) cs=`🏹 Freccia sale a ${lo.at}`;
+    else if(lo.af!=null) cs=`🏹 Freccia viene da ${lo.af}`;
     const isSnake = lo.st!=null||lo.sf!=null;
     return `<div class="lc" id="lk${n}">
       <div class="lch" onclick="toggleLoka(${n})">
@@ -1220,11 +1220,11 @@ function filterLoka(f, btn) {
         ${lo.tema?`<div class="lbl">Tema</div><div class="ltxt">${lo.tema}</div>`:''}
         ${lo.guida?`<div class="lbl">Risposta guida</div><div class="ltxt">${lo.guida}</div>`:''}
         ${lo.spiega?`<div class="lbl">Spiegazione</div><div class="ltxt">${lo.spiega}</div>`:''}
-        ${lo.st!=null?`<span class="conn s">?? Serpente ? casella ${lo.st} (${L[lo.st]?L[lo.st].name:''})</span>`:''}
-        ${lo.sf!=null?`<span class="conn s">?? Arrivi da casella ${lo.sf} (${L[lo.sf]?L[lo.sf].name:''})</span>`:''}
-        ${lo.sf2!=null?`<span class="conn s">?? Arrivi anche da casella ${lo.sf2} (${L[lo.sf2]?L[lo.sf2].name:''})</span>`:''}
-        ${lo.at!=null?`<span class="conn a">?? Freccia ? casella ${lo.at} (${L[lo.at]?L[lo.at].name:''})</span>`:''}
-        ${lo.af!=null?`<span class="conn a">?? Vieni da casella ${lo.af} (${L[lo.af]?L[lo.af].name:''})</span>`:''}
+        ${lo.st!=null?`<span class="conn s">🐍 Serpente ? casella ${lo.st} (${L[lo.st]?L[lo.st].name:''})</span>`:''}
+        ${lo.sf!=null?`<span class="conn s">🐍 Arrivi da casella ${lo.sf} (${L[lo.sf]?L[lo.sf].name:''})</span>`:''}
+        ${lo.sf2!=null?`<span class="conn s">🐍 Arrivi anche da casella ${lo.sf2} (${L[lo.sf2]?L[lo.sf2].name:''})</span>`:''}
+        ${lo.at!=null?`<span class="conn a">🏹 Freccia ? casella ${lo.at} (${L[lo.at]?L[lo.at].name:''})</span>`:''}
+        ${lo.af!=null?`<span class="conn a">🏹 Vieni da casella ${lo.af} (${L[lo.af]?L[lo.af].name:''})</span>`:''}
       </div>
     </div>`;
   }).join('');
@@ -1254,7 +1254,7 @@ function renderQ() {
   if (!qList.length || qIdx >= qList.length) { showQDone(); return; }
   const q = qList[qIdx];
   document.getElementById('qc').innerHTML = `<div class="qcard">
-    <div class="qnum">Casella ${q.n} è ${q.name}</div>
+    <div class="qnum">Casella ${q.n} — ${q.name}</div>
     <div class="qq">${q.q}</div>
     <div class="qopts">${q.opts.map((o,i)=>`
       <div class="qo" onclick="ansQ(${i})" id="qo${i}">
@@ -1288,15 +1288,15 @@ function nextQ() {
 
 function updQProg() {
   document.getElementById('qpt').textContent=`Domanda ${Math.min(qIdx+1,qList.length||1)} di ${qList.length}`;
-  document.getElementById('qps').textContent=`${qScore} ?`;
+  document.getElementById('qps').textContent=`${qScore} ✅`;
 }
 
 function showQDone() {
   const p=qList.length?Math.round(qScore/qList.length*100):0;
   document.getElementById('qc').innerHTML=`<div class="qcard" style="text-align:center;padding:32px 22px">
-    <div style="font-size:52px;margin-bottom:14px">??</div>
+    <div style="font-size:52px;margin-bottom:14px">🏆</div>
     <div style="font-size:21px;font-weight:800;margin-bottom:8px">Quiz completato!</div>
-    <div style="font-size:15px;color:var(--muted);margin-bottom:24px">${qScore} su ${qList.length} corrette è ${p}%</div>
+    <div style="font-size:15px;color:var(--muted);margin-bottom:24px">${qScore} su ${qList.length} corrette — ${p}%</div>
     <button class="rb" onclick="restartQ()" style="width:100%;padding:14px">Riprova</button>
   </div>`;
 }
@@ -1342,9 +1342,9 @@ function startSfidaKarma(n) {
   const hdr = document.getElementById('sk-hdr');
   hdr.className = 'sk-hdr' + (isTesta ? '' : ' arr');
   hdr.innerHTML = `<div class="sk-icon">${isTesta?'🐍':'🏹'}</div>
-    <div class="sk-title">${lo.name} (${n}) ? ${L[dest].name} (${dest})</div>
+    <div class="sk-title">${lo.name} (${n}) → ${L[dest].name} (${dest})</div>
     <div class="sk-sub">${isTesta
-      ? 'Prima risposta sbagliata: scendi senza recupero è Giusta: scendi ma poi risali loka per loka'
+      : 'Prima risposta sbagliata: scendi senza recupero — Giusta: scendi ma poi risali loka per loka'
       : 'Ogni risposta giusta avanza di 1 loka è Prima sbagliata: stop'}</div>`;
   document.getElementById('sk').classList.add('open');
   skNextQ();
@@ -1365,14 +1365,14 @@ function skNextQ() {
   const totalSteps = seq.length - 1;
   const stepLabel = isTesta
     ? (phase==='gate'
-        ? '? Prima domanda è supera per iniziare il recupero'
-        : `?? Recupero è step ${stepsGained+1}/${totalSteps} è ora in casella ${revSeq[stepsGained]}`)
-    : `?? Avanzamento è step ${stepsGained+1}/${totalSteps} è ora in casella ${seq[stepsGained]}`;
+        ? '⭐ Prima domanda — supera per iniziare il recupero'
+        : `↩️ Recupero — step ${stepsGained+1}/${totalSteps} — ora in casella ${revSeq[stepsGained]}`)
+    : `⬆️ Avanzamento — step ${stepsGained+1}/${totalSteps} — ora in casella ${seq[stepsGained]}`;
   document.getElementById('sk-body').innerHTML = `
     <div class="sk-step">${stepLabel}</div>
-    <div class="sk-step" style="margin-top:-4px;color:var(--acc2)">?? Carta: <strong>${cardLabel}</strong> è ${lokaName} (${currentN})</div>
+    <div class="sk-step" style="margin-top:-4px;color:var(--acc2)">🃏 Carta: <strong>${cardLabel}</strong> — ${lokaName} (${currentN})</div>
     <div class="qcard">
-      <div class="qnum">Casella ${q.n} è ${q.name}</div>
+      <div class="qnum">Casella ${q.n} — ${q.name}</div>
       <div class="qq">${q.q}</div>
       <div class="qopts">${q.opts.map((o,i)=>`
         <div class="qo" onclick="skAns(${i})" id="sko${i}"><span class="ql">${String.fromCharCode(65+i)}</span>${o}</div>`).join('')}
@@ -1395,36 +1395,36 @@ function skAns(c) {
     if (isTesta) {
       if (phase === 'gate') {
         if (!correct) {
-          skEnd(`?? Risposta errata. Scendi direttamente alla casella <strong>${dest} è ${L[dest].name}</strong>. Nessun recupero.`, false, dest);
+          skEnd(`❌ Risposta errata. Scendi direttamente alla casella <strong>${dest} — ${L[dest].name}</strong>. Nessun recupero.`, false, dest);
         } else {
           skState.phase = 'recover';
-          skBridge(`? Risposta giusta! Scendi alla casella ${dest} è <strong>${L[dest].name}</strong>. Ora rispondi per risalire!`);
+          skBridge(`✅ Risposta giusta! Scendi alla casella ${dest} — <strong>${L[dest].name}</strong>. Ora rispondi per risalire!`);
         }
       } else {
         if (!correct) {
           const pos = revSeq[stepsGained];
-          skEnd(`?? Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' è '+L[pos].name:''}</strong>. Recuperate ${stepsGained} caselle.`, false, pos);
+          skEnd(`❌ Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' — '+L[pos].name:''}</strong>. Recuperate ${stepsGained} caselle.`, false, pos);
         } else {
           skState.stepsGained++;
           const pos = revSeq[skState.stepsGained];
           if (skState.stepsGained >= seq.length - 1) {
-            skEnd(`?? Serpente annullato! Resti in casella <strong>${origin} è ${L[origin].name}</strong>.`, true, origin);
+            skEnd(`✅ Serpente annullato! Resti in casella <strong>${origin} — ${L[origin].name}</strong>.`, true, origin);
           } else {
-            skBridge(`? Casella ${pos}${L[pos]?' è '+L[pos].name:''}. Continua!`);
+            skBridge(`📍 Casella ${pos}${L[pos]?' è '+L[pos].name:''}. Continua!`);
           }
         }
       }
     } else {
       if (!correct) {
         const pos = seq[stepsGained];
-        skEnd(`?? Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' è '+L[pos].name:''}</strong>. Avanzate ${stepsGained} caselle.`, false, pos);
+        skEnd(`❌ Risposta errata. Ti fermi alla casella <strong>${pos}${L[pos]?' — '+L[pos].name:''}</strong>. Avanzate ${stepsGained} caselle.`, false, pos);
       } else {
         skState.stepsGained++;
         const pos = seq[skState.stepsGained];
         if (skState.stepsGained >= seq.length - 1) {
-          skEnd(`?? Freccia completa! Arrivi in casella <strong>${dest} è ${L[dest].name}</strong>!`, true, dest);
+          skEnd(`✅ Freccia completa! Arrivi in casella <strong>${dest} — ${L[dest].name}</strong>!`, true, dest);
         } else {
-          skBridge(`? Casella ${pos}${L[pos]?' è '+L[pos].name:''}. Continua!`);
+          skBridge(`📍 Casella ${pos}${L[pos]?' è '+L[pos].name:''}. Continua!`);
         }
       }
     }
@@ -1434,7 +1434,7 @@ function skAns(c) {
 function skBridge(msg) {
   document.getElementById('sk-body').innerHTML = `
     <div class="sk-msg ok-msg">${msg}</div>
-    <button class="sk-btn pri" onclick="skNextQ()">Prossima domanda ?</button>
+    <button class="sk-btn pri" onclick="skNextQ()">Prossima domanda ▶</button>
     <button class="sk-btn sec" onclick="closeSK()">Fermati qui</button>`;
 }
 
@@ -1472,7 +1472,7 @@ function renderPChips() {
   el.innerHTML = players.map((p,i) => `
     <div class="pchip ${i===currentP?'curr':''}" style="--pc:${P_COLORS[i%6]}">
       <span class="pn">${p.name}</span>
-      <span class="pp">??${p.pos}</span>
+      <span class="pp">📍${p.pos}</span>
     </div>`).join('');
   const tag = document.getElementById('curr-player-tag');
   if(tag) {
@@ -1523,8 +1523,8 @@ function nextTurn() {
   savePlayers();
   document.getElementById('turn-toast').style.display = 'none';
   document.getElementById('dr').textContent = myPos===68
-    ? `🌟 ${players[currentP].name} è Lancia 1 per entrare nel gioco`
-    : `?? Turno di: ${players[currentP].name}`;
+    ? `🌟 ${players[currentP].name} — ${gameMode === 'party' ? 'Lancia un numero PARI per entrare' : 'Lancia un 1 per entrare nel gioco'}`
+    : `🎯 Turno di: ${players[currentP].name}`;
   renderHist();
   setPos(myPos);
   renderCarte();
@@ -1553,7 +1553,7 @@ function renderPGNames() {
       <input id="pgname${i}" value="${(players[i]?.name||'Giocatore '+(i+1)).replace(/"/g,'&quot;')}" placeholder="Giocatore ${i+1}">
     </div>
     <div class="pg-domanda">
-      <div class="pg-dlbl">?? Domanda al Maha Lila</div>
+      <div class="pg-dlbl">🙏 Domanda al Maha Lila</div>
       <textarea id="pgdomanda${i}" placeholder="Cosa vuoi chiedere al Maha Lila in questa partita?">${players[i]?.domanda||''}</textarea>
     </div>`).join('');
 }
@@ -1573,7 +1573,7 @@ function applyPGSetup() {
   closePGSetup();
   setPos(myPos);
   updateModeBadge();
-  document.getElementById('dr').textContent = players.length > 1 ? `?? Turno di: ${players[0].name}` : 'Tocca per lanciare!';
+  document.getElementById('dr').textContent = players.length > 1 ? `🎯 Turno di: ${players[0].name}` : 'Tocca per lanciare!';
 }
 
 function closePGSetup() {
@@ -1597,7 +1597,7 @@ function undo() {
   setPos(myPos);
   renderCarte();
   canRoll = true;
-  document.getElementById('dr').textContent = '? Turno annullato';
+  document.getElementById('dr').textContent = '↩️ Turno annullato';
   const tt = document.getElementById('turn-toast');
   if(tt) tt.style.display = 'none';
   updateUndoBtn();
@@ -1626,7 +1626,7 @@ function updateModeBadge() {
 function toggleSFX() {
   const m = sfx.toggle();
   const btn = document.getElementById('sfx-btn');
-  if(btn) btn.textContent = m ? '??' : '??';
+  if(btn) btn.textContent = m ? '🔇' : '🔊';
 }
 
 // ------------------------------------------
@@ -1641,44 +1641,45 @@ function showRT(id, btn) {
 
 function buildRegole() {
   document.getElementById('r1').innerHTML = `
-    <div class="card"><h3>?? ModalitÈ 1 è Il Gioco Introspettivo Classico</h3><p>Si concentra sulla crescita personale, sulla riflessione e sulla condivisione profonda tra i partecipanti.</p></div>
-    <div class="card"><h3>?? Ingresso</h3><p>Tutti partono <em>fuori</em> dal tabellone. Si entra sulla <strong>Casella 1 solo se esce un 6</strong> è simbolo dell'intenzione pura.</p></div>
-    <div class="card"><h3>?? Movimento</h3><p>Il giocatore avanza del numero indicato dal dado.</p></div>
-    <div class="card"><h3>?? Frecce (Consonanza Karmica)</h3><p>Se si atterra sulla <strong>base di una freccia</strong>, per attivare la salita il giocatore deve <strong>raccontare un episodio reale</strong> in cui ha vissuto la virtù di quella casella. Se il gruppo valuta il racconto autentico, la pedina sale. Altrimenti resta ferma.</p></div>
-    <div class="card"><h3>?? Serpenti (Consonanza Karmica)</h3><p>Se si atterra sulla <strong>testa di un serpente</strong>, il giocatore viene "morso". Per integrare la lezione, deve <strong>confessare una propria debolezza</strong> legata a quel vizio. Poi la pedina scende alla coda del serpente per purificare il percorso.</p></div>
-    <div class="card"><h3>? Sfida Karma (opzione quiz)</h3><p>In alternativa al racconto spirituale, si può attivare la <strong>Sfida Karma</strong> usando le 40 domande del pool karmica.</p><p><strong>?? Serpente:</strong> si risponde alla prima domanda. <em>Sbagliata</em> ? scendi alla coda senza recupero. <em>Giusta</em> ? scendi alla coda ma poi rispondi a quante domande vuoi: ogni risposta giusta vale <strong>+1 loka</strong> verso la testa. Alla prima sbagliata ci si ferma.</p><p><strong>?? Freccia:</strong> ogni risposta giusta avanza la pedina di <strong>+1 loka</strong> verso la punta. Alla prima sbagliata ci si ferma dove si è.</p><p>In app: tocca la casella sul tabellone e premi <strong>? Sfida Karma</strong> per la guida interattiva.</p></div>
-    <div class="card"><h3>?? Diario di Viaggio</h3><p>Si consiglia di annotare le caselle su cui si passa. I blocchi ripetuti sulle stesse caselle rivelano spesso dinamiche psicologiche reali del giocatore.</p></div>
-    <div class="card"><h3>?? Fine partita</h3><p>Vince chi atterra <strong>esattamente</strong> sulla casella <strong>68 è Coscienza Cosmica</strong>. Il tabellone finisce al 72: se il lancio porta oltre, si <strong>rimbalza indietro</strong> del numero eccedente (es. da 67 con 6 si <em>atterrebbe</em> al 73, ma siccome non esiste si torna indietro di 1 e ci si ferma al 71). Attenzione al serpente alla <strong>72</strong> è riporta alla Terra (casella 51), scendendo di due piani!</p></div>`;
+    <div class="card"><h3>🎯 Modalità 1 — Il Gioco Introspettivo Classico</h3><p>Si concentra sulla crescita personale, sulla riflessione e sulla condivisione profonda tra i partecipanti.</p></div>
+    <div class="card"><h3>🚪 Ingresso</h3><p>Tutti i giocatori partono <em>fuori</em> dal tabellone (posizione di attesa). Si entra sulla <strong>Casella 1 solo se esce 1</strong> — simbolo dell'intenzione pura. Con qualsiasi altro numero si resta fuori e il turno passa al giocatore successivo.</p></div>
+    <div class="card"><h3>🎲 Movimento</h3><p>Una volta entrati, il giocatore avanza del numero indicato dal dado. Se il lancio porta oltre la casella 72, la pedina <strong>rimbalza indietro</strong> del numero eccedente.</p></div>
+    <div class="card"><h3>🏹 Frecce — Consonanza Karmica</h3><p>Se si atterra sulla <strong>base (scocca) di una freccia</strong>, per attivare la salita il giocatore deve <strong>raccontare un episodio reale</strong> in cui ha vissuto la virtù di quella casella. Se il gruppo valuta il racconto autentico, la pedina sale fino alla punta. Altrimenti resta ferma.</p></div>
+    <div class="card"><h3>🐍 Serpenti — Consonanza Karmica</h3><p>Se si atterra sulla <strong>testa di un serpente</strong>, il giocatore viene "morso" dal vizio. Per integrare la lezione, deve <strong>confessare una propria debolezza</strong> legata a quel vizio. Poi la pedina scende alla coda del serpente per purificare il percorso.</p></div>
+    <div class="card"><h3>⚡ Sfida Karma — opzione quiz</h3><p>In alternativa al racconto spirituale, si può attivare la <strong>Sfida Karma</strong>: il giocatore risponde a domande legate alle caselle del percorso.</p><p><strong>🐍 Serpente:</strong> si risponde alla prima domanda. <em>Sbagliata</em> → scendi alla coda senza recupero. <em>Giusta</em> → scendi alla coda ma poi rispondi a quante domande vuoi: ogni risposta giusta vale <strong>+1 loka</strong> risalendo verso la testa. Alla prima sbagliata ci si ferma.</p><p><strong>🏹 Freccia:</strong> ogni risposta giusta avanza la pedina di <strong>+1 loka</strong> verso la punta. Alla prima sbagliata ci si ferma dove si è.</p><p>In app: tocca la casella sul tabellone e premi <strong>⚡ Sfida Karma</strong> per la guida interattiva.</p></div>
+    <div class="card"><h3>📖 Diario di Viaggio</h3><p>Si consiglia di annotare le caselle su cui si passa. I blocchi ripetuti sulle stesse caselle rivelano spesso dinamiche psicologiche reali del giocatore.</p></div>
+    <div class="card"><h3>🏆 Fine partita</h3><p>Vince chi atterra <strong>esattamente</strong> sulla casella <strong>68 — Coscienza Cosmica</strong>. Se il lancio porta oltre il 72, la pedina rimbalza indietro del numero eccedente (es. da 67 con un 6 si arriva a 73, ma siccome non esiste si torna indietro di 1 fermandosi al 71). Attenzione al serpente sulla <strong>72</strong> — riporta alla Terra (casella 51)!</p></div>`;
 
   document.getElementById('r2').innerHTML = `
-    <div class="card"><h3>?? ModalitÈ 2 è Il Party Game della Coscienza</h3><p>Trasforma il viaggio in un gioco dinamico, competitivo e pieno di penitenze esilaranti, ideale per serate in gruppo.</p></div>
-    <div class="card"><h3>?? Ingresso</h3><p>Si entra sulla Casella 1 se esce un numero <strong>PARI</strong>. Se esce un numero <strong>DISPARI</strong> si resta fuori, ma si entra subito facendo un <strong>complimento esagerato e teatrale</strong> al giocatore alla propria destra.</p></div>
-    <div class="card"><h3>? Caselle Freccia / Serpente</h3><p>Quando si atterra su una casella speciale, il giocatore sceglie:</p><ul><li><strong>OPZIONE A</strong> è Sfida fisica o penitenza di gruppo.</li><li><strong>OPZIONE B è Sfida Karma</strong> è Il vicino di destra guida il quiz (usa il pulsante ? nell’app). ?? <em>Serpente</em>: prima risposta sbagliata = coda senza recupero; giusta = coda ma poi +1 loka per ogni risposta corretta verso la testa. ?? <em>Freccia</em>: ogni risposta giusta avanza di +1 loka verso la punta; prima sbagliata = stop.</li></ul></div>
-    <div class="card"><h3>?? Se esce il Joker (Opzione B)</h3><p><strong>Sfortuna mistica!</strong> Niente quiz. Il gruppo vota a maggioranza una delle 3 penitenze previste per la riga del tabellone in cui si trova la pedina.</p></div>
-    <div class="card"><h3>?? Caselle Neutre</h3><p>Se si atterra su una casella senza freccia nÈ serpente, si pesca una carta dal <strong>Mazzo Imprevisti</strong> principale e si applica l'effetto.</p></div>
-    <div class="card"><h3>?? Fine partita</h3><p>Vince chi atterra <strong>esattamente</strong> sulla casella <strong>68 è Coscienza Cosmica</strong>. Il tabellone finisce al 72: se il lancio porta oltre, si <strong>rimbalza indietro</strong> del numero eccedente (es. da 67 con 6 si <em>atterrebbe</em> al 73, ma siccome non esiste si torna indietro di 1 e ci si ferma al 71). Attenzione al serpente alla <strong>72</strong> è riporta alla Terra (casella 51), scendendo di due piani!</p></div>`;
+    <div class="card"><h3>🎉 Modalità 2 — Il Party Game della Coscienza</h3><p>Trasforma il viaggio in un gioco dinamico, competitivo e pieno di penitenze esilaranti, ideale per serate in gruppo.</p></div>
+    <div class="card"><h3>🚪 Ingresso</h3><p>Si entra sulla Casella 1 se esce un numero <strong>PARI</strong>. Se esce un numero <strong>DISPARI</strong> si resta fuori, ma si entra subito facendo un <strong>complimento esagerato e teatrale</strong> al giocatore alla propria destra.</p></div>
+    <div class="card"><h3>🎲 Movimento</h3><p>Una volta entrati, il giocatore avanza del numero indicato dal dado. Se il lancio porta oltre la casella 72, la pedina <strong>rimbalza indietro</strong> del numero eccedente.</p></div>
+    <div class="card"><h3>⚡ Caselle Freccia / Serpente</h3><p>Quando si atterra su una casella speciale, il giocatore sceglie:</p><ul><li><strong>OPZIONE A</strong> — Sfida fisica o penitenza di gruppo.</li><li><strong>OPZIONE B — Sfida Karma</strong> — Il vicino di destra guida il quiz (usa il pulsante ⚡ nell’app). 🐍 <em>Serpente</em>: prima risposta sbagliata → coda senza recupero; giusta → coda ma poi +1 loka per ogni risposta corretta verso la testa. 🏹 <em>Freccia</em>: ogni risposta giusta avanza di +1 loka verso la punta; prima sbagliata → stop.</li></ul></div>
+    <div class="card"><h3>🃏 Joker (Opzione B)</h3><p>Se la carta pescata è un Joker, niente quiz. Il gruppo vota a maggioranza una delle 3 <strong>penitenze</strong> previste per la riga del tabellone in cui si trova la pedina.</p></div>
+    <div class="card"><h3>📍 Caselle Neutre</h3><p>Se si atterra su una casella senza freccia né serpente, si pesca una carta dal <strong>Mazzo Imprevisti</strong> e si applica l'effetto.</p></div>
+    <div class="card"><h3>🏆 Fine partita</h3><p>Vince chi atterra <strong>esattamente</strong> sulla casella <strong>68 — Coscienza Cosmica</strong>. Se il lancio porta oltre il 72, la pedina rimbalza indietro del numero eccedente (es. da 67 con un 6 si arriva a 73, ma siccome non esiste si torna indietro di 1 fermandosi al 71). Attenzione al serpente sulla <strong>72</strong> — riporta alla Terra (casella 51)!</p></div>`;
 
   document.getElementById('carte').innerHTML = `
-    <button class="cdb" onclick="drawCard()">?? Pesca una carta Imprevisti</button>
+    <button class="cdb" onclick="drawCard()">🎴 Pesca una carta Imprevisti</button>
     <div class="cr" id="cr"></div>
     <div class="card" style="margin-top:14px"><h3>Il Mazzo</h3>
     <ul>
-      <li>? ? <strong>Carte Rosse</strong> (Cuori & Quadri) = Buon Karma ?</li>
-      <li>? ? <strong>Carte Nere</strong> (Picche & Fiori) = Monelli del Caos ??</li>
-      <li>?? <strong>Joker Rosso</strong> = Avanza di 12 o salva da un serpente</li>
-      <li>?? <strong>Joker Nero</strong> = Urla «CAOS!» è tutti scambiano posizione</li>
+      <li>♥ ♦ <strong>Carte Rosse</strong> (Cuori & Quadri) = Buon Karma ♥</li>
+      <li>♠ ♣ <strong>Carte Nere</strong> (Picche & Fiori) = Monelli del Caos ♠</li>
+      <li>🃏 <strong>Joker Rosso</strong> = Avanza di 12 o salva da un serpente</li>
+      <li>🃏 <strong>Joker Nero</strong> = Urla «CAOS!» — tutti scambiano posizione</li>
     </ul></div>`;
 
   const penH = PEN.map(p=>`
     <div class="pr" id="pr${p.r}">
       <div class="prh" onclick="togPen(${p.r})">
         <div class="prb">${p.r}</div>
-        <div class="phi"><h4>Riga ${p.r} è Caselle ${p.c}</h4><p>${p.el}</p></div>
+        <div class="phi"><h4>Riga ${p.r} — Caselle ${p.c}</h4><p>${p.el}</p></div>
         <svg class="prchev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
       <div class="prbd">${p.opts.map((o,i)=>`
         <div class="po">
-          <div class="pol">Opzione ${i+1} è "${o.n}"</div>
+          <div class="pol">Opzione ${i+1} — &ldquo;${o.n}&rdquo;</div>
           <p>${o.d}</p>
         </div>`).join('')}
       </div>
@@ -1694,7 +1695,7 @@ function togPen(r) {
 }
 
 function drawCard() {
-  const suits_r=['?','?'], suits_n=['?','?'];
+  const suits_r=['♥','♦'], suits_n=['♠','♣'];
   const rnd = Math.random();
   let card, tipo, suit;
   if (rnd < 0.481) { // 13/27 red cards
@@ -1705,11 +1706,11 @@ function drawCard() {
     tipo='ner'; suit=suits_n[Math.floor(Math.random()*2)];
   } else { // 2/54 jokers
     card = JOKERS[Math.floor(Math.random()*2)];
-    tipo='jok'; suit='??';
+    tipo='jok'; suit='🃏';
   }
   const cr = document.getElementById('cr');
   const color = tipo==='ros'?'#c0392b':tipo==='jok'?'#6e4e2e':'#2c3e50';
-  const badge = tipo==='ros'?'? Buon Karma':tipo==='jok'?'?? Joker':'?? Monello del Caos';
+  const badge = tipo==='ros'?'♥ Buon Karma':tipo==='jok'?'🃏 Joker':'♠ Monello del Caos';
   cr.innerHTML=`
     <div class="csuit" style="color:${color}">${suit}</div>
     <div class="cval" style="color:${color}">${card.v}</div>
@@ -1741,14 +1742,14 @@ function showCartaDraw(n) {
   const isRed = Math.random() < 0.5;
   const deck = isRed ? CARTE_R : CARTE_N;
   const card = deck[Math.floor(Math.random()*deck.length)];
-  const suit = isRed ? '?' : '?';
+  const suit = isRed ? '♥' : '♠';
   const color = isRed ? '#c0392b' : '#2c3e50';
   _cartaPending = {tipo: isRed?'R':'N', card};
   document.getElementById('cd-suit').textContent = suit;
   document.getElementById('cd-suit').style.color = color;
   document.getElementById('cd-val').textContent = card.v;
   document.getElementById('cd-val').style.color = color;
-  document.getElementById('cd-tipo').textContent = isRed ? '? Carta Rossa è Buon Karma ?' : '? Carta Nera è Monello del Caos ??';
+  document.getElementById('cd-tipo').textContent = isRed ? '♥ Carta Rossa — Buon Karma ♥' : '♠ Carta Nera — Monello del Caos ♠';
   document.getElementById('cd-tipo').style.color = color;
   document.getElementById('cd-eff').textContent = card.e;
   sfx.carta();
@@ -1778,7 +1779,7 @@ function renderCarte() {
   box.style.display = carte.length ? '' : 'none';
   list.innerHTML = carte.map((c,i) => `
     <div class="carta-item${c.tipo==='N'?' nera':''}">
-      <div class="carta-lbl">${c.tipo==='R'?'? Carta Rossa':'? Carta Nera'}</div>
+      <div class="carta-lbl">${c.tipo==='R'?'♥ Carta Rossa':'♠ Carta Nera'}</div>
       <div class="carta-val">${c.card.v}</div>
       <div class="carta-eff">${c.card.e}</div>
       <button class="carta-usa" onclick="usaCarta(${i})">Usa questa carta</button>
@@ -1791,11 +1792,11 @@ function usaCarta(idx) {
   if(!c) return;
   const isRed = c.tipo === 'R';
   document.getElementById('mc').innerHTML = `
-    <div class="badge ${isRed?'scocca':'coda'}">${isRed?'? Buon Karma':'?? Monello del Caos'}</div>
+    <div class="badge ${isRed?'scocca':'coda'}">${isRed?'♥ Buon Karma':'♠ Monello del Caos'}</div>
     <div class="mnum">Carta ${isRed?'Rossa':'Nera'}</div>
     <div class="mtit">${c.card.v}</div>
     <div class="mtheme">${c.card.e}</div>
-    <button class="sk-btn pri" style="margin-top:14px" onclick="confermUsoCarta(${idx});closeModal()">? Effetto Applicato è Scarta</button>
+    <button class="sk-btn pri" style="margin-top:14px" onclick="confermUsoCarta(${idx});closeModal()">✅ Effetto Applicato — Scarta</button>
     <button class="sk-btn sec" style="margin-top:8px" onclick="closeModal()">Annulla</button>`;
   document.getElementById('mo').classList.add('open');
 }
@@ -1832,8 +1833,8 @@ function showPenitenza(n) {
   _penPiano = piano;
   const p = players[currentP];
   const rimanenti = 3 - (p.penitenze?.length || 0);
-  document.getElementById('pen-title').textContent = `?? Penitenza! è Piano ${piano} è ${penData.el}`;
-  document.getElementById('pen-sub').textContent = `Casella ${n} è ${L[n]?.name || ''}`;
+  document.getElementById('pen-title').textContent = `🎭 Penitenza! — Piano ${piano} — ${penData.el}`;
+  document.getElementById('pen-sub').textContent = `Casella ${n} — ${L[n]?.name || ''}`;
   const penPick=[...penData.opts].sort(()=>Math.random()-0.5).slice(0,3);
   document.getElementById('pen-opts').innerHTML=penPick.map((o,i) =>
     `<div class="pen-opt"><strong>Opzione ${i+1} — &ldquo;${o.n}&rdquo;</strong><p>${o.d}</p></div>`).join('');
@@ -1936,8 +1937,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderDice(1);
   setPos(myPos); // also renders player chips
   if(players.length > 1) document.getElementById('dr').textContent = myPos===68
-    ? `🌟 ${players[currentP].name} è Lancia 1 per entrare nel gioco`
-    : `?? Turno di: ${players[currentP].name}`;
+    ? `🌟 ${players[currentP].name} — ${gameMode === 'party' ? 'Lancia un numero PARI per entrare' : 'Lancia un 1 per entrare nel gioco'}`
+    : `🎯 Turno di: ${players[currentP].name}`;
   renderHist();
   buildBoard();
   filterLoka('all', null);
