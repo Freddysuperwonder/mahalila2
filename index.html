@@ -303,11 +303,22 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .pen-sub{font-size:12px;opacity:.8;margin-top:5px;line-height:1.5}
 .pen-body{padding:14px}
 .pen-opts{display:flex;flex-direction:column;gap:10px;margin:12px 0 18px}
-.pen-opt{background:var(--soft);border:1.5px solid var(--line);border-radius:14px;padding:14px}
+.pen-opt{background:var(--soft);border:2px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .18s,background .18s,transform .12s;user-select:none}
+.pen-opt:active{transform:scale(.98)}
+.pen-opt.sel{border-color:#7b4ea4;background:#f3eaff}
 .pen-opt strong{font-size:14px;font-weight:800;color:#7b4ea4;display:block;margin-bottom:4px}
 .pen-opt p{font-size:13px;line-height:1.6;color:var(--ink);margin:0}
+.pen-time{font-size:12px;font-weight:600;color:#555;margin-left:6px}
 .pen-note{font-size:12px;color:var(--muted);text-align:center;margin-bottom:14px;font-style:italic}
 .pen-btn{width:100%;padding:14px;border-radius:12px;border:none;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:8px;display:block;background:#7b4ea4;color:#fff}
+.pen-btn:disabled{background:#ccc;color:#999;cursor:not-allowed}
+#pen-tmr{position:fixed;bottom:80px;right:12px;background:var(--paper);border:2px solid #7b4ea4;border-radius:16px;padding:14px 16px;z-index:900;box-shadow:0 4px 24px rgba(0,0,0,.3);min-width:155px;text-align:center;transition:border-color .3s}
+#pen-tmr.warn{border-color:#e74c3c}
+#pen-tmr-lbl{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+#pen-tmr-nm{font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+#pen-tmr-cd{font-size:38px;font-weight:900;color:#7b4ea4;margin-bottom:10px;font-variant-numeric:tabular-nums;letter-spacing:-.02em;transition:color .3s}
+#pen-tmr.warn #pen-tmr-cd{color:#e74c3c}
+#pen-tmr-done{width:100%;background:#7b4ea4;color:#fff;border:none;border-radius:8px;padding:9px;font-size:13px;font-weight:700;cursor:pointer}
 /* -- Carte Imprevisto (mano) -- */
 .carte-box{margin-top:10px;padding:14px 16px;background:var(--paper);border-radius:14px;border:1px solid var(--line);width:100%;max-width:320px}
 .carte-box h3{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
@@ -532,8 +543,17 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
   <div class="pen-body">
     <div class="pen-opts" id="pen-opts"></div>
     <div class="pen-note" id="pen-note"></div>
-    <button class="pen-btn" onclick="closePenitenza()">✅ Penitenza Accettata</button>
+    <button id="pen-confirm" class="pen-btn" disabled onclick="startPenOpt(_penSelected)">Seleziona un'opzione qui sopra</button>
+    <button class="pen-btn" style="background:var(--soft);color:var(--muted);font-size:13px" onclick="closePenitenza()">Salta penitenza</button>
   </div>
+</div>
+
+<!-- ------ TIMER PENITENZA FLOTTANTE ------ -->
+<div id="pen-tmr" style="display:none">
+  <div id="pen-tmr-lbl">⏱ Penitenza in corso</div>
+  <div id="pen-tmr-nm"></div>
+  <div id="pen-tmr-cd">—</div>
+  <button id="pen-tmr-done" onclick="stopPenTimer(true)">✅ Fatto!</button>
 </div>
 
 <!-- ------ REPORT FINALE ------ -->
@@ -671,27 +691,27 @@ const JOKERS = [
 const QTPL = {
   coda:{
     q:["Come si manifesta {n} nella vita interiore?","Qual è l'effetto principale di {n} sulla consapevolezza personale?","Come si può iniziare a trasformare {n}?","Quale atteggiamento mentale aiuta a riconoscere {n}?","In che modo {n} influenza le relazioni con gli altri?","Quale pratica quotidiana aiuta a superare {n}?","Come si collega {n} alla sofferenza interiore?","Qual è il rischio di ignorare {n}?","Come si può usare {n} come occasione di crescita?","Quale qualità opposta aiuta a riequilibrare {n}?","Come si può integrare maggiore consapevolezza rispetto a {n}?","Quale ruolo ha l'auto-osservazione nel lavoro su {n}?","Quale insegnamento profondo può offrire {n} quando viene compreso?"],
-    a:["Attraverso schemi interiori ricorrenti e reazioni automatiche","Limita la chiarezza e rallenta la crescita interiore","Con presenza, sincerità e volontà di cambiamento","Apertura e osservazione senza giudizio","PuÈ creare distanza, incomprensioni o aspettative distorte","Meditazione, riflessione e piccoli atti consapevoli","Alimenta tensione, attaccamento e disagio","PuÈ consolidarsi e diventare un ostacolo più profondo","Riconoscendolo e trasformandolo in consapevolezza","La qualità opposta, coltivata con costanza, aiuta a ristabilire equilibrio","Con attenzione ai propri pensieri, parole e azioni","Aiuta a riconoscere il meccanismo prima che prenda il controllo","PuÈ insegnare discernimento, umiltà e verità"],
-    s:["Questo loka si rivela nei comportamenti abituali e nelle risposte emotive non osservate.","Quando non riconosciuto, ostacola lucidità, equilibrio e comprensione di sé.","Ogni trasformazione inizia dal riconoscimento onesto di ciò che accade dentro.","Una mente aperta permette di vedere il problema con precisione invece di negarlo.","Le dinamiche interiori irrisolte si riflettono nella qualità delle relazioni.","La continuità nelle pratiche aiuta a sciogliere gradualmente gli automatismi.","Quando domina la mente, aumenta il senso di sofferenza e disordine.","CiÈ che non viene guardato tende a ripetersi e radicarsi con maggiore forza.","Ogni ombra può diventare una soglia di comprensione se affrontata con coraggio.","Ogni tendenza disarmonica si riequilibra sviluppando la virtù complementare.","La trasformazione si radica nella vita concreta attraverso scelte quotidiane lucide.","Osservare sé stessi in tempo reale permette di interrompere reazioni abituali.","Anche le difficoltÈ interiori, se comprese, diventano insegnamenti preziosi."]
+    a:["Attraverso schemi interiori ricorrenti e reazioni automatiche","Limita la chiarezza e rallenta la crescita interiore","Con presenza, sincerità e volontà di cambiamento","Apertura e osservazione senza giudizio","Può creare distanza, incomprensioni o aspettative distorte","Meditazione, riflessione e piccoli atti consapevoli","Alimenta tensione, attaccamento e disagio","Può consolidarsi e diventare un ostacolo più profondo","Riconoscendolo e trasformandolo in consapevolezza","La qualità opposta, coltivata con costanza, aiuta a ristabilire equilibrio","Con attenzione ai propri pensieri, parole e azioni","Aiuta a riconoscere il meccanismo prima che prenda il controllo","Può insegnare discernimento, umiltà e verità"],
+    s:["Questo loka si rivela nei comportamenti abituali e nelle risposte emotive non osservate.","Quando non riconosciuto, ostacola lucidità, equilibrio e comprensione di sé.","Ogni trasformazione inizia dal riconoscimento onesto di ciò che accade dentro.","Una mente aperta permette di vedere il problema con precisione invece di negarlo.","Le dinamiche interiori irrisolte si riflettono nella qualità delle relazioni.","La continuità nelle pratiche aiuta a sciogliere gradualmente gli automatismi.","Quando domina la mente, aumenta il senso di sofferenza e disordine.","Ciò che non viene guardato tende a ripetersi e radicarsi con maggiore forza.","Ogni ombra può diventare una soglia di comprensione se affrontata con coraggio.","Ogni tendenza disarmonica si riequilibra sviluppando la virtù complementare.","La trasformazione si radica nella vita concreta attraverso scelte quotidiane lucide.","Osservare sé stessi in tempo reale permette di interrompere reazioni abituali.","Anche le difficoltà interiori, se comprese, diventano insegnamenti preziosi."]
   },
   testa:{
-    q:["Come si esprime {n} nel pensiero e nel comportamento?","Quale effetto ha {n} sulla luciditÈ mentale?","Come si può riconoscere la presenza di {n} in sé stessi?","Quale pratica aiuta a trasformare {n}?","In che modo {n} altera le relazioni interpersonali?","Qual è un segnale che {n} sta diventando dannoso?","Come si può interrompere il ciclo di {n}?","Quale ruolo ha la consapevolezza nel lavoro su {n}?","Come {n} può essere trasformato in apprendimento interiore?","Quale atteggiamento opposto favorisce il riequilibrio di {n}?","Come si può prevenire il ritorno di {n} nella vita quotidiana?","Quale legame esiste tra {n} e sofferenza emotiva?","Quale comprensione profonda aiuta a liberarsi da {n}?"],
-    a:["Si manifesta attraverso schemi mentali ripetitivi e reazioni distorte","Riduce chiarezza, equilibrio e capacità di discernimento","Osservando i propri pensieri automatici e i propri giudizi","Meditazione, ascolto interiore e riflessione sincera","PuÈ generare incomprensione, conflitto o distanza","Quando produce chiusura, risentimento o ripetizione di schemi dannosi","Interrompendo l'automatismo con presenza e scelta consapevole","Permette di vedere il processo interno e non solo il suo effetto","Usandolo come specchio delle proprie paure o attaccamenti","Apertura, equilibrio e responsabilitÈ personale","Con vigilanza interiore e pratiche costanti","Alimenta tensione e instabilità interiore","Capire che nessun automatismo mentale coincide con la propria essenza"],
-    s:["Le teste agiscono sul piano mentale, influenzando interpretazioni, giudizi e decisioni.","Quando domina la mente, questo stato confonde la visione e orienta verso risposte poco lucide.","Riconoscere il tono interno della mente è essenziale per accorgersi di ciò che la condiziona.","Una pratica regolare scioglie gradualmente i meccanismi mentali più rigidi.","CiÈ che avviene nella mente si riflette nel modo di relazionarsi con gli altri.","Il danno emerge quando il pensiero smette di essere strumento e diventa prigione.","Fermarsi prima di reagire consente di cambiare direzione mentale ed emotiva.","La consapevolezza illumina il meccanismo profondo, rendendo possibile la trasformazione.","Ogni distorsione rivela qualcosa che chiede comprensione e lavoro interiore.","Coltivare l'opposto armonico riduce la forza della tendenza disfunzionale.","La prevenzione nasce dalla continuità, non da interventi occasionali.","Quando il pensiero si irrigidisce, aumenta il disagio emotivo e relazionale.","La libertà cresce quando si smette di identificarsi con i propri schemi mentali."]
+    q:["Come si esprime {n} nel pensiero e nel comportamento?","Quale effetto ha {n} sulla lucidità mentale?","Come si può riconoscere la presenza di {n} in sé stessi?","Quale pratica aiuta a trasformare {n}?","In che modo {n} altera le relazioni interpersonali?","Qual è un segnale che {n} sta diventando dannoso?","Come si può interrompere il ciclo di {n}?","Quale ruolo ha la consapevolezza nel lavoro su {n}?","Come {n} può essere trasformato in apprendimento interiore?","Quale atteggiamento opposto favorisce il riequilibrio di {n}?","Come si può prevenire il ritorno di {n} nella vita quotidiana?","Quale legame esiste tra {n} e sofferenza emotiva?","Quale comprensione profonda aiuta a liberarsi da {n}?"],
+    a:["Si manifesta attraverso schemi mentali ripetitivi e reazioni distorte","Riduce chiarezza, equilibrio e capacità di discernimento","Osservando i propri pensieri automatici e i propri giudizi","Meditazione, ascolto interiore e riflessione sincera","Può generare incomprensione, conflitto o distanza","Quando produce chiusura, risentimento o ripetizione di schemi dannosi","Interrompendo l'automatismo con presenza e scelta consapevole","Permette di vedere il processo interno e non solo il suo effetto","Usandolo come specchio delle proprie paure o attaccamenti","Apertura, equilibrio e responsabilità personale","Con vigilanza interiore e pratiche costanti","Alimenta tensione e instabilità interiore","Capire che nessun automatismo mentale coincide con la propria essenza"],
+    s:["Le teste agiscono sul piano mentale, influenzando interpretazioni, giudizi e decisioni.","Quando domina la mente, questo stato confonde la visione e orienta verso risposte poco lucide.","Riconoscere il tono interno della mente è essenziale per accorgersi di ciò che la condiziona.","Una pratica regolare scioglie gradualmente i meccanismi mentali più rigidi.","Ciò che avviene nella mente si riflette nel modo di relazionarsi con gli altri.","Il danno emerge quando il pensiero smette di essere strumento e diventa prigione.","Fermarsi prima di reagire consente di cambiare direzione mentale ed emotiva.","La consapevolezza illumina il meccanismo profondo, rendendo possibile la trasformazione.","Ogni distorsione rivela qualcosa che chiede comprensione e lavoro interiore.","Coltivare l'opposto armonico riduce la forza della tendenza disfunzionale.","La prevenzione nasce dalla continuità, non da interventi occasionali.","Quando il pensiero si irrigidisce, aumenta il disagio emotivo e relazionale.","La libertà cresce quando si smette di identificarsi con i propri schemi mentali."]
   },
   scocca:{
     q:["Qual è il significato di {n} nel percorso interiore?","Come si può coltivare {n} nella vita quotidiana?","Quale beneficio offre {n} alla crescita personale?","In che modo {n} influenza le relazioni?","Quale pratica rafforza {n}?","Come si riconosce la presenza autentica di {n}?","Quale ostacolo può indebolire {n}?","Come si può proteggere e sviluppare {n} nel tempo?","Quale legame esiste tra {n} e consapevolezza?","Come può {n} guidare le scelte quotidiane?","Quale atteggiamento mentale sostiene {n}?","Come si può condividere {n} con gli altri?","Quale insegnamento profondo trasmette {n}?"],
-    a:["\u00c8 una qualità portante che sostiene equilibrio e maturazione","Attraverso pratica costante, attenzione e coerenza","Rafforza chiarezza, stabilità e direzione","Favorisce fiducia, rispetto e armonia","Una pratica consapevole e regolare","Si riconosce da coerenza, semplicitÈ e continuità","Distrazione, incoerenza o rigidità","Proteggendola con presenza, verifica interiore e pratica","La consapevolezza ne è la base e il nutrimento","Offrendo un criterio etico e spirituale nelle decisioni","Umiltà, pazienza e perseveranza","Con l'esempio e con una presenza autentica","Che la vera forza nasce da un lavoro interiore stabile"],
-    s:["Le scocche rappresentano risorse interiori che strutturano il cammino con stabilità.","Le virtù si sviluppano nella continuità delle azioni più che nelle intenzioni astratte.","Questa qualità aiuta a vivere con maggiore presenza e senso interiore.","Le qualità interiori autentiche si manifestano nel modo in cui ci si relaziona.","Ripetizione, ascolto e intenzione rendono questa qualità più viva e concreta.","Quando è autentica, questa qualità non è ostentata ma visibile nei fatti.","Ogni qualità interiore può indebolirsi se non viene nutrita con attenzione.","CiÈ che viene coltivato con costanza diventa parte del proprio carattere.","Senza presenza interiore anche una qualità positiva rischia di diventare superficiale.","Le scocche sono punti di appoggio per scegliere in modo più allineato.","Le qualità profonde crescono in una mente non arrogante e non impulsiva.","Le virtù si trasmettono soprattutto attraverso il modo di essere.","L'evoluzione richiede radici profonde e un lavoro interiore stabile."]
+    a:["\u00c8 una qualità portante che sostiene equilibrio e maturazione","Attraverso pratica costante, attenzione e coerenza","Rafforza chiarezza, stabilità e direzione","Favorisce fiducia, rispetto e armonia","Una pratica consapevole e regolare","Si riconosce da coerenza, semplicità e continuità","Distrazione, incoerenza o rigidità","Proteggendola con presenza, verifica interiore e pratica","La consapevolezza ne è la base e il nutrimento","Offrendo un criterio etico e spirituale nelle decisioni","Umiltà, pazienza e perseveranza","Con l'esempio e con una presenza autentica","Che la vera forza nasce da un lavoro interiore stabile"],
+    s:["Le scocche rappresentano risorse interiori che strutturano il cammino con stabilità.","Le virtù si sviluppano nella continuità delle azioni più che nelle intenzioni astratte.","Questa qualità aiuta a vivere con maggiore presenza e senso interiore.","Le qualità interiori autentiche si manifestano nel modo in cui ci si relaziona.","Ripetizione, ascolto e intenzione rendono questa qualità più viva e concreta.","Quando è autentica, questa qualità non è ostentata ma visibile nei fatti.","Ogni qualità interiore può indebolirsi se non viene nutrita con attenzione.","Ciò che viene coltivato con costanza diventa parte del proprio carattere.","Senza presenza interiore anche una qualità positiva rischia di diventare superficiale.","Le scocche sono punti di appoggio per scegliere in modo più allineato.","Le qualità profonde crescono in una mente non arrogante e non impulsiva.","Le virtù si trasmettono soprattutto attraverso il modo di essere.","L'evoluzione richiede radici profonde e un lavoro interiore stabile."]
   },
   punta:{
     q:["Cosa rappresenta {n} nel percorso spirituale?","Come si può avvicinare l'esperienza di {n}?","Quale effetto ha {n} sulla vita interiore?","In che modo {n} orienta la crescita personale?","Quale pratica aiuta a coltivare {n}?","Come si riconosce la presenza di {n} nella propria vita?","Quale ostacolo può allontanare da {n}?","Come si può integrare {n} nella quotidianità?","Quale legame esiste tra {n} e consapevolezza?","Come può {n} aiutare a superare le difficoltà?","Quale atteggiamento mentale favorisce {n}?","Come si può condividere con gli altri la qualità di {n}?","Quale insegnamento essenziale porta {n}?"],
     a:["Rappresenta una meta elevata o uno stato superiore di coscienza","Attraverso pratica, apertura e trasformazione interiore","Genera maggiore ampiezza, pace o lucidità","Offre una direzione nobile verso cui tendere","Meditazione, contemplazione e presenza consapevole","Si riconosce da una maggiore armonia e da una percezione più ampia","Attaccamento, paura o chiusura mentale","Trasformandolo in un orientamento pratico nelle scelte di ogni giorno","La consapevolezza è il ponte che rende questa qualità accessibile","Ricordando una visione più ampia del senso dell'esperienza","Fiducia, apertura e umiltà","Con autenticità, gentilezza e testimonianza","Che l'essere umano può trasformarsi e partecipare a una realtà più ampia"],
-    s:["Le punte indicano esiti evolutivi, direzioni profonde e possibilità di compimento interiore.","Gli stati più alti non si afferrano con sforzo ma si preparano con dedizione.","Quando questa qualità emerge, la vita interiore si ordina e si espande.","Le punte funzionano come orientamenti che elevano l'intenzione e il comportamento.","Le pratiche interiori aiutano a stabilizzare stati più sottili e profondi.","Gli stati evoluti si manifestano con più pace, chiarezza e coerenza.","CiÈ che irrigidisce l'io ostacola il contatto con dimensioni più elevate.","Una meta spirituale diventa reale quando ispira il vivere concreto.","Senza presenza interiore, anche gli ideali più alti restano astratti.","Le mete interiori aiutano a non perdersi dentro le difficoltÈ momentanee.","Gli stati più elevati maturano in una mente ricettiva e non rigida.","CiÈ che è reale interiormente si comunica attraverso il modo di stare nel mondo.","Il cammino interiore ha una direzione luminosa e concreta."]
+    s:["Le punte indicano esiti evolutivi, direzioni profonde e possibilità di compimento interiore.","Gli stati più alti non si afferrano con sforzo ma si preparano con dedizione.","Quando questa qualità emerge, la vita interiore si ordina e si espande.","Le punte funzionano come orientamenti che elevano l'intenzione e il comportamento.","Le pratiche interiori aiutano a stabilizzare stati più sottili e profondi.","Gli stati evoluti si manifestano con più pace, chiarezza e coerenza.","Ciò che irrigidisce l'io ostacola il contatto con dimensioni più elevate.","Una meta spirituale diventa reale quando ispira il vivere concreto.","Senza presenza interiore, anche gli ideali più alti restano astratti.","Le mete interiori aiutano a non perdersi dentro le difficoltà momentanee.","Gli stati più elevati maturano in una mente ricettiva e non rigida.","Ciò che è reale interiormente si comunica attraverso il modo di stare nel mondo.","Il cammino interiore ha una direzione luminosa e concreta."]
   },
   neutral:{
     q:["Che ruolo ha {n} nel cammino spirituale?","Come si manifesta {n} nell'esperienza quotidiana?","Quale lezione offre {n} alla coscienza?","In che modo {n} si collega alla crescita interiore?","Come si può approfondire la comprensione di {n}?","Quale pratica favorisce l'integrazione di {n}?","Come si riconosce la presenza di {n} nella propria vita?","Quale aspetto di {n} richiede maggiore attenzione?","Come può {n} diventare una risorsa sul cammino?","Quale legame esiste tra {n} e la consapevolezza di sé?","Come si integra {n} con gli altri aspetti del percorso?","Quale atteggiamento aiuta a vivere pienamente {n}?","Quale insegnamento profondo porta {n}?"],
-    a:["Rappresenta un piano o una qualità che richiede comprensione e integrazione","Attraverso le sensazioni, i pensieri e le risposte alle situazioni quotidiane","Invita a riconoscere i propri pattern di risposta e a sviluppare consapevolezza","Ogni piano dell'esperienza offre un'opportunità di comprensione e trasformazione","Attraverso riflessione, osservazione diretta e pratica interiore costante","La presenza consapevole e la riflessione regolare ne favoriscono l'integrazione","Si riconosce nei momenti di risposta automatica o di particolare risonanza interiore","L'aspetto che sfugge alla consapevolezza ordinaria è spesso il più significativo","Diventa una risorsa quando viene osservato e integrato con intenzione","La consapevolezza trasforma ogni esperienza in uno strumento di comprensione","Tutto il percorso è interconnesso: ogni aspetto riflette e nutre gli altri","Presenza, curiositÈ e non giudizio permettono di attraversarlo in modo autentico","Ogni esperienza, compresa e integrata, diventa parte della saggezza del cammino"],
+    a:["Rappresenta un piano o una qualità che richiede comprensione e integrazione","Attraverso le sensazioni, i pensieri e le risposte alle situazioni quotidiane","Invita a riconoscere i propri pattern di risposta e a sviluppare consapevolezza","Ogni piano dell'esperienza offre un'opportunità di comprensione e trasformazione","Attraverso riflessione, osservazione diretta e pratica interiore costante","La presenza consapevole e la riflessione regolare ne favoriscono l'integrazione","Si riconosce nei momenti di risposta automatica o di particolare risonanza interiore","L'aspetto che sfugge alla consapevolezza ordinaria è spesso il più significativo","Diventa una risorsa quando viene osservato e integrato con intenzione","La consapevolezza trasforma ogni esperienza in uno strumento di comprensione","Tutto il percorso è interconnesso: ogni aspetto riflette e nutre gli altri","Presenza, curiosità e non giudizio permettono di attraversarlo in modo autentico","Ogni esperienza, compresa e integrata, diventa parte della saggezza del cammino"],
     s:["Le caselle neutrali rappresentano stazioni del cammino che richiedono osservazione e presenza.","L'esperienza quotidiana è il campo in cui si manifesta ogni qualità interiore.","Ogni loka del percorso porta un'opportunità specifica di crescita e integrazione.","Il cammino interiore si nutre di attenzione a ogni piano dell'esperienza.","La comprensione profonda nasce dall'osservazione diretta più che dall'analisi teorica.","Le pratiche interiori rendono concreto ciò che altrimenti rimane solo concetto.","La vita offre costantemente occasioni per riconoscere i propri stati interiori.","Portare attenzione a ciò che si trascura è un atto essenziale di consapevolezza.","Tutto ciò che viene riconosciuto può essere trasformato.","La consapevolezza è la chiave che apre ogni aspetto del percorso interiore.","Il cammino spirituale è un sistema integrato in cui ogni parte influenza le altre.","La qualità dell'esperienza dipende dalla qualità dell'attenzione portata.","Ogni tappa del percorso, vissuta con presenza, contribuisce alla liberazione della coscienza."]
   }
 };
@@ -715,20 +735,20 @@ const QD_BUILD=(()=>{
 })();
 const _QD_STATIC = [
   {n:12,name:"Invidia",type:"testa",q:"Come si manifesta l'invidia nelle relazioni interpersonali?",opts:["Con gioia per il successo altrui","Con indifferenza","Con sentimenti di risentimento e confronto costante"],a:2,s:"L'invidia si manifesta con risentimento e confronto costante, deteriorando relazioni e benessere personale."},
-  {n:16,name:"Avversione",type:"testa",q:"Qual è l'effetto dell'avversione sul benessere psicologico?",opts:["Non ha effetti","Genera stress e isolamento","Favorisce la serenità"],a:1,s:"L'avversione genera stress e isolamento, creando tensioni interne e difficoltÈ nelle relazioni."},
+  {n:16,name:"Avversione",type:"testa",q:"Qual è l'effetto dell'avversione sul benessere psicologico?",opts:["Non ha effetti","Genera stress e isolamento","Favorisce la serenità"],a:1,s:"L'avversione genera stress e isolamento, creando tensioni interne e difficoltà nelle relazioni."},
   {n:24,name:"Cattive Compagnie",type:"testa",q:"Come possono influenzare la nostra mente le cattive compagnie?",opts:["Sempre aiutano a crescere","Non hanno alcun effetto","Possono rafforzare abitudini negative e pensieri limitanti"],a:2,s:"Le cattive compagnie rafforzano abitudini negative e pensieri limitanti, influenzando negativamente la mente."},
   {n:29,name:"Fede Cieca",type:"testa",q:"Quale rischio psicologico può derivare dalla fede cieca?",opts:["Maggiore apertura mentale","Perdita di senso critico e possibile fanatismo","Crescita personale"],a:1,s:"La fede cieca può portare alla perdita del senso critico e a forme di fanatismo."},
-  {n:44,name:"CecitÈ / Inganno",type:"testa",q:"Come si manifesta la cecitÈ mentale nella vita quotidiana?",opts:["Con incapacità di vedere le proprie ombre e limiti","Con apertura mentale","Con chiarezza e consapevolezza"],a:0,s:"La cecitÈ mentale si manifesta come incapacità di vedere le proprie ombre e limiti."},
+  {n:44,name:"Cecità / Inganno",type:"testa",q:"Come si manifesta la cecità mentale nella vita quotidiana?",opts:["Con incapacità di vedere le proprie ombre e limiti","Con apertura mentale","Con chiarezza e consapevolezza"],a:0,s:"La cecità mentale si manifesta come incapacità di vedere le proprie ombre e limiti."},
   {n:52,name:"Violenza",type:"testa",q:"Quale emozione spesso precede un comportamento violento?",opts:["Gioia","Rabbia","Calma"],a:1,s:"L'ira spesso precede comportamenti violenti, portando a reazioni impulsive e dannose."},
   {n:55,name:"Egocentrismo",type:"testa",q:"Come si manifesta l'egocentrismo nel comportamento quotidiano?",opts:["Concentrandosi solo sui propri bisogni e desideri","Collaborando con gli altri","Ascoltando gli altri con empatia"],a:0,s:"L'egocentrismo si manifesta concentrandosi solo sui propri bisogni, limitando l'empatia."},
-  {n:61,name:"Intelletto Negativo",type:"testa",q:"Quale atteggiamento caratterizza l'intelletto negativo?",opts:["Empatia","CuriositÈ e apertura","Giudizio affrettato e pregiudizio"],a:2,s:"L'intelletto negativo è caratterizzato da giudizio affrettato e pregiudizio."},
-  {n:63,name:"Torpore",type:"testa",q:"Quale abitudine mentale può causare torpore?",opts:["Procrastinazione e inattività","AttivitÈ fisica","Meditazione"],a:0,s:"La procrastinazione e l'inattività causano torpore, riducendo energia e motivazione."},
+  {n:61,name:"Intelletto Negativo",type:"testa",q:"Quale atteggiamento caratterizza l'intelletto negativo?",opts:["Empatia","Curiosità e apertura","Giudizio affrettato e pregiudizio"],a:2,s:"L'intelletto negativo è caratterizzato da giudizio affrettato e pregiudizio."},
+  {n:63,name:"Torpore",type:"testa",q:"Quale abitudine mentale può causare torpore?",opts:["Procrastinazione e inattività","Attività fisica","Meditazione"],a:0,s:"La procrastinazione e l'inattività causano torpore, riducendo energia e motivazione."},
   {n:2,name:"Illusione",type:"coda",q:"Come si manifesta l'illusione nella percezione della realtà?",opts:["Con accettazione","Con chiarezza e verità","Attraverso false convinzioni e distorsioni"],a:2,s:"L'illusione si manifesta attraverso false convinzioni e distorsioni della realtà."},
-  {n:3,name:"Ira",type:"coda",q:"Qual è l'effetto dell'ira sul comportamento umano?",opts:["Favorisce la calma","Non ha effetti","PuÈ portare a reazioni impulsive e dannose"],a:2,s:"L'ira può portare a reazioni impulsive e dannose, alterando il comportamento."},
-  {n:4,name:"AviditÈ / Gola",type:"coda",q:"Come si manifesta l'avidità nella vita quotidiana?",opts:["Desiderio eccessivo di accumulare e consumare","Indifferenza","Condivisione e generosità"],a:0,s:"L'avidità si manifesta come desiderio eccessivo di accumulare e consumare."},
-  {n:6,name:"Confusione",type:"coda",q:"Quale stato mentale caratterizza la confusione?",opts:["Chiarezza e determinazione","Incertezza e difficoltÈ a prendere decisioni","Calma e serenità"],a:1,s:"La confusione è uno stato di incertezza e difficoltÈ a prendere decisioni."},
-  {n:7,name:"Superbia / Vanità",type:"coda",q:"Come si manifesta la superbia nel comportamento?",opts:["UmiltÈ e rispetto","Senso di superioritÈ e bisogno di ammirazione","Indifferenza"],a:1,s:"La superbia si manifesta con senso di superioritÈ e bisogno di ammirazione."},
-  {n:8,name:"Avarizia",type:"coda",q:"Quale atteggiamento caratterizza l'avarizia?",opts:["Rifiuto di condividere risorse e paura della perdita","Indifferenza","GenerositÈ e apertura"],a:0,s:"L'avarizia è caratterizzata dal rifiuto di condividere risorse e dalla paura della perdita."},
+  {n:3,name:"Ira",type:"coda",q:"Qual è l'effetto dell'ira sul comportamento umano?",opts:["Favorisce la calma","Non ha effetti","Può portare a reazioni impulsive e dannose"],a:2,s:"L'ira può portare a reazioni impulsive e dannose, alterando il comportamento."},
+  {n:4,name:"Avidità / Gola",type:"coda",q:"Come si manifesta l'avidità nella vita quotidiana?",opts:["Desiderio eccessivo di accumulare e consumare","Indifferenza","Condivisione e generosità"],a:0,s:"L'avidità si manifesta come desiderio eccessivo di accumulare e consumare."},
+  {n:6,name:"Confusione",type:"coda",q:"Quale stato mentale caratterizza la confusione?",opts:["Chiarezza e determinazione","Incertezza e difficoltà a prendere decisioni","Calma e serenità"],a:1,s:"La confusione è uno stato di incertezza e difficoltà a prendere decisioni."},
+  {n:7,name:"Superbia / Vanità",type:"coda",q:"Come si manifesta la superbia nel comportamento?",opts:["Umiltà e rispetto","Senso di superiorità e bisogno di ammirazione","Indifferenza"],a:1,s:"La superbia si manifesta con senso di superiorità e bisogno di ammirazione."},
+  {n:8,name:"Avarizia",type:"coda",q:"Quale atteggiamento caratterizza l'avarizia?",opts:["Rifiuto di condividere risorse e paura della perdita","Indifferenza","Generosità e apertura"],a:0,s:"L'avarizia è caratterizzata dal rifiuto di condividere risorse e dalla paura della perdita."},
   {n:9,name:"Desiderio",type:"coda",q:"Come può il desiderio influenzare le scelte personali?",opts:["Sempre portando felicità","Non influenzando","Spingendo verso obiettivi ma anche verso insoddisfazione"],a:2,s:"Il desiderio può spingere verso obiettivi ma anche generare insoddisfazione se non equilibrato."},
   {n:13,name:"Lamento",type:"coda",q:"Qual è l'effetto del lamento continuo sulla mente?",opts:["Mantiene uno stato di insoddisfazione e passività","Non ha effetti","Favorisce la risoluzione dei problemi"],a:0,s:"Il lamento continuo mantiene uno stato di insoddisfazione e passività, bloccando il cambiamento."},
   {n:35,name:"Purgatorio",type:"coda",q:"Come si può interpretare il purgatorio in senso psicologico?",opts:["Come una punizione eterna","Come uno stato di transizione e trasformazione interiore","Come una condizione fissa"],a:1,s:"Il purgatorio può essere interpretato come uno stato di transizione e trasformazione interiore."},
@@ -737,21 +757,21 @@ const _QD_STATIC = [
   // Scocche (basi freccia)
   {n:10,name:"Disciplina Interiore",type:"scocca",q:"Cosa distingue la disciplina autentica dalla rigidità?",opts:["Sono la stessa cosa","La disciplina autentica è fedeltà consapevole a un percorso scelto, non costrizione","La rigidità porta sempre a risultati migliori"],a:1,s:"La disciplina autentica nasce dalla scelta libera e serve la crescita; la rigidità è chiusura all'adattamento."},
   {n:17,name:"Compassione",type:"scocca",q:"Come si esprime la vera compassione senza perdere il proprio equilibrio?",opts:["Sacrificandosi completamente per gli altri","Con empatia attiva e presenza, senza dissolversi nel dolore altrui","Mantenendo totale distacco emotivo"],a:1,s:"La compassione matura è empatia attiva che tocca il dolore dell'altro senza esserne sopraffatta."},
-  {n:20,name:"Dare",type:"scocca",q:"Qual è il fondamento del dare autentico?",opts:["Il bisogno di essere riconosciuti per il proprio gesto","La libertà interiore e il non attaccamento al frutto del dono","Aspettarsi sempre una contropartita equa"],a:1,s:"Il dare autentico nasce da libertà interiore: non cerca approvazione nÈ contropartita."},
-  {n:22,name:"Dharma",type:"scocca",q:"Cosa caratterizza la vita vissuta secondo il proprio dharma?",opts:["Il rispetto formale di tutte le regole sociali","L'azione coerente con la propria natura profonda e con la responsabilitÈ verso il tutto","Il raggiungimento del successo materiale"],a:1,s:"Il dharma è la via giusta rispetto alla propria verità interiore, non un codice esterno imposto."},
-  {n:27,name:"Spirito di Servizio",type:"scocca",q:"Come si distingue il servizio autentico dal servilismo?",opts:["Non esiste differenza sostanziale","Il servizio autentico nasce dalla scelta libera e dalla dignitÈ personale","Il servilismo è più altruistico del servizio"],a:1,s:"Il servizio autentico viene dalla dignitÈ e dalla scelta libera; il servilismo è sottomissione priva di libertà."},
+  {n:20,name:"Dare",type:"scocca",q:"Qual è il fondamento del dare autentico?",opts:["Il bisogno di essere riconosciuti per il proprio gesto","La libertà interiore e il non attaccamento al frutto del dono","Aspettarsi sempre una contropartita equa"],a:1,s:"Il dare autentico nasce da libertà interiore: non cerca approvazione né contropartita."},
+  {n:22,name:"Dharma",type:"scocca",q:"Cosa caratterizza la vita vissuta secondo il proprio dharma?",opts:["Il rispetto formale di tutte le regole sociali","L'azione coerente con la propria natura profonda e con la responsabilità verso il tutto","Il raggiungimento del successo materiale"],a:1,s:"Il dharma è la via giusta rispetto alla propria verità interiore, non un codice esterno imposto."},
+  {n:27,name:"Spirito di Servizio",type:"scocca",q:"Come si distingue il servizio autentico dal servilismo?",opts:["Non esiste differenza sostanziale","Il servizio autentico nasce dalla scelta libera e dalla dignità personale","Il servilismo è più altruistico del servizio"],a:1,s:"Il servizio autentico viene dalla dignità e dalla scelta libera; il servilismo è sottomissione priva di libertà."},
   {n:28,name:"Dovere Interiore",type:"scocca",q:"Quale forza orienta il dovere interiore a differenza del dovere esterno?",opts:["La pressione del giudizio sociale","La voce profonda della propria coscienza e del senso di responsabilità","La paura delle conseguenze negative"],a:1,s:"Il dovere interiore è una chiamata silenziosa della coscienza, non una costrizione esterna."},
   {n:37,name:"Insight",type:"scocca",q:"Quale condizione interiore favorisce maggiormente l'emergere di un insight genuino?",opts:["Il continuo rumore mentale e l'analisi ossessiva","Il silenzio interiore e l'osservazione senza pregiudizi","L'accumulo di molta teoria e concetti"],a:1,s:"L'insight emerge nel silenzio: è la comprensione improvvisa che nasce dall'osservazione diretta."},
-  {n:45,name:"Saggezza",type:"scocca",q:"In cosa si distingue la saggezza dalla semplice conoscenza?",opts:["PiÈ si sa, più automaticamente si diventa saggi","La saggezza integra conoscenza, esperienza e umiltà in discernimento vivo","La saggezza è solo innata, non si può coltivare"],a:1,s:"La saggezza trasforma il sapere in orientamento giusto attraverso esperienza e umiltà."},
+  {n:45,name:"Saggezza",type:"scocca",q:"In cosa si distingue la saggezza dalla semplice conoscenza?",opts:["Più si sa, più automaticamente si diventa saggi","La saggezza integra conoscenza, esperienza e umiltà in discernimento vivo","La saggezza è solo innata, non si può coltivare"],a:1,s:"La saggezza trasforma il sapere in orientamento giusto attraverso esperienza e umiltà."},
   {n:46,name:"Discernimento",type:"scocca",q:"Come si esercita il discernimento in una scelta difficile?",opts:["Lasciandosi guidare dall'impulso del momento","Con una mente limpida che distingue l'essenziale dal superfluo","Affidandosi sempre al parere della maggioranza"],a:1,s:"Il discernimento richiede una mente limpida e non dominata dall'impulso: vede l'essenziale."},
   {n:54,name:"Devozione",type:"scocca",q:"Cosa alimenta la devozione autentica nel cammino spirituale?",opts:["L'abitudine e la ripetizione meccanica del rito","L'amore profondo e l'orientamento del cuore verso ciò che si considera sacro","La paura delle conseguenze se non si è devoti"],a:1,s:"La devozione autentica nasce dall'amore, non dall'abitudine o dalla paura."},
   // Punte (destinazioni freccia)
-  {n:23,name:"Paradiso Terrestre",type:"punta",q:"Cosa rappresenta il Paradiso Terrestre nel cammino spirituale interiore?",opts:["Il possesso di grandi ricchezze materiali","L'armonia tra vita interiore e realtà vissuta con presenza e gratitudine","L'assenza permanente di ogni difficoltà"],a:1,s:"Il Paradiso Terrestre è uno stato di coscienza: armonia e semplicitÈ che tornano a coincidere."},
-  {n:32,name:"Equilibrio",type:"punta",q:"Come si mantiene l'equilibrio di fronte alle polaritÈ della vita?",opts:["Scegliendo sempre un solo polo e rifiutando l'altro","Attraverso flessibilità, cura di sé e capacità di stare nel cambiamento","Evitando ogni situazione di conflitto"],a:1,s:"L'equilibrio è dinamico: non immobilità, ma capacità di restare centrati nel cambiamento."},
+  {n:23,name:"Paradiso Terrestre",type:"punta",q:"Cosa rappresenta il Paradiso Terrestre nel cammino spirituale interiore?",opts:["Il possesso di grandi ricchezze materiali","L'armonia tra vita interiore e realtà vissuta con presenza e gratitudine","L'assenza permanente di ogni difficoltà"],a:1,s:"Il Paradiso Terrestre è uno stato di coscienza: armonia e semplicità che tornano a coincidere."},
+  {n:32,name:"Equilibrio",type:"punta",q:"Come si mantiene l'equilibrio di fronte alle polarità della vita?",opts:["Scegliendo sempre un solo polo e rifiutando l'altro","Attraverso flessibilità, cura di sé e capacità di stare nel cambiamento","Evitando ogni situazione di conflitto"],a:1,s:"L'equilibrio è dinamico: non immobilità, ma capacità di restare centrati nel cambiamento."},
   {n:41,name:"Mente Collettiva",type:"punta",q:"Cosa nutre e rafforza la mente collettiva in un gruppo?",opts:["La competizione costante e il giudizio reciproco","Dialogo autentico, fiducia e scambio sincero tra i partecipanti","Il silenzio e l'isolamento di ciascuno"],a:1,s:"La mente collettiva cresce nella relazione autentica, nel dialogo e nella fiducia reciproca."},
   {n:50,name:"Spirito di Rinuncia",type:"punta",q:"Cosa distingue la vera rinuncia spirituale dall'autorepressione?",opts:["Sono la stessa cosa: entrambe richiedono sacrificio","La vera rinuncia è scelta consapevole che libera spazio interiore per qualcosa di più alto","L'autorepressione è più efficace sul piano spirituale"],a:1,s:"La rinuncia autentica è liberatoria: nasce dalla scelta, non dalla paura o dal sacrificio forzato."},
   {n:60,name:"Intelletto Positivo",type:"punta",q:"Quale atteggiamento contraddistingue l'intelletto positivo?",opts:["Certezza assoluta e rifiuto del dubbio","Curiosità, umiltà e apertura continua all'apprendimento","Critica sistematica verso tutto ciò che è nuovo"],a:1,s:"L'intelletto positivo è aperto, curioso e umile: non nega i problemi ma li affronta con lucidità."},
-  {n:62,name:"Felicità",type:"punta",q:"Dove risiede la fonte della felicitÈ autentica secondo il cammino spirituale?",opts:["Nel raggiungimento di obiettivi e possessi esterni","Nell'allineamento tra mente, cuore e vita vissuta con gratitudine e presenza","Nel piacere sensoriale continuamente rinnovato"],a:1,s:"La felicitÈ autentica è allineamento interiore con la propria verità, più profondo del piacere."},
+  {n:62,name:"Felicità",type:"punta",q:"Dove risiede la fonte della felicità autentica secondo il cammino spirituale?",opts:["Nel raggiungimento di obiettivi e possessi esterni","Nell'allineamento tra mente, cuore e vita vissuta con gratitudine e presenza","Nel piacere sensoriale continuamente rinnovato"],a:1,s:"La felicità autentica è allineamento interiore con la propria verità, più profondo del piacere."},
   {n:66,name:"Beatitudine",type:"punta",q:"Come si distingue la beatitudine dall'euforia emotiva passeggera?",opts:["Non c'è differenza: sono entrambe temporanee","La beatitudine è uno stato interiore stabile, indipendente dalle circostanze esterne","L'euforia è più duratura e profonda della beatitudine"],a:1,s:"La beatitudine è stabilità interiore: non dipende dalle circostanze ma dall'essere centrati."},
   {n:67,name:"Sacra Distruzione",type:"punta",q:"Quando una distruzione può essere definita 'sacra' nel percorso interiore?",opts:["Quando causa sofferenza visibile agli altri","Quando dissolve ciò che non serve più aprendo spazio per una rinascita autentica","La distruzione non è mai positiva"],a:1,s:"La distruzione è sacra quando apre a un ordine più vero: dissolvere il vecchio per rinascere."},
   {n:68,name:"Coscienza Cosmica",type:"punta",q:"Cosa caratterizza l'esperienza della coscienza cosmica?",opts:["La separazione totale dalla vita quotidiana","La percezione viva dell'unità e dell'interconnessione di tutte le cose","Il distacco freddo da emozioni e relazioni"],a:1,s:"La coscienza cosmica dissolve i confini: è percezione diretta dell'unità che permea ogni cosa."},
@@ -781,7 +801,7 @@ const PEN = [
     {n:"Il Servo del Re",d:"Prendi un cartone o giornale e sventola il vicino di destra per i prossimi 2 minuti."},
     {n:"L'Incenso Vivente",d:"Resta in piedi in un angolo della stanza immobile come una statua per tutto il prossimo giro."},
     {n:"Il Drago",d:"Emetti il ruggito più terrificante che puoi per almeno 10 secondi. Il gruppo giudica a maggioranza se è abbastanza spaventoso."},
-    {n:"La Fiamma Ammansita",d:"Chiedi scusa, con grande solennitÈ e inchino, a ogni giocatore per qualcosa di completamente immaginario ma credibile."},
+    {n:"La Fiamma Ammansita",d:"Chiedi scusa, con grande solennità e inchino, a ogni giocatore per qualcosa di completamente immaginario ma credibile."},
     {n:"Il Carbone Ardente",d:"Fai 10 flessioni (o, se non puoi, canta l'inno nazionale a squarciagola dall'inizio alla fine)."}
   ]},
   {r:4,c:"28–36",el:"💨 Aria",opts:[
@@ -820,7 +840,7 @@ const PEN = [
     {n:"Il Guru Sacrificale",d:"Gioca l'intero prossimo giro stando seduto o in ginocchio sul pavimento."},
     {n:"La Prova del Tempio",d:"Il gruppo prova a farti ridere o il solletico per 15 secondi. Rimani serio come un monaco zen."},
     {n:"L'Ultimo Distacco",d:"Scegli un giocatore dietro di te e regalagli subito 4 delle tue caselle."},
-    {n:"Il Bodhisattva Servitore",d:"Esegui senza discussioni il primo ordine ragionevole che ti dÈ qualsiasi giocatore nei prossimi 2 minuti."},
+    {n:"Il Bodhisattva Servitore",d:"Esegui senza discussioni il primo ordine ragionevole che ti dà qualsiasi giocatore nei prossimi 2 minuti."},
     {n:"Il Fuoco di Gioia",d:"Esegui la danza della vittoria più scenografica che puoi per 15 secondi. Il gruppo applaude o fischia a seconda della performance."},
     {n:"Il Dono Finale",d:"Il tuo prossimo lancio del dado va al giocatore più indietro di te: avanza lui di quei passi, non tu."}
   ]}
@@ -953,7 +973,7 @@ const sfx = (() => {
 let players = JSON.parse(localStorage.getItem('ml_players')||'[]');
 let gameMode = localStorage.getItem('ml_mode') || 'oracolo';
 if(!players.length) players = [{name:'Giocatore 1',pos:68,hist:[]}];
-players.forEach(p => { if(!p.hist) p.hist = []; if(!p.path) p.path = []; if(!p.domanda) p.domanda = ''; if(!p.penitenze) p.penitenze = []; if(!p.carte) p.carte = []; if(p.carteDrawn===undefined) p.carteDrawn = 0; }); // compat
+players.forEach(p => { if(!p.hist) p.hist = []; if(!p.path) p.path = []; if(!p.domanda) p.domanda = ''; if(!p.penitenze) p.penitenze = []; if(!p.carte) p.carte = []; if(p.carteDrawn===undefined) p.carteDrawn = 0; if(p.skipTurns===undefined) p.skipTurns = 0; }); // compat
 let currentP = +localStorage.getItem('ml_cp')||0;
 if(currentP >= players.length) currentP = 0;
 let myPos = players[currentP].pos;
@@ -1171,8 +1191,8 @@ function showModal(n) {
     <div class="badge neutral">Casella Neutra</div>
     <div class="mnum">Casella ${n}</div>
     <div class="mtit">Casella Neutra</div>
-    <div class="mt">Non ci sono serpenti nÈ frecce qui.<br><br>
-    In <strong>ModalitÈ 2</strong>: pesca una carta dal Mazzo Imprevisti e applica l'effetto.</div>
+    <div class="mt">Non ci sono serpenti né frecce qui.<br><br>
+    In <strong>Modalità 2</strong>: pesca una carta dal Mazzo Imprevisti e applica l'effetto.</div>
   `;
   sfx.quiz();
   document.getElementById('mo').classList.add('open');
@@ -1520,6 +1540,25 @@ function nextTurn() {
   canRoll = true;
   currentP = (currentP+1) % players.length;
   myPos = players[currentP].pos;
+
+  const timerSkip = _penTimerIv !== null && currentP === _penTimerPlayer;
+  const turnSkip  = (players[currentP].skipTurns || 0) > 0;
+  if (timerSkip || turnSkip) {
+    if (!timerSkip) players[currentP].skipTurns--; // timer-based skips don't consume skipTurns
+    canRoll = false;
+    savePlayers();
+    document.getElementById('turn-toast').style.display = 'none';
+    const timeLeft = timerSkip
+      ? ` — ⏱ ${document.getElementById('pen-tmr-cd').textContent} rimasti`
+      : '';
+    document.getElementById('dr').textContent = `⏭ ${players[currentP].name} salta questo turno (penitenza in corso${timeLeft})`;
+    renderHist();
+    setPos(myPos);
+    renderCarte();
+    _autoAdv = setTimeout(() => nextTurn(), 2500);
+    return;
+  }
+
   savePlayers();
   document.getElementById('turn-toast').style.display = 'none';
   document.getElementById('dr').textContent = myPos===68
@@ -1564,7 +1603,7 @@ function applyPGSetup() {
     const name = inp ? inp.value.trim()||('Giocatore '+(i+1)) : 'Giocatore '+(i+1);
     const dInp = document.getElementById('pgdomanda'+i);
     const domanda = dInp ? dInp.value.trim() : (players[i]?.domanda||'');
-    return {name, pos: 68, hist: [], path: [], domanda, penitenze: [], carte: [], carteDrawn: 0};
+    return {name, pos: 68, hist: [], path: [], domanda, penitenze: [], carte: [], carteDrawn: 0, skipTurns: 0};
   });
   currentP = 0;
   myPos = players[0].pos;
@@ -1804,6 +1843,9 @@ function usaCarta(idx) {
 function confermUsoCarta(idx) {
   const p = players[currentP];
   if(!p?.carte) return;
+  const c = p.carte[idx];
+  const skip = c ? detectSkipTurns(c.card.e) : 0;
+  if (skip > 0) p.skipTurns = (p.skipTurns || 0) + skip;
   p.carte.splice(idx, 1);
   savePlayers();
   renderCarte();
@@ -1812,7 +1854,76 @@ function confermUsoCarta(idx) {
 // ------------------------------------------
 // PENITENZA
 // ------------------------------------------
-let _penPiano = null;
+let _penPiano = null, _penPickedData = [], _penTimerIv = null, _penTimerPlayer = -1, _penSelected = -1;
+
+function selectPenOpt(i) {
+  _penSelected = i;
+  document.querySelectorAll('.pen-opt').forEach((el, j) => el.classList.toggle('sel', j === i));
+  const cb = document.getElementById('pen-confirm');
+  if(cb){ cb.disabled = false; cb.textContent = `▶ Avvia: “${_penPickedData[i]?.n || ''}”`; }
+}
+
+// Returns how many turns to skip based on "Salti … turno/turni" in text
+function detectSkipTurns(text) {
+  if (!/\bSalti\b.{0,40}\bturno/i.test(text)) return 0;
+  const mN = text.match(/\b(\d+)\s*turni\b/i);
+  return mN ? parseInt(mN[1]) : 1;
+}
+
+// Extract duration in seconds from a penitenza description string
+function penTime(d) {
+  let m;
+  if (m = d.match(/(\d+)\s*minut/i)) return parseInt(m[1]) * 60;
+  if (m = d.match(/(\d+)\s*second/i)) return parseInt(m[1]);
+  if (m = d.match(/\b(\d+)\s*s\b/i)) return parseInt(m[1]);
+  return 0;
+}
+function fmtPenSec(s) { return s >= 60 ? Math.floor(s/60)+'m' : s+'s'; }
+
+function startPenOpt(i) {
+  if (i < 0 || i >= _penPickedData.length) return;
+  const o = _penPickedData[i];
+  const skip = o ? detectSkipTurns(o.d) : 0;
+  if (skip > 0) players[currentP].skipTurns = (players[currentP].skipTurns || 0) + skip;
+  closePenitenza(); // savePlayers() inside captures skipTurns
+  if (!o) return;
+  const secs = penTime(o.d);
+  if (secs > 0) startPenTimer(secs, o.n);
+}
+
+function startPenTimer(secs, name) {
+  if (_penTimerIv) clearInterval(_penTimerIv);
+  _penTimerPlayer = currentP; // remember who is doing the penitenza
+  let rem = secs;
+  const box = document.getElementById('pen-tmr');
+  const cd  = document.getElementById('pen-tmr-cd');
+  const nm  = document.getElementById('pen-tmr-nm');
+  nm.textContent = name;
+  box.classList.remove('warn');
+  box.style.display = '';
+  document.getElementById('pen-tmr-done').textContent = '✅ Fatto!';
+  const render = () => {
+    const m = Math.floor(rem / 60), s = rem % 60;
+    cd.textContent = m > 0 ? m + ':' + String(s).padStart(2,'0') : s + 's';
+    box.classList.toggle('warn', rem <= 5);
+  };
+  render();
+  _penTimerIv = setInterval(() => { rem--; render(); if (rem < 0) stopPenTimer(false); }, 1000);
+}
+
+function stopPenTimer(byUser) {
+  if (_penTimerIv) { clearInterval(_penTimerIv); _penTimerIv = null; }
+  _penTimerPlayer = -1;
+  const box = document.getElementById('pen-tmr');
+  if (!box) return;
+  if (byUser) {
+    box.style.display = 'none';
+  } else {
+    document.getElementById('pen-tmr-cd').textContent = '⏰';
+    document.getElementById('pen-tmr-done').textContent = '✅ Chiudi';
+    sfx && sfx.wrong && sfx.wrong();
+  }
+}
 
 function triggerPenitenza(n) {
   if(gameMode !== 'party') return false;
@@ -1836,8 +1947,14 @@ function showPenitenza(n) {
   document.getElementById('pen-title').textContent = `🎭 Penitenza! — Piano ${piano} — ${penData.el}`;
   document.getElementById('pen-sub').textContent = `Casella ${n} — ${L[n]?.name || ''}`;
   const penPick=[...penData.opts].sort(()=>Math.random()-0.5).slice(0,3);
-  document.getElementById('pen-opts').innerHTML=penPick.map((o,i) =>
-    `<div class="pen-opt"><strong>Opzione ${i+1} — &ldquo;${o.n}&rdquo;</strong><p>${o.d}</p></div>`).join('');
+  _penPickedData = penPick;
+  _penSelected = -1;
+  document.getElementById('pen-opts').innerHTML=penPick.map((o,i) => {
+    const t = penTime(o.d);
+    return `<div class="pen-opt" onclick="selectPenOpt(${i})" id="pen-opt-${i}"><strong>Opzione ${i+1} &mdash; &ldquo;${o.n}&rdquo;${t>0?` <span class="pen-time">&#x23F1; ${fmtPenSec(t)}</span>`:''}</strong><p>${o.d}</p></div>`;
+  }).join('');
+  const cb = document.getElementById('pen-confirm');
+  if(cb){ cb.disabled=true; cb.textContent="Seleziona un'opzione qui sopra"; }
   document.getElementById('pen-note').textContent =
     `Il gruppo vota a maggioranza. Penitenze rimanenti per ${p.name}: ${rimanenti - 1} dopo questa.`;
   sfx.penitenza();
